@@ -1,0 +1,33 @@
+{% comment %}
+  Renders gsap animated banner
+
+  Usage:
+  {% render 'main-page-banner' %}
+{% endcomment %}
+<script src="{{ 'banner.js' | asset_url }}" defer="defer"></script>
+<section id="banner" class="bh-banner grid md:grid-cols-3 border-solid border-collapse border-2 border-red-800">
+  <div id="banner__media" class="flex justify-center items-center w-auto">
+    <img src="{{ 'image-banner.png' | asset_img_url: 'large' }}" class="w-full h-auto" width="100%" height="100%" />
+  </div>
+  <div id="banner__content" class="md:col-span-2 p-10">
+    <div id="banner__box" class="bh-banner__box">
+      <!-- header-text -->
+      <h2 id="banner__content--header">
+        Introducing the <span class="bh-text--red">M87</span> Amplifier
+      </h2>
+   
+      <!-- subheader-text -->
+      <p id="banner__content--sub-header">
+        A custom amplifier for your custom setup that is also a cleaner sound than any other. We will work with you to get the look you want.
+      </p>
+
+      <!-- banner-button -->
+      <div id="banner__content--button" class="mt-2 h-full">
+        <button href="/products/the-3p-fulfilled-snowboard" class="bh-button bh-button--danger">
+          Learn More
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+

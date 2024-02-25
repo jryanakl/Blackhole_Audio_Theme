@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/** Test using @layer directive **/
+@layer base {
+  h1 {
+    @apply text-5xl font-bold uppercase;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold uppercase;
+  }
+
+  h3 {
+    @apply text-xl font-semibold uppercase;
+  }
+
+  h3 {
+    @apply text-lg font-semibold;
+  }
+
+  .bh-main {
+    /* @apply p-4; */
+  }
+
+  .bh-main a {
+    @apply text-red-400 underline;
+  }
+
+  /** Links **/
+  button.bh-button {
+    @apply py-2 px-4 rounded shadow-sm uppercase text-sm;
+  }
+
+  button.bh-button:hover {
+    @apply text-red-950;
+  }
+
+
+  button.bh-button--danger {
+    @apply bg-red-600 hover:bg-red-400 border-2 border-red-800 text-white;
+  }
+
+  /** Form **/
+  form.bh-form {
+    @apply space-y-8;
+  }
+  
+  input.bh-input {
+    @apply block p-2 w-full;
+    @apply text-sm text-gray-400 bg-gray-200 rounded-sm border border-red-500 shadow-sm focus:ring-red-700 focus:border-red-800;
+  }
+
+  label.bh-label {
+    /* @apply block; */
+    /* @apply text-gray-300; */
+  }
+  
+  textarea.bh-textarea {
+    @apply block p-2 w-full;
+    @apply text-sm text-gray-500 bg-gray-200 rounded-sm border border-red-500 shadow-sm focus:ring-red-700 focus:border-red-800;
+  }
+}
+
+@layer components {
+  /** Layout **/
+  .bh-header {
+    @apply bg-black;
+  }
+
+  .bh-body {
+    @apply bg-gray-900;
+  }
+
+  .bh-header__box {
+    @apply flex justify-center items-center;
+  }
+
+  .bh-main {
+    @apply bg-gray-300 min-h-screen;
+  }
+
+  .bh-main__box {
+    @apply bg-gray-100;
+  }
+
+  .bh-main__section {
+    /* @apply p-4; */
+    /* @apply text-center md:text-left; */
+  }
+
+  .bh-footer {
+    @apply bg-black text-gray-500;
+  }
+
+  .bh-footer__box {
+    @apply flex justify-center items-center;
+  }
+  
+  /** Responsive **/
+  .bh--md-flex-1 {
+    @apply hidden md:flex flex-1; /* show for only medium screen sizes and above */
+  }
+
+  .bh--md-block {
+    @apply hidden md:block; /* show for only medium screen sizes and above */
+  }
+
+  .bh--md-hide {
+    @apply md:hidden;  /* show for only medium screen sizes and below */
+  }
+
+  /** Icons **/
+  .bh-icon {
+    @apply fill-none;
+  }
+
+  .bh-icon--red {
+    @apply fill-red-500;
+  }
+
+  .bh-icon--white {
+    @apply fill-red-50;
+  }
+
+  /** Logo **/
+  .bh-logo {
+
+  }
+
+  .bh-logo__box {
+
+  }
+
+  .bh-logo--header {
+    /* @apply border border-2 border-dotted border-red-500 ; */
+  }
+
+  .bh-logo--footer {
+
+  }
+
+  /** Menu, Nav **/
+  .bh-menu {
+    @apply text-gray-50 text-center;
+  }
+
+  .bh-menu--header {
+    @apply uppercase text-lg;
+  }
+
+  .bh-menu--header .bh-menu__list__item {
+    /* @apply inline; */
+  }
+
+  .bh-menu--footer {
+    @apply block uppercase text-xs w-full;
+  }
+
+  .bh-menu__list {
+    /* @apply; */
+  }
+
+  .bh-menu__list__item {
+    @apply ml-2 mr-2;
+    /* @apply inline; */
+  }
+
+  .bh-menu__list__item a:hover,
+  .bh-menu__list__item button:hover {
+    @apply text-red-500 transition duration-100;
+  }
+  
+  /** Border **/
+  .bh-border--solid-red {
+    @apply border border-1 border-solid border-red-500;
+  }
+
+  /** Text **/
+  .bh-text--dark {
+    @apply text-gray-950;
+  }
+
+  .bh-text--dark-gray {
+    @apply text-gray-800;
+  }
+
+  .bh-text--gray {
+    @apply text-gray-400;
+  }
+
+  .bh-text--md-light {
+    @apply font-light;
+  }
+
+  .bh-text--red {
+    @apply bg-gradient-to-r from-red-800 via-red-400 to-red-950 bg-clip-text text-transparent font-bold;
+  }
+
+  /** Snippets **/
+  .bh-banner__box {
+    @apply text-center md:text-left;
+  }
+
+  .bh-banner__content__item {
+    @apply mt-3 md:mt-5 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto lg:mx-0;
+  }
+
+  /** Other **/
+  .bh-hide {
+    @apply hidden;
+  }
+
+  /** Banner **/
+}
+
+@layer utilities {
+  /* .bh-header--sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+  } */
+
+  /* .bh-main--sticky {
+    position: relative;
+    top: 67px;
+    width: 100%;
+  } */
+
+  .bh-footer--sticky {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
+  }
+
+  .bh-menu--header, .bh-menu--footer, h2, h3 {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  .button {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  .text-green-500 {
+    color: blue;
+  }
+ }

@@ -1,0 +1,117 @@
+{% comment %}
+  Renders product overview, features, specifications
+
+  Usage:
+  {% render 'main-product-details' %}
+{% endcomment %}
+<script src="{{ '' | asset_url }}" defer="defer"></script>
+<section>
+  <div class="grid grid-cols-4 gap-4 mt-10">
+    <div>
+      <ul class="list-none">
+        <li class="flex items-top-center mb-4">
+          <i class="bh-icon bh-icon--red">
+            {% render 'icon-audio-video-receiver' %}
+          </i>
+          <div>
+            <dt class="font-semibold">100% Analog</dt>
+            <dd>No digital switching or clocks in the box (TM)</dd>
+          </div>
+        </li>
+        <li class="flex items-top-center mb-4">
+          <span class="bh-icon bh-icon--red">
+            {% render 'icon-dynamic-form' %}
+          </span>
+          <div>
+            <dt class="font-semibold">120W +120W</dt>
+            <dd>At 4, 6, or 8 ohms</dd>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul class="list-none">
+        <li class="flex items-top-center mb-4">
+          <span class="bh-icon bh-icon--red">
+            {% render 'icon-high-res' %}
+          </span>
+          <div>
+            <dt class="font-semibold">Hi-Res amplifier</dt>
+            <dd>0.0002% THD+N (-114dB)</dd>
+          </div>
+        </li>
+        <li class="flex items-top-center mb-4">
+          <span class="bh-icon bh-icon--red">
+            {% render 'icon-grid-view' %}
+          </span>
+          <div>
+            <dt class="font-semibold">Dual Mono Block Design</dt>
+            <dd>For non-measurable cross talk levels</dd>
+          </div>
+        </li>
+        <li class="flex items-top-center mb-4">
+          <span class="bh-icon bh-icon--red">
+            {% render 'icon-commit' %}
+          </span>
+          <div>
+            <dt class="font-semibold">No Mechanical Relays</dt>
+            <dd>100% solid state for uncompromised reliability and performance</dd>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul class="list-none">
+        <li class="flex items-top-center mb-4">
+          <span class="bh-icon bh-icon--red">
+            {% render 'icon-volume-up' %}
+          </span>
+          <div>
+            <dt class="font-semibold">Class AB</dt>
+            <dd>Re-imagined from the bottom up</dd>
+          </div>
+        </li>
+        <li class="flex items-top-center mb-4">
+          <span class="bh-icon bh-icon--red">
+            {% render 'icon-blue-linear' %}
+          </span>
+          <div>
+            <dt class="font-semibold">Linear Regulated System</dt>
+            <dd>With 15uVrms noise 20-20kHz on low voltage rails</dd>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul class="list-none">
+        <li class="flex items-top-center mb-4">
+          <span class="bh-icon bh-icon--red">
+            {% render 'icon-filter-list' %}
+          </span>
+          <div>
+            <dt class="font-semibold">33mF filter caps</dt>
+            <dd>Each for high and low rail</dd>
+          </div>
+        </li>
+        <li class="flex items-top-center mb-4">
+          <span class="bh-icon bh-icon--red">
+            {% render 'icon-settings-input-component' %}
+          </span>
+          <div>
+            <dt class="font-semibold">Input/Output</dt>
+            <dd>12V- remote turn</dd>
+          </div>
+        </li>
+        <li class="flex items-top-center mb-4">
+          <span class="bh-icon bh-icon--red">
+            {% render 'icon-output' %}
+          </span>
+          <div>
+            <dt class="font-semibold">Fast acting 100uS output</dt>
+            <dd>Short fault protection on hi and low side</dd>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

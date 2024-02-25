@@ -1,0 +1,48 @@
+<div id="bh-header__box" class="bh-header__box">
+
+  <!-- Menu -->
+  <nav class="bh-menu bh-menu--header flex-1">
+    <ul class="bh-menu__list">
+      {% for link in linklists.main-menu.links %}
+        <li class="bh-menu__list__item hidden md:inline-flex">
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+      <li class="bh-menu__list__item flex-none md:hidden">
+        <a href="#">
+          <span class="bh-icon bh-icon--white">
+            {% render 'icon-menu' %}
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Logo -->
+  <div class="bh-logo bh-logo--header flex-0">
+    <div class="bh-logo__box">
+      <a href="{{ routes.root_url }}">
+        <span class="sr-only">{{ shop.name }}</span>
+        {% render 'logo-bh-header' %}
+      </a>
+    </div>
+  </div>
+
+  <!-- Menu, Cart -->
+  <nav class="bh-menu bh-menu--header flex-1">
+    <ul class="bh-menu__list">
+      {% for link in linklists.header-right-menu.links %}
+        <li class="bh-menu__list__item hidden md:inline-flex">
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+      <li class="bh-menu__list__item md:mt-auto md:inline-flex">
+        <a href="{{ routes.cart_url }}">
+          <span class="bh-icon bh-icon--white">
+            {% render 'icon-shopping-cart' %}
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

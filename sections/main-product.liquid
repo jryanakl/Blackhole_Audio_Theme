@@ -1,45 +1,189 @@
-{% comment %}
-   main-product.liquid
-   
-   renders main-product-top & main-product-bottom
-{% endcomment %}
-<section class="grid md:grid-cols-3 bh-main__section">
-  <div class="p-5">
-    <img src="{{ 'image-banner.png' | asset_img_url: 'large' }}" class="w-full h-auto" width="100%" height="100%" />
 
-    {% comment %} 
-    <img src="{{ product.featured_image.src | image_url: 'large' }}" alt="{{ product.title }}" width="" height="">
-    <pre>{{ product.featured_image }}</pre> 
-    {% endcomment %}
-  </div>
-  <div class="md:col-span-2 p-5">
-    <h2 id="banner__content--header">
-      <span class="bh-text--red">M87</span> Amplifier
-    </h2>
-
-    {% comment %} <p>{{ product.description }}</p> {% endcomment %}
-    <h3>Buy Now</h3>
-    <p>Price: {{ product.price | money }}</p>
-    <!-- Add more product information here -->
-    <form action="/cart/add" method="post">
-      <input class="bh-input" type="hidden" name="id" value="{{ product.variants.first.id }}">
-      <button class="bh-button bh-button--danger" type="submit">Add to cart</button>
-    </form>
-    <div class="mt-5">
-      <h3>Overview</h3>
-      <p>
-        A custom amplifier for your custom setup that is also a cleaner sound than any other. We will work with you to get
-        the look you want. You can choose your custom wood veneer, speaker grill material, and input gain sensitivity to
-        match your tastes and home decor.
+<aside class="">
+  <h2 id="">Amplifier</h2>
+  <div class="flex flex-col md:flex-row">
+    <div class="md:w-3/5 bg-gray-100 align-middle p-5 mb-5 mr-5 md:p-10 md:mb-10 md:mr-10">
+      <div style="w-full">
+        {% render 'product-image-swiper' %}
+      </div>
+    </div>
+    <div class="md:w-2/5 pb-5 text-sm md:text-base">
+      <h3 class="pb-4"><span class="bh-text--red">M87</span> Amplifier</h3>
+      <p class="pb-4">
+        The M87 Amplifier ensures that your audio experience is elevated to the next level, delivering outstanding sound quality and reliability.
+        {% comment %} {{ product.description }} {% endcomment %}
       </p>
+      <div class="w-full text-xl">
+        <p>
+          <span class="sr-only">Price:</span>
+          {{ product.price | money }}</p>
+      </div>
+      <form action="/cart/add" method="post">
+        <div class="w-full pb-4">
+          {% render 'quantity' %}
+        </div>
+        <input class="bh-input pb-4 hidden" type="hidden" name="id" value="{{ product.variants.first.id }}">
+        <div class="w-full pb-3 border text-sm md:text-base">
+          <button class="bh-button bh-button--md bh-button--white mb-2 w-full" type="submit">Add to cart</button>
+          <button class="bh-button bh-button--md bh-button--black w-full">Buy Now</button>
+        </div>
+      </form>
     </div>
   </div>
-</section>
-<section class="grid md:grid-cols-3">
-  <div class="md:col-span-3 p-5">
-    {% render 'main-product-overview' %}
+</aside>
+
+<aside class="mb-5 md:mb-10">
+  <h3>Overview</h3>
+  <p>
+    A custom amplifier for your custom setup that is also a cleaner sound than any other. We will work with you to
+    get the look you want. You can choose your custom wood veneer, speaker grill material, and input gain
+    sensitivity to match your tastes and home decor.
+  </p>
+</aside>
+
+<aside class="mb-5 md:mb-10">
+  <h3>Features</h3>
+  <div class="grid md:grid-cols-2">
+    <ul class="list-none">
+      <li class="flex items-top-center mb-2">
+        <i class="bh-icon bh-icon--gray">
+          {% render 'icon-audio-video-receiver' %}
+        </i>
+        <div class="ml-2">
+          <dt><h4>100% Analog</h4></dt>
+          <dd class="text-sm md:text-base">No digital switching or clocks in the box <small>(TM)</small></dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-dynamic-form' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>120W +120W</h4></dt>
+          <dd class="text-sm md:text-base">At 4, 6, or 8 ohms</dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-high-res' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>Hi-Res amplifier</h4></dt>
+          <dd class="text-sm md:text-base">0.0002% THD+N <small>(-114dB)</small></dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-grid-view' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>Dual Mono Block Design</h4></dt>
+          <dd class="text-sm md:text-base">For non-measurable cross talk levels</dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-commit' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>No Mechanical Relays</h4></dt>
+          <dd class="text-sm md:text-base">100% solid state for uncompromised reliability and performance</dd>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="list-none">
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-volume-up' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>Class AB</h4></dt>
+          <dd class="text-sm md:text-base">Re-imagined from the bottom up</dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-blue-linear' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>Linear Regulated System</h4></dt>
+          <dd class="text-sm md:text-base">With 15uVrms noise 20-20kHz on low voltage rails</dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-filter-list' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>33mF filter caps</h4></dt>
+          <dd class="text-sm md:text-base">Each for high and low rail</dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-settings-input-component' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>Input/Output</h4></dt>
+          <dd class="text-sm md:text-base">12V- remote turn</dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-output' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>Fast acting 100uS output</h4></dt>
+          <dd class="text-sm md:text-base">Short fault protection on hi and low side</dd>
+        </div>
+      </li>
+    </ul>
   </div>
-  <div class="md:col-span-3 p-5">
-    {% render 'main-product-specifications' %}
+</aside>
+
+<aside class="">
+  <h3>Specifications</h3>
+  <div class="grid md:grid-cols-2">
+    <div class="">
+      <h4 class="">Audio Specification</h4>
+      <ul class="list-disc list-inside text-sm md:text-base">
+        <li>20W +120W @ 4, 6, or 8 ohms</li>
+        <li>THD+N - 0.0002% THD+N</li>
+        <li>SNR - 135dB at input sensitivity 5.2Vrms</li>
+        <li>SRN - 127dB at input sensitivity for 1.5Vrms</li>
+      </ul>
+      <h4 class="pt-2">Dimensions</h4>
+      <ul class="pb-2 list-disc list-inside text-sm md:text-base">
+        <li>17" x 6" x 14", 50 lbs</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="">Inputs/Outputs Connection</h4>
+      <ul class="list-disc list-inside text-sm md:text-base">
+        <li>110-120VAC</li>
+        <li>2 inputs - balanced <small>(XLR)</small></li>
+        <li>2 speaker banana plug outputs</li>
+        <li>3-way Power switch <small>(selectable ON-OFF-12V REMOTE)</small></li>
+        <li>Load configuration switch <small>(8-6-4) ohm</small></li>
+        <li>12V remote 3.5mm mono jack input and output</li>
+      </ul>
+    </div>
   </div>
-</section>
+</aside>
+
+{% schema %}
+{
+  "name": "Product Page",
+  "tag": "section",
+  "class": "bh-main__page__section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Amplifier",
+      "label": "Product Heading Title"
+    }
+  ]
+}
+{% endschema %}

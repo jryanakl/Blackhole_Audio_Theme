@@ -5,11 +5,16 @@ module.exports = {
     './sections/*.liquid',
     './snippets/*.liquid',
     './snippets/customers/*.liquid',
-    './templates/*.liquid'
+    './templates/*.liquid',
+    './node_modules/flowbite/**/*.js'
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+plugins: [
+    require('flowbite/plugin')({
+      charts: true,
+    }),
+  ],
 }
 

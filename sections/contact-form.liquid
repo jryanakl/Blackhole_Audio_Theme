@@ -1,0 +1,85 @@
+<aside class="">
+  {% form 'contact' %}
+    {% if form.errors %}
+    <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <span class="bh-icon bh-icon--gray-md">{% render 'icon-error' %} </span>&nbsp;
+      <span class="font-medium">Form erros!</span> Your message was not sen
+      <div>
+        <span class="font-medium">Ensure that these requirements are met:</span>
+          <ul class="mt-1.5 list-disc list-inside">
+            {% for error in form.errors %}
+              <li class="">
+                <span>{{ form.errors.messages[error] }}</span>
+              </li>
+            {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% elsif form.posted_successfully? %}
+      <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+        {% render 'icon-success' %}
+        <span class="sr-only">Info</span>
+        <div>
+          <span class="font-medium">Success alert!</span> Your message was sent!
+        </div>
+      </div>
+      {% comment %} <div class="flex flex-row items-center w-full my-3 p-5">
+        <div class="text-green-700">
+          {% render 'icon-success' %}
+        </div>
+      </div> {% endcomment %}
+    {% endif %}
+
+    {% if section.settings.title != blank %}
+      <h3 class="">{{ section.settings.title }}</h3>
+    {% else %}
+      <h3 class="mb-42">Get in touch for amplifier inquiries</h3>
+    {% endif %}
+
+    <div class="bh-form text-sm md:text-base">
+      <div class="mb-2">
+        <label class="bh-label" for="contact_name">Name</label>
+        <input class="bh-input" type="text" placeholder="Enter name" name="contact[name]" id="contact_name">
+      </div>
+      <div class="mb-2">
+        <label for="email" class="bh-label" for="contact_email">Your email</label>
+        <input
+          type="email"
+          id="email"
+          class="bh-input"
+          placeholder="name@gmail.com"
+          name="contact[email]"
+          id="contact_email"
+          required
+        >
+      </div>
+      <div class="sm:col-span-2 mb-2">
+        <label for="contact_message" class="bh-label">Your message</label>
+        <textarea
+          rows="6"
+          class="bh-textarea"
+          placeholder="Let us know how we can help"
+          name="contact[body]"
+          id="contact_message"
+        ></textarea>
+      </div>
+      <button type="submit" class="bh-button bh-button--md bh-button--black" value="Submit message">Send message</button>
+    </div>
+  {% endform %}
+</aside>
+
+{% schema %}
+{
+  "name": "Form Contact",
+  "tag": "section",
+  "class": "bh-main__page__section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Get in Touch for Amplifier Inquiries",
+      "label": "Contact Heading Title"
+    }
+  ]
+}
+{% endschema %}

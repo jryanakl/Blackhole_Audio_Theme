@@ -4,18 +4,35 @@
   Usage:
   {% render 'main-page-chart' %}
 {% endcomment %}
+
 <script src="{{ 'chart.js' | asset_url }}" defer="defer"></script>
-<section class="grid md:grid-cols-3 text-center md:text-left bg-gray-950 pt-1 pl-5 pb-1 pr-5 text-gray-50">
-  <div class="p-5">
-    <h2 class="text-2xl font-semibold">Outperforms Top Amps</h2>
-    <p class="mt-5 bh-text--gray">Consectetur adipiscing elit. Vestibulum imperdiet consectetur ligula, et blandit libero vehicula et. Cras imperdiet odio leo, eu consequat justo rhoncus vitae.</p> 
+<!-- Flowbite -->
+<section class="md:pt-5 px-5 h-full">
+  <h2 class="md:text-left">Unleash your Sound</h2>
+  <p class="text-sm md:text-left md:text-base pb-5">Experience unparalled performance. Hear what's on the Horizon</p>
+</section>
+<div class="w-full h-600 rounded-lg border border-gray-300 shadow dark:bg-gray-800 bg-gradient-to-r from-gray-100 to-gray-200">
+  <div class="p-4 md:p-6 pb-0 md:pb-0">
+    <h4 class="md:text-left">THD+N(20-20%kHz BW) 1kHz tone input 8 ohm load</h4>
   </div>
-  <div class="md:col-span-2 p-5">
-    <h3 class="text-md text-red-600 font-semibold">THD+N(20-20%kHz BW) 1kHz tone input 8 ohm load</h3>
-    <div id="chart" class="mt-5">
+  <div id="labels-chart" class="px-0 md:px-2"></div>
+  {% comment %} <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between mt-5 p-4 md:p-6 pt-0 md:pt-0">
+    <div class="flex justify-between items-center pt-5">
+      
+    </div>
+  </div> {% endcomment %}
+</div>
+
+<!-- HighCharts -->
+{% comment %} <section class="md:pt-5 pb-4">
+  <div class="text-center md:text-leftp-4">
+    <h2 class="md:text-left">Unleash your Sound</h2>
+    <p class="text-sm md:text-left md:text-base">Experience unparalled performance. Hear what's on the Horizon</p>
+  </div>
+  <div id="chart" class="bg-gray-100 p-6 w-auto">
+    <h4 class="text-gray-700 text-center pb-4">THD+N(20-20%kHz BW) 1kHz tone input 8 ohm load</h4>
+    <div class="w-auto">
       <div id="chart-container"></div>
     </div>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
   </div>
-</section>
+</section> {% endcomment %}

@@ -9,37 +9,95 @@
   }
 
   h2 {
-    @apply text-3xl font-semibold uppercase;
+    @apply text-3xl font-semibold uppercase text-black;
   }
 
   h3 {
-    @apply text-xl font-semibold uppercase;
+    @apply text-xl font-semibold uppercase text-gray-900;
   }
 
-  h3 {
-    @apply text-lg font-semibold;
+  h4 {
+    @apply text-gray-600;
   }
 
-  .bh-main {
-    /* @apply p-4; */
+  p, .bh-label, li:not(.bh-menu__list__item) {
+    @apply text-gray-700;
+  }
+
+  .bh-header {
+    background: black;
+  }
+
+  .bh-footer {
+    @apply bg-neutral-800;
   }
 
   .bh-main a {
-    @apply text-red-400 underline;
+    @apply text-red-700 underline ;
   }
 
   /** Links **/
+  .bh-main a:hover,
+  .bh-header a:hover {
+    @apply text-red-600 transition duration-100;
+    @apply fill-red-600 transition duration-100;
+  }
+
+  .bh-footer .bh-menu__list__item a:hover {
+    @apply text-white transition duration-100;
+  }
+
+  /** Buttons, Icons **/
   button.bh-button {
-    @apply py-2 px-4 rounded shadow-sm uppercase text-sm;
+    @apply uppercase p-1;
   }
 
-  button.bh-button:hover {
-    @apply text-red-950;
+  button.bh-button--sm {
+    @apply text-xs font-thin p-1;
   }
 
+  button.bh-button--md {
+    @apply text-xs md:text-sm uppercase px-16 py-2;
+  }
 
-  button.bh-button--danger {
-    @apply bg-red-600 hover:bg-red-400 border-2 border-red-800 text-white;
+  button.bh-button--lg {
+    @apply text-base md:text-lg font-semibold uppercase py-2.5 px-8;
+  }
+
+  button.bh-button--black {
+    @apply text-white hover:text-red-500 border border-black hover:border-red-500 bg-black hover:bg-gray-900 active:bg-gray-900;
+  }
+
+  button.bh-button--gray {
+    @apply text-white border border-gray-500 hover:text-gray-500 bg-gray-500 hover:bg-gray-600 active:bg-gray-700;
+  }
+
+  button.bh-button--red {
+    @apply text-white hover:text-black border border-red-800 hover:border-red-900 bg-red-600 hover:bg-red-700 active:bg-red-800;
+  }
+
+  button.bh-button--white {
+    @apply text-black border border-black hover:border-red-600 hover:border active:border-black bg-white hover:text-black hover:bg-white active:text-black active:bg-white;
+  }
+
+  .bh-icon {
+    @apply fill-none;
+  }
+
+  .bh-icon--black {
+    @apply fill-black;
+  }
+
+  .bh-icon--gray {
+    @apply fill-gray-600;
+  }
+  
+  .bh-icon--red {
+    @apply fill-gray-950;
+  }
+
+  .bh-icon--white {
+    @apply fill-red-50;
   }
 
   /** Form **/
@@ -49,55 +107,59 @@
   
   input.bh-input {
     @apply block p-2 w-full;
-    @apply text-sm text-gray-400 bg-gray-200 rounded-sm border border-red-500 shadow-sm focus:ring-red-700 focus:border-red-800;
+    @apply text-sm text-gray-400 bg-gray-100 border border-gray-500 shadow-sm focus:border-gray-900 focus:outline-black focus:outline-4;
   }
 
-  label.bh-label {
-    /* @apply block; */
-    /* @apply text-gray-300; */
+  input.bh-input--sm {
+    @apply p-1.5 w-auto text-center text-black;
   }
   
   textarea.bh-textarea {
     @apply block p-2 w-full;
-    @apply text-sm text-gray-500 bg-gray-200 rounded-sm border border-red-500 shadow-sm focus:ring-red-700 focus:border-red-800;
+    @apply text-sm text-gray-500 bg-gray-100 border border-gray-500 shadow-sm focus:ring-gray-800 focus:outline-black focus:outline-4;
+  }
+
+  input.shopify-challenge__button.btn {
+    @apply block p-2 w-full;
+    @apply bg-gradient-to-r from-red-800 via-red-400 to-red-950 bg-clip-text text-transparent font-bold;
   }
 }
 
 @layer components {
   /** Layout **/
-  .bh-header {
-    @apply bg-black;
-  }
-
   .bh-body {
-    @apply bg-gray-900;
+    @apply bg-gray-500;
   }
 
-  .bh-header__box {
-    @apply flex justify-center items-center;
+  .bh-main .bh-main__page {
+    @apply p-5;
   }
 
-  .bh-main {
-    @apply bg-gray-300 min-h-screen;
+  .bh-main__page__section {
+    @apply text-sm md:text-base mb-5 h-auto md:px-10 lg:px-20;
   }
 
-  .bh-main__box {
-    @apply bg-gray-100;
+  .bh-main__page__section h2 {
+    @apply mb-5;
   }
 
-  .bh-main__section {
-    /* @apply p-4; */
-    /* @apply text-center md:text-left; */
+  .bh-main__page__section h3 {
+    @apply mb-0;
+  }
+
+
+  .bh-main .bh-main-page--content {
+    @apply bg-white min-h-screen p-6 text-gray-800 text-base m-2 md:m-6
+  }
+  
+  .bh-main .bh-main-page--banner {
+
   }
 
   .bh-footer {
-    @apply bg-black text-gray-500;
+    @apply pb-2 pt-2 border-gray-500;
   }
 
-  .bh-footer__box {
-    @apply flex justify-center items-center;
-  }
-  
   /** Responsive **/
   .bh--md-flex-1 {
     @apply hidden md:flex flex-1; /* show for only medium screen sizes and above */
@@ -111,35 +173,6 @@
     @apply md:hidden;  /* show for only medium screen sizes and below */
   }
 
-  /** Icons **/
-  .bh-icon {
-    @apply fill-none;
-  }
-
-  .bh-icon--red {
-    @apply fill-red-500;
-  }
-
-  .bh-icon--white {
-    @apply fill-red-50;
-  }
-
-  /** Logo **/
-  .bh-logo {
-
-  }
-
-  .bh-logo__box {
-
-  }
-
-  .bh-logo--header {
-    /* @apply border border-2 border-dotted border-red-500 ; */
-  }
-
-  .bh-logo--footer {
-
-  }
 
   /** Menu, Nav **/
   .bh-menu {
@@ -147,29 +180,43 @@
   }
 
   .bh-menu--header {
-    @apply uppercase text-lg;
+    @apply uppercase text-lg bg-black;
   }
 
-  .bh-menu--header .bh-menu__list__item {
-    /* @apply inline; */
+  .bh-menu--header .bh-menu__list__item  {
+    @apply p-5;
   }
 
   .bh-menu--footer {
-    @apply block uppercase text-xs w-full;
+    @apply uppercase w-full;
   }
 
-  .bh-menu__list {
-    /* @apply; */
+  .bh-menu--footer .bh-menu__list__item  {
+    @apply font-semibold;
   }
 
-  .bh-menu__list__item {
-    @apply ml-2 mr-2;
-    /* @apply inline; */
+  .bh-menu--footer .bh-menu__list__item a {
+    @apply text-gray-300;
   }
 
-  .bh-menu__list__item a:hover,
+  .bh-menu--footer .bh-menu__list__item a:hover {
+    @apply text-white transition duration-100;
+  }
+
+  .bh-menu--footer-legal {
+    @apply w-full;
+  }
+
+  .bh-menu--footer-social .bh-menu__list__item  {
+    @apply py-4 px-2 text-gray-300;
+  }
+
+  .bh-menu__list--inline {
+    @apply inline-flex flex-nowrap;
+  }
+
   .bh-menu__list__item button:hover {
-    @apply text-red-500 transition duration-100;
+    @apply text-red-600 transition duration-100;
   }
   
   /** Border **/
@@ -195,10 +242,14 @@
   }
 
   .bh-text--red {
-    @apply bg-gradient-to-r from-red-800 via-red-400 to-red-950 bg-clip-text text-transparent font-bold;
+    @apply bg-gradient-to-r from-red-600 via-red-500 to-red-800 bg-clip-text text-transparent font-bold;
   }
 
   /** Snippets **/
+  .bh-banner {
+    background-image: url("black-hole-m87.png");
+    background-color: black;
+  }
   .bh-banner__box {
     @apply text-center md:text-left;
   }
@@ -216,27 +267,22 @@
 }
 
 @layer utilities {
-  /* .bh-header--sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 999;
-  } */
-
-  /* .bh-main--sticky {
-    position: relative;
-    top: 67px;
-    width: 100%;
-  } */
+  .bh-main {
+    display: block;
+    min-height: 550px;
+    /* min-height: 60vh; */
+  }
 
   .bh-footer--sticky {
-    position: fixed;
+    position: relative;
     bottom: 0;
     width: 100%;
+    padding-top: 1.5rem;
     z-index: 999;
   }
 
-  .bh-menu--header, .bh-menu--footer, h2, h3 {
+  .bh-menu--header, .bh-menu--footer, h2, h3, h4,
+  .sidenav a {
     font-family: "Oswald", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;

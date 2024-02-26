@@ -1,13 +1,21 @@
-<section class="grid md:grid-cols-3 bh-main__section">
-  <div class="p-5 md:col-span-3">
-    <h2>Contact</h2>
-  </div>
-  <div class="p-5">
-    {% render 'contact-address' %}
-    <p>&nbsp;</p>
-    {% render 'contact-email-phone' %}
-  </div>
-  <div class="md:col-span-2 p-5">
-    {% render 'contact-form' %}
-  </div>
-</section>
+<aside class="">
+  <h2>{{ section.settings.title }}</h2>
+  {% render 'contact-address' %}
+  {% render 'contact-email-phone' %}
+</aside>
+
+{% schema %}
+{
+  "name": "Page Contact",
+  "tag": "section",
+  "class": "bh-main__page__section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Contact",
+      "label": "Contact Heading Title"
+    }
+  ]
+}
+{% endschema %}

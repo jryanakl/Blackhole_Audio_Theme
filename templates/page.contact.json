@@ -1,8 +1,13 @@
 {
+  "wrapper": "div.bh-main__page",
   "sections": {
     "main": {
       "type": "contact-page"
+    },
+    "contact-form": {
+      "wrapper": "section",
+      "type": "contact-form"
     }
   },
-  "order": ["main"]
+  "order": ["main", "contact-form"]
 }

@@ -1,0 +1,163 @@
+{
+  "id": 7973560909981,
+  "title": "M87 Two-Channel Power Amplifier",
+  "handle": "m87-amplifier",
+  "description": "\u003cdiv class=\"pb-5\" style=\"margin-top: 10px;\"\u003e\n\u003cp class=\"hidden underline\"\u003eClear Summary of Products Unique Selling Points (USPs)\u003c/p\u003e\n\u003cdl class=\"list-inside list-disc\"\u003e\n\u003cdt class=\"font-semibold\"\u003eHigh-level Product Description:\u003c/dt\u003e\n\u003cdd\u003e* The M87 is a high-powered two-channel power amplifier customizable for audiophiles.\u003c/dd\u003e\n\u003cdt class=\"font-semibold\"\u003eUnique Selling Points (USPs):\u003c/dt\u003e\n\u003cdd\u003e* Ensures that your audio experience is elevated to the next level, delivering outstanding sound quality and reliability.\u003c/dd\u003e\n\u003cdd\u003e* This is a custom amplifier for your custom setup that is also a cleaner sound than any other.\u003c/dd\u003e\n\u003cdt class=\"font-semibold\"\u003eMaterial Variants:\u003c/dt\u003e\n\u003cdd\u003e* We will work with you to get the look you want.\u003c/dd\u003e\n\u003cdd\u003e* You can choose your custom wood veneer, speaker grill material, and input gain sensitivity to match your tastes and home decor.\u003c/dd\u003e\n\u003c/dl\u003e\n\u003c/div\u003e\n\u003cdiv class=\"pb-5 hidden\"\u003e\n\u003cp class=\"hidden underline\"\u003eMaterial Used\u003c/p\u003e\n\u003cul class=\"list-inside list-disc\"\u003e\n\u003cli\u003eYou can choose your custom wood veneer, speaker grill material, and input gain sensitivity to match your tastes and home decor.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e\n\u003cdiv class=\"pb-5 hidden\"\u003e\n\u003cp class=\"underline\"\u003eDimensions \u0026amp; Weight\u003c/p\u003e\n\u003cul class=\"list-inside list-disc\"\u003e\n\u003cli\u003e\n\u003cspan\u003e17\" x 6\" x 14\"\u003c/span\u003e  \u003csmall\u003e(L x W x H)\u003c/small\u003e \u003c/li\u003e\n\u003cli\u003e50 lbs\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e\n\u003cdiv class=\"pb-5 hidden\"\u003e\n\u003cp class=\"underline\"\u003eTop Features \u0026amp; Technical Specifications\u003c/p\u003e\n\u003cul class=\"list-inside list-disc\"\u003e\n\u003cli\u003e2 Channel Power Amplifier\u003c/li\u003e\n\u003cli\u003ePower output: 20W +120W @ 4, 6, or 8 ohms\u003c/li\u003e\n\u003cli\u003e\n\u003cspan\u003eTHD+N: \u0026lt; 0.0002%\u003c/span\u003e  \u003csmall\u003e20-20%kHz BW, 1kHz, 8 ohms\u003c/small\u003e \u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e",
+  "published_at": "2024-02-23T18:38:36-05:00",
+  "created_at": "2024-02-23T18:38:36-05:00",
+  "vendor": "Blackhole Audio Development (custom template) (db0e6315)",
+  "type": "",
+  "tags": [],
+  "price": 200000,
+  "price_min": 200000,
+  "price_max": 250000,
+  "available": true,
+  "price_varies": true,
+  "compare_at_price": null,
+  "compare_at_price_min": 0,
+  "compare_at_price_max": 0,
+  "compare_at_price_varies": false,
+  "variants": [
+    {
+      "id": 44686212104349,
+      "title": "Custom Wood Veneer",
+      "option1": "Custom Wood Veneer",
+      "option2": null,
+      "option3": null,
+      "sku": "",
+      "requires_shipping": true,
+      "taxable": true,
+      "featured_image": {
+        "id": 36199555661981,
+        "product_id": 7973560909981,
+        "position": 2,
+        "created_at": "2024-03-08T16:42:30-05:00",
+        "updated_at": "2024-03-08T16:42:31-05:00",
+        "alt": null,
+        "width": 1344,
+        "height": 896,
+        "src": "//quickstart-db0e6315.myshopify.com/cdn/shop/files/dual_monoblock_wooden_solid_state_amplifier_46762e62-5ae2-44a7-a0d5-4ed6766ec16b.png?v=1709934151",
+        "variant_ids": [44686212104349]
+      },
+      "available": true,
+      "name": "M87 Two-Channel Power Amplifier - Custom Wood Veneer",
+      "public_title": "Custom Wood Veneer",
+      "options": ["Custom Wood Veneer"],
+      "price": 250000,
+      "weight": 0,
+      "compare_at_price": null,
+      "inventory_management": "shopify",
+      "barcode": "",
+      "featured_media": {
+        "alt": null,
+        "id": 28608618725533,
+        "position": 2,
+        "preview_image": {
+          "aspect_ratio": 1.5,
+          "height": 896,
+          "width": 1344,
+          "src": "//quickstart-db0e6315.myshopify.com/cdn/shop/files/dual_monoblock_wooden_solid_state_amplifier_46762e62-5ae2-44a7-a0d5-4ed6766ec16b.png?v=1709934151"
+        }
+      },
+      "requires_selling_plan": false,
+      "selling_plan_allocations": [],
+      "quantity_rule": {
+        "min": 1,
+        "max": null,
+        "increment": 1
+      }
+    },
+    {
+      "id": 44686212300957,
+      "title": "Aluminium",
+      "option1": "Aluminium",
+      "option2": null,
+      "option3": null,
+      "sku": "",
+      "requires_shipping": true,
+      "taxable": true,
+      "featured_image": {
+        "id": 36199489077405,
+        "product_id": 7973560909981,
+        "position": 1,
+        "created_at": "2024-03-08T16:29:14-05:00",
+        "updated_at": "2024-03-08T16:29:15-05:00",
+        "alt": null,
+        "width": 636,
+        "height": 459,
+        "src": "//quickstart-db0e6315.myshopify.com/cdn/shop/files/mono-amp_black-red_dual_no-bk.png?v=1709933355",
+        "variant_ids": [44686212300957]
+      },
+      "available": false,
+      "name": "M87 Two-Channel Power Amplifier - Aluminium",
+      "public_title": "Aluminium",
+      "options": ["Aluminium"],
+      "price": 200000,
+      "weight": 0,
+      "compare_at_price": null,
+      "inventory_management": "shopify",
+      "barcode": "",
+      "featured_media": {
+        "alt": null,
+        "id": 28608554205341,
+        "position": 1,
+        "preview_image": {
+          "aspect_ratio": 1.386,
+          "height": 459,
+          "width": 636,
+          "src": "//quickstart-db0e6315.myshopify.com/cdn/shop/files/mono-amp_black-red_dual_no-bk.png?v=1709933355"
+        }
+      },
+      "requires_selling_plan": false,
+      "selling_plan_allocations": [],
+      "quantity_rule": {
+        "min": 1,
+        "max": null,
+        "increment": 1
+      }
+    }
+  ],
+  "images": [
+    "//quickstart-db0e6315.myshopify.com/cdn/shop/files/mono-amp_black-red_dual_no-bk.png?v=1709933355",
+    "//quickstart-db0e6315.myshopify.com/cdn/shop/files/dual_monoblock_wooden_solid_state_amplifier_46762e62-5ae2-44a7-a0d5-4ed6766ec16b.png?v=1709934151"
+  ],
+  "featured_image": "//quickstart-db0e6315.myshopify.com/cdn/shop/files/mono-amp_black-red_dual_no-bk.png?v=1709933355",
+  "options": ["Case"],
+  "media": [
+    {
+      "alt": null,
+      "id": 28608554205341,
+      "position": 1,
+      "preview_image": {
+        "aspect_ratio": 1.386,
+        "height": 459,
+        "width": 636,
+        "src": "//quickstart-db0e6315.myshopify.com/cdn/shop/files/mono-amp_black-red_dual_no-bk.png?v=1709933355"
+      },
+      "aspect_ratio": 1.386,
+      "height": 459,
+      "media_type": "image",
+      "src": "//quickstart-db0e6315.myshopify.com/cdn/shop/files/mono-amp_black-red_dual_no-bk.png?v=1709933355",
+      "width": 636
+    },
+    {
+      "alt": null,
+      "id": 28608618725533,
+      "position": 2,
+      "preview_image": {
+        "aspect_ratio": 1.5,
+        "height": 896,
+        "width": 1344,
+        "src": "//quickstart-db0e6315.myshopify.com/cdn/shop/files/dual_monoblock_wooden_solid_state_amplifier_46762e62-5ae2-44a7-a0d5-4ed6766ec16b.png?v=1709934151"
+      },
+      "aspect_ratio": 1.5,
+      "height": 896,
+      "media_type": "image",
+      "src": "//quickstart-db0e6315.myshopify.com/cdn/shop/files/dual_monoblock_wooden_solid_state_amplifier_46762e62-5ae2-44a7-a0d5-4ed6766ec16b.png?v=1709934151",
+      "width": 1344
+    }
+  ],
+  "requires_selling_plan": false,
+  "selling_plan_groups": [],
+  "content": "\u003cdiv class=\"pb-5\" style=\"margin-top: 10px;\"\u003e\n\u003cp class=\"hidden underline\"\u003eClear Summary of Products Unique Selling Points (USPs)\u003c/p\u003e\n\u003cdl class=\"list-inside list-disc\"\u003e\n\u003cdt class=\"font-semibold\"\u003eHigh-level Product Description:\u003c/dt\u003e\n\u003cdd\u003e* The M87 is a high-powered two-channel power amplifier customizable for audiophiles.\u003c/dd\u003e\n\u003cdt class=\"font-semibold\"\u003eUnique Selling Points (USPs):\u003c/dt\u003e\n\u003cdd\u003e* Ensures that your audio experience is elevated to the next level, delivering outstanding sound quality and reliability.\u003c/dd\u003e\n\u003cdd\u003e* This is a custom amplifier for your custom setup that is also a cleaner sound than any other.\u003c/dd\u003e\n\u003cdt class=\"font-semibold\"\u003eMaterial Variants:\u003c/dt\u003e\n\u003cdd\u003e* We will work with you to get the look you want.\u003c/dd\u003e\n\u003cdd\u003e* You can choose your custom wood veneer, speaker grill material, and input gain sensitivity to match your tastes and home decor.\u003c/dd\u003e\n\u003c/dl\u003e\n\u003c/div\u003e\n\u003cdiv class=\"pb-5 hidden\"\u003e\n\u003cp class=\"hidden underline\"\u003eMaterial Used\u003c/p\u003e\n\u003cul class=\"list-inside list-disc\"\u003e\n\u003cli\u003eYou can choose your custom wood veneer, speaker grill material, and input gain sensitivity to match your tastes and home decor.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e\n\u003cdiv class=\"pb-5 hidden\"\u003e\n\u003cp class=\"underline\"\u003eDimensions \u0026amp; Weight\u003c/p\u003e\n\u003cul class=\"list-inside list-disc\"\u003e\n\u003cli\u003e\n\u003cspan\u003e17\" x 6\" x 14\"\u003c/span\u003e  \u003csmall\u003e(L x W x H)\u003c/small\u003e \u003c/li\u003e\n\u003cli\u003e50 lbs\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e\n\u003cdiv class=\"pb-5 hidden\"\u003e\n\u003cp class=\"underline\"\u003eTop Features \u0026amp; Technical Specifications\u003c/p\u003e\n\u003cul class=\"list-inside list-disc\"\u003e\n\u003cli\u003e2 Channel Power Amplifier\u003c/li\u003e\n\u003cli\u003ePower output: 20W +120W @ 4, 6, or 8 ohms\u003c/li\u003e\n\u003cli\u003e\n\u003cspan\u003eTHD+N: \u0026lt; 0.0002%\u003c/span\u003e  \u003csmall\u003e20-20%kHz BW, 1kHz, 8 ohms\u003c/small\u003e \u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+}

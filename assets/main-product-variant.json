@@ -1,0 +1,49 @@
+{
+  "id": 44686212300957,
+  "title": "Aluminium",
+  "option1": "Aluminium",
+  "option2": null,
+  "option3": null,
+  "sku": "",
+  "requires_shipping": true,
+  "taxable": true,
+  "featured_image": {
+    "id": 36199489077405,
+    "product_id": 7973560909981,
+    "position": 1,
+    "created_at": "2024-03-08T16:29:14-05:00",
+    "updated_at": "2024-03-08T16:29:15-05:00",
+    "alt": null,
+    "width": 636,
+    "height": 459,
+    "src": "//quickstart-db0e6315.myshopify.com/cdn/shop/files/mono-amp_black-red_dual_no-bk.png?v=1709933355",
+    "variant_ids": [44686212300957]
+  },
+  "available": false,
+  "name": "M87 Two-Channel Power Amplifier - Aluminium",
+  "public_title": "Aluminium",
+  "options": ["Aluminium"],
+  "price": 200000,
+  "weight": 0,
+  "compare_at_price": null,
+  "inventory_management": "shopify",
+  "barcode": "",
+  "featured_media": {
+    "alt": null,
+    "id": 28608554205341,
+    "position": 1,
+    "preview_image": {
+      "aspect_ratio": 1.386,
+      "height": 459,
+      "width": 636,
+      "src": "//quickstart-db0e6315.myshopify.com/cdn/shop/files/mono-amp_black-red_dual_no-bk.png?v=1709933355"
+    }
+  },
+  "requires_selling_plan": false,
+  "selling_plan_allocations": [],
+  "quantity_rule": {
+    "min": 1,
+    "max": null,
+    "increment": 1
+  }
+}

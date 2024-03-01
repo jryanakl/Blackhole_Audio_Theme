@@ -1,29 +1,25 @@
-<link rel="stylesheet" href="{{ 'header-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
-
-<noscript>{{ 'header-drawer.css' | asset_url | stylesheet_tag }}</noscript>
-<script>
-
-  function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-  }
-
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-  }
-</script>
-
-<style>
-
-</style>
-
+<script></script>
+<style></style>
 <div id="bh-header__box" class="flex justify-evenly items-center">
-  {% render 'header-drawer' %}
-
-  <div class="md:hidden">
+  <!-- drawer init and show -->
+  <div class="md:hidden" >
+    <button class=""
+      type="button"
+      data-drawer-target="drawer-navigation"
+      data-drawer-show="drawer-navigation"
+      aria-controls="drawer-navigation">
+      <span class="bh-icon bh-icon--white hover:fill-red-600">{% render 'icon-menu' %}</span>
+    </button>
+    {% comment %} <div class="bh-icon bh-icon--white p-3 cursor-pointer"></div> {% endcomment %}
+    {% comment %} 
     <a href="#" onclick="openNav()">
       <div class="bh-icon bh-icon--white p-3 cursor-pointer">{% render 'icon-menu' %}</div>
     </a>
+    {% endcomment %}
   </div>
+
+  <!-- drawer component -->
+  {% render 'header-drawer' %}
 
   <!-- Menu Yo -->
   <div>
@@ -62,9 +58,10 @@
           </li>
         {% endfor %}
         <li class="bh-menu__list__item">
-          <a href="{{ routes.cart_url }}">
-            <span class="bh-icon bh-icon--white h-full">
-              {% render 'icon-shopping-cart' %}
+          <a id="cart-icon-bubble" href="{{ routes.cart_url }}">
+            <span class="bh-icon bh-icon--white h-full hover:fill-red-600">
+              {% comment %} {% render 'icon-shopping-cart' %} {% endcomment %}
+              {% render 'cart-icon-bubble' %}
             </span>
           </a>
         </li>

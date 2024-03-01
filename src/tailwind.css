@@ -36,6 +36,13 @@
     @apply text-red-700 underline ;
   }
 
+  /** Shopify Overwrites **/
+  /* overwrites 'contact form' section's captcha button */
+  .button, .button-label, .shopify-challenge__button, .customer button {
+    @apply mt-10 bg-black text-white text-sm md:text-base font-semibold uppercase py-2.5 px-8 cursor-pointer;
+  }
+  
+
   /** Links **/
   .bh-main a:hover,
   .bh-header a:hover {
@@ -84,6 +91,24 @@
     @apply fill-none;
   }
 
+  .bh-img {
+    @apply flex items-center justify-center w-full h-48 rounded sm:w-96 bg-gray-200;
+
+    /* @apply flex items-center justify-center w-full h-48 bg-gray-950 rounded sm:w-96 dark:bg-gray-700; */
+  }
+
+  .bh-img__image-box {
+    @apply w-auto h-40 overflow-hidden;
+  }
+
+  .bh-img__image {
+    @apply w-full h-full object-cover;
+  }
+  
+  .bh-icon--img-mock {
+    @apply flex items-center justify-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700;
+  }
+
   .bh-icon--black {
     @apply fill-black;
   }
@@ -92,22 +117,32 @@
     @apply fill-gray-600;
   }
   
-  .bh-icon--red {
-    @apply fill-gray-950;
+  .bh-icon--red,
+  .bh-icon--danger {
+    @apply fill-red-600;
   }
 
   .bh-icon--white {
     @apply fill-red-50;
   }
 
+  .bh-icon-green,
+  .bh-icon--success {
+    @apply fill-green-600;
+  }
+
   /** Form **/
   form.bh-form {
     @apply space-y-8;
   }
+
+  .bh-form__control {
+    @apply py-1 md:py-2;
+  }
   
   input.bh-input {
     @apply block p-2 w-full;
-    @apply text-sm text-gray-400 bg-gray-100 border border-gray-500 shadow-sm focus:border-gray-900 focus:outline-black focus:outline-4;
+    @apply text-sm text-gray-700 bg-gray-100 border border-gray-500 shadow-sm focus:border-gray-900 focus:outline-black focus:outline-4;
   }
 
   input.bh-input--sm {
@@ -116,7 +151,7 @@
   
   textarea.bh-textarea {
     @apply block p-2 w-full;
-    @apply text-sm text-gray-500 bg-gray-100 border border-gray-500 shadow-sm focus:ring-gray-800 focus:outline-black focus:outline-4;
+    @apply text-sm text-gray-700 bg-gray-100 border border-gray-500 shadow-sm focus:ring-gray-800 focus:outline-black focus:outline-4;
   }
 
   input.shopify-challenge__button.btn {
@@ -282,7 +317,7 @@
   }
 
   .bh-menu--header, .bh-menu--footer, h2, h3, h4,
-  .sidenav a {
+  .bh-header-drawer__links a {
     font-family: "Oswald", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;

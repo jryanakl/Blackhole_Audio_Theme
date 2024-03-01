@@ -1,174 +1,496 @@
 
+<script>
+  console.log(`%cmain-product-variants.liquid`, 'font-size: 14px; color: green;');
+
+  class VariantImageUpdater {
+    constructor(selector) {
+      this.container = document.getElementById(selector);
+      if (!this.container) return;
+  
+      this.variantSelect = this.container.querySelector('.bh-product__variant select');
+      this.productImage = this.container.querySelector('.bh-product__img img');
+      this.productPrice = this.container.querySelector('.bh-product__price-value');
+      
+      if (this.variantSelect && this.productImage) {
+        this.variantSelect.addEventListener('change', this.updateProductImage.bind(this));
+      }
+  
+      /** Test */
+      console.log(`%c VariantImageUpdater`, 'font-size: 14px; color: dodgerblue');
+      console.log({
+        $ctrl: this,
+      });
+      /** Test */
+    }
+  
+    formatAsCurrency(amount) {
+      // Convert amount to a number if it's not already
+      amount = Number(amount) / 100;
+  
+      // Check if the amount is a valid number
+      if (isNaN(amount)) {
+        console.error('Invalid amount:', amount);
+        return 'Invalid amount';
+      }
+  
+      // Use toLocaleString() to format the number as currency
+      return amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+    
+    updateProductImage() {
+      var selectedOption = this.variantSelect.value;
+      var variants = {{ product.variants | json }};
+      
+      variants.forEach(variant => {
+        const variantId = `${variant?.id}`;
+        const variantImageSrc = variant?.featured_image?.src;
+        const variantPrice = this.formatAsCurrency(variant?.price);
+        // const variantPrice = this.variantSelect?.querySelector('[selected]')?.dataset?.price;
+
+        if (variantId && variantImageSrc && (selectedOption === variantId)) {
+          // const productPrice = this.container.querySelector('.bh-product__price-value');
+          this.productImage.src = variantImageSrc;
+          this.productPrice.textContent = variantPrice;
+  
+          /** Test */
+          console.log(`%c updateProductImage`, 'font-size: 12px; color: dodgerblue');
+          console.log({
+            productImage: this.productImage,
+            productPrice: this.productPrice,
+          });
+          /** Test */
+        }
+      });
+    }
+  }
+ 
+  document.addEventListener('DOMContentLoaded', function () {
+    const selector = 'bh-product';
+    new VariantImageUpdater(selector);
+  });
+</script>
+
 <aside class="">
   <h2 id="">Amplifier</h2>
-  <div class="flex flex-col md:flex-row">
+  <div id="bh-product" class="flex flex-col md:flex-row">
     <div class="md:w-3/5 bg-gray-100 align-middle p-5 mb-5 mr-5 md:p-10 md:mb-10 md:mr-10">
-      <div style="w-full">
-        {% render 'product-image-swiper' %}
+      <div id="bh-product__img" class="bh-product__img w-full">
+        {% render 'main-product-featured' %}
+        {% comment %} {% render 'product-image-swiper' %} {% endcomment %}
       </div>
     </div>
-    <div class="md:w-2/5 pb-5 text-sm md:text-base">
-      <h3 class="pb-4"><span class="bh-text--red">M87</span> Amplifier</h3>
-      <p class="pb-4">
-        The M87 Amplifier ensures that your audio experience is elevated to the next level, delivering outstanding sound quality and reliability.
-        {% comment %} {{ product.description }} {% endcomment %}
-      </p>
-      <div class="w-full text-xl">
-        <p>
-          <span class="sr-only">Price:</span>
-          {{ product.price | money }}</p>
+    <div class="md:w-2/5 pb-5 text-sm md:ftext-base">
+      <h3 class="pb-4">
+        <span class="bh-text--red"> M87</span> Two-Channel Power Amplifier
+      </h3>
+      <div id="bh-product__description" class="bh-product__description pb-4 hidden">
+        <p class="pb-4">
+          {% comment %} {% render 'main-product-description' %} {% endcomment %}
+          {% comment %} {{ product.description }} {% endcomment %}
+        </p>
       </div>
-      <form action="/cart/add" method="post">
-        <div class="w-full pb-4">
-          {% render 'quantity' %}
+      <div id="bh-product__variant" class="bh-product__variant pb-4">
+        {% render 'main-product-variants' %}
+      </div>
+      <div id="bh-product__price" class="bh-product__price pb-4">
+        <label class="bh-label font-semibold text-sm md:text-base">Price:</label><br />
+        <span id="bh-product__price-value" class="bh-product__price-value text-sm md:text-base pb-4">
+          {{ product.price | money }}
+        </span>
+      </div>
+
+      <!-- Add to Cart -->
+      {% assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id %}
+      {% assign product_form_id = 'product-form-' | append: section.id %}
+  
+      <form id="Quantity-Form-{{ section.id }}" action="/cart/add" method="post">
+        <div class="bw-full pb-4">
+          <div class="bh-form-control">
+            <label class="bh-label font-semibold text-sm md:text-base" for="Quantity-{{ section.id }}">
+              {{ 'products.product.quantity.label' | t }}&colon;
+            </label>
+            <quantity-input class="quantity cart-quantity">
+              <div id="bh-quantity-selector" class="flex items-center">
+                <button class="bh-minus-button inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                  type="button"
+                  name="minus">
+                  <span class="sr-only">
+                    {{ 'products.product.quantity.decrease' | t: product: product.title | escape }}
+                  </span>
+                  <span class="bh-minus-button bh-icon fill-gray-400 hover:fill-gray-500">
+                    {% render 'icon-minus' %}
+                  </span>
+                </button>
+
+                <div>
+                  {% comment %}
+                      <!-- @todo: initially may need to set max value to 1 -->
+                  {% endcomment %}
+                  <input type="number"
+                    class="bh-quantity-input bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="quantity__input"
+                    type="number"
+                    name="quantity"
+                    id="Quantity-{{ section.id }}"
+                    data-cart-quantity="{{ cart_qty }}"
+                    data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                    min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                    {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                      data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                      max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                    {% endif %}
+                    step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                    value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                    form="{{ product_form_id }}"
+                    />
+                </div>
+  
+                <button class="bh-plus-button inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+                  <span class="sr-only">
+                    {{ 'products.product.quantity.increase' | t: product: product.title | escape }}
+                  </span>
+                  <span class="bh-plus-button bh-icon fill-gray-400 hover:fill-gray-500">
+                    {% render 'icon-add' %}
+                  </span>
+                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                  </svg>
+                </button>
+              </div>
+            </quantity-input>
+          </div>
         </div>
         <input class="bh-input pb-4 hidden" type="hidden" name="id" value="{{ product.variants.first.id }}">
-        <div class="w-full pb-3 border text-sm md:text-base">
+        <div class="w-full pb-3x text-sm md:text-base">
           <button class="bh-button bh-button--md bh-button--white mb-2 w-full" type="submit">Add to cart</button>
           <button class="bh-button bh-button--md bh-button--black w-full">Buy Now</button>
         </div>
       </form>
+
     </div>
   </div>
 </aside>
 
 <aside class="mb-5 md:mb-10">
   <h3>Overview</h3>
-  <p>
-    A custom amplifier for your custom setup that is also a cleaner sound than any other. We will work with you to
-    get the look you want. You can choose your custom wood veneer, speaker grill material, and input gain
-    sensitivity to match your tastes and home decor.
-  </p>
+  {% render 'main-product-description' %} 
 </aside>
 
 <aside class="mb-5 md:mb-10">
-  <h3>Features</h3>
-  <div class="grid md:grid-cols-2">
-    <ul class="list-none">
-      <li class="flex items-top-center mb-2">
-        <i class="bh-icon bh-icon--gray">
-          {% render 'icon-audio-video-receiver' %}
-        </i>
-        <div class="ml-2">
-          <dt><h4>100% Analog</h4></dt>
-          <dd class="text-sm md:text-base">No digital switching or clocks in the box <small>(TM)</small></dd>
-        </div>
+  <!-- New -->
+  <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-styled-tab" data-tabs-toggle="#default-styled-tab-content" data-tabs-active-classes="text-red-600 hover:text-red-600 dark:text-red-500 dark:hover:text-red-500 border-red-600 dark:border-red-500" data-tabs-inactive-classes="dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" role="tablist">
+      <li class="me-2" role="presentation">
+        <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-styled-tab" data-tabs-target="#styled-features" type="button" role="tab" aria-controls="features" aria-selected="false">
+          Features
+        </button>
       </li>
-      <li class="flex items-top-center mb-2">
-        <span class="bh-icon bh-icon--gray">
-          {% render 'icon-dynamic-form' %}
-        </span>
-        <div class="ml-2">
-          <dt><h4>120W +120W</h4></dt>
-          <dd class="text-sm md:text-base">At 4, 6, or 8 ohms</dd>
-        </div>
+      <li class="me-2" role="presentation">
+        <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-styled-tab" data-tabs-target="#styled-specifications" type="button" role="tab" aria-controls="specifications" aria-selected="false">
+          Specifications
+        </button>
       </li>
-      <li class="flex items-top-center mb-2">
-        <span class="bh-icon bh-icon--gray">
-          {% render 'icon-high-res' %}
-        </span>
-        <div class="ml-2">
-          <dt><h4>Hi-Res amplifier</h4></dt>
-          <dd class="text-sm md:text-base">0.0002% THD+N <small>(-114dB)</small></dd>
-        </div>
+      <li class="me-2" role="presentation">
+        <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-styled-tab" data-tabs-target="#styled-performance" type="button" role="tab" aria-controls="performance" aria-selected="false">
+          Performance
+        </button>
       </li>
-      <li class="flex items-top-center mb-2">
-        <span class="bh-icon bh-icon--gray">
-          {% render 'icon-grid-view' %}
-        </span>
-        <div class="ml-2">
-          <dt><h4>Dual Mono Block Design</h4></dt>
-          <dd class="text-sm md:text-base">For non-measurable cross talk levels</dd>
-        </div>
-      </li>
-      <li class="flex items-top-center mb-2">
-        <span class="bh-icon bh-icon--gray">
-          {% render 'icon-commit' %}
-        </span>
-        <div class="ml-2">
-          <dt><h4>No Mechanical Relays</h4></dt>
-          <dd class="text-sm md:text-base">100% solid state for uncompromised reliability and performance</dd>
-        </div>
-      </li>
-    </ul>
-
-    <ul class="list-none">
-      <li class="flex items-top-center mb-2">
-        <span class="bh-icon bh-icon--gray">
-          {% render 'icon-volume-up' %}
-        </span>
-        <div class="ml-2">
-          <dt><h4>Class AB</h4></dt>
-          <dd class="text-sm md:text-base">Re-imagined from the bottom up</dd>
-        </div>
-      </li>
-      <li class="flex items-top-center mb-2">
-        <span class="bh-icon bh-icon--gray">
-          {% render 'icon-blue-linear' %}
-        </span>
-        <div class="ml-2">
-          <dt><h4>Linear Regulated System</h4></dt>
-          <dd class="text-sm md:text-base">With 15uVrms noise 20-20kHz on low voltage rails</dd>
-        </div>
-      </li>
-      <li class="flex items-top-center mb-2">
-        <span class="bh-icon bh-icon--gray">
-          {% render 'icon-filter-list' %}
-        </span>
-        <div class="ml-2">
-          <dt><h4>33mF filter caps</h4></dt>
-          <dd class="text-sm md:text-base">Each for high and low rail</dd>
-        </div>
-      </li>
-      <li class="flex items-top-center mb-2">
-        <span class="bh-icon bh-icon--gray">
-          {% render 'icon-settings-input-component' %}
-        </span>
-        <div class="ml-2">
-          <dt><h4>Input/Output</h4></dt>
-          <dd class="text-sm md:text-base">12V- remote turn</dd>
-        </div>
-      </li>
-      <li class="flex items-top-center mb-2">
-        <span class="bh-icon bh-icon--gray">
-          {% render 'icon-output' %}
-        </span>
-        <div class="ml-2">
-          <dt><h4>Fast acting 100uS output</h4></dt>
-          <dd class="text-sm md:text-base">Short fault protection on hi and low side</dd>
-        </div>
+      <li class="me-2" role="presentation">
+        <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-styled-tab" data-tabs-target="#styled-design" type="button" role="tab" aria-controls="design" aria-selected="false">
+          Design
+        </button>
       </li>
     </ul>
   </div>
-</aside>
+  <div id="default-tab-content">
+    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-features" role="tabpanel" aria-labelledby="features-tab">
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+        <div class="grid md:grid-cols-2">
+          <ul class="list-none">
+            <li class="flex items-top-center mb-2">
+              <i class="bh-icon bh-icon--gray">
+                {% render 'icon-audio-video-receiver' %}
+              </i>
+              <div class="ml-2">
+                <dt><h4>100% Analog</h4></dt>
+                <dd class="text-sm md:text-base">No digital switching or clocks in the box <small>(TM)</small></dd>
+              </div>
+            </li>
+            <li class="flex items-top-center mb-2">
+              <span class="bh-icon bh-icon--gray">
+                {% render 'icon-dynamic-form' %}
+              </span>
+              <div class="ml-2">
+                <dt><h4>120W+120W</h4></dt>
+                <dd class="text-sm md:text-base">At 4, 6, or 8 ohms</dd>
+              </div>
+            </li>
+            <li class="flex items-top-center mb-2">
+              <span class="bh-icon bh-icon--gray">
+                {% render 'icon-high-res' %}
+              </span>
+              <div class="ml-2">
+                <dt><h4>Hi-Res amplifier</h4></dt>
+                <dd class="text-sm md:text-base">0.0002% THD+N <small>(-114dB)</small></dd>
+              </div>
+            </li>
+            <li class="flex items-top-center mb-2">
+              <span class="bh-icon bh-icon--gray">
+                {% render 'icon-grid-view' %}
+              </span>
+              <div class="ml-2">
+                <dt><h4>Dual Mono Block Design</h4></dt>
+                <dd class="text-sm md:text-base">For non-measurable cross talk levels</dd>
+              </div>
+            </li>
+            <li class="flex items-top-center mb-2">
+              <span class="bh-icon bh-icon--gray">
+                {% render 'icon-commit' %}
+              </span>
+              <div class="ml-2">
+                <dt><h4>No Mechanical Relays</h4></dt>
+                <dd class="text-sm md:text-base">100% solid state for uncompromised reliability and performance</dd>
+              </div>
+            </li>
+          </ul>
+      
+          <ul class="list-none">
+            <li class="flex items-top-center mb-2">
+              <span class="bh-icon bh-icon--gray">
+                {% render 'icon-volume-up' %}
+              </span>
+              <div class="ml-2">
+                <dt><h4>Class AB</h4></dt>
+                <dd class="text-sm md:text-base">Re-imagined from the bottom up</dd>
+              </div>
+            </li>
+            <li class="flex items-top-center mb-2">
+              <span class="bh-icon bh-icon--gray">
+                {% render 'icon-blue-linear' %}
+              </span>
+              <div class="ml-2">
+                <dt><h4>Linear Regulated System</h4></dt>
+                <dd class="text-sm md:text-base">With 15uVrms noise 20-20kHz on low voltage rails</dd>
+              </div>
+            </li>
+            <li class="flex items-top-center mb-2">
+              <span class="bh-icon bh-icon--gray">
+                {% render 'icon-filter-list' %}
+              </span>
+              <div class="ml-2">
+                <dt><h4>33mF filter caps</h4></dt>
+                <dd class="text-sm md:text-base">Each for high and low rail</dd>
+              </div>
+            </li>
+            <li class="flex items-top-center mb-2">
+              <span class="bh-icon bh-icon--gray">
+                {% render 'icon-settings-input-component' %}
+              </span>
+              <div class="ml-2">
+                <dt><h4>Input/Output</h4></dt>
+                <dd class="text-sm md:text-base">12V- remote turn</dd>
+              </div>
+            </li>
+            <li class="flex items-top-center mb-2">
+              <span class="bh-icon bh-icon--gray">
+                {% render 'icon-output' %}
+              </span>
+              <div class="ml-2">
+                <dt><h4>Fast acting 100uS output</h4></dt>
+                <dd class="text-sm md:text-base">Short fault protection on hi and low side</dd>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </p>
+    </div>
+    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-specifications" role="tabpanel" aria-labelledby="specifications-tab">
+      <div class="grid md:grid-cols-2">
+        <div class="">
+          <h4 class="">Audio Specification</h4>
+          <ul class="list-disc list-inside text-sm md:text-base">
+            <li>Power output: 20W +120W @ 4, 6, or 8 ohms</li>
+            <li>THD+N: &lt; 0.0002% <small>20-20%kHz BW, 1kHz, 8 ohms</small></li>
+            <li>SNR: 135dB at input sensitivity 5.2Vrms</li>
+            <li>SRN: 127dB at input sensitivity for 1.5Vrms</li>
+          </ul>
+          <h4 class="pt-2">Dimension & Weight</h4>
+          <ul class="list-disc list-inside text-sm md:text-base">
+            <li>17" x 6" x 14" <small>(L x W x H)</small></li>
+            <li>50 lbs</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="">Inputs/Outputs Connections</h4>
+          <ul class="list-disc list-inside text-sm md:text-base">
+            <li>Input connections: 2 balanced <small>(XLR)</small></li>
+            <li>Output connections: 2 speaker banana plug</li>
+            <li>Trigger input/output: 12V remote 3.5mm mono jack</li>
+          </ul>
+          <h4 class="pt-2">Controls</h4>
+          <ul class="list-disc list-inside text-sm md:text-base">
+            <li>3-way power switch <small>(selectable ON-OFF-12V REMOTE)</small></li>
+            <li>Load configuration switch <small>(8-6-4) ohm</small></li>
+          </ul>
+          <h4 class="pt-2">Power Needs</h4>
+          <ul class="pb-2 list-disc list-inside text-sm md:text-base">
+            <li>110-120VAC</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-performance" role="tabpanel" aria-labelledby="performance-tab">
+      {% render 'main-page-chart' %}
+    </div>
+    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-500" id="styled-design" role="tabpanel" aria-labelledby="design-tab">
+      <div role="status" class="pb-5 space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+        <div class="bh-img">
+          <div class="bh-img__image-box">
+            <img src="{{ 'analog-100.png' | asset_img_url: 'large' }}" class="bh-img__image" width="" height="192px" />
+            {% comment %} <img src="{{ 'mono-amp_analog.png' | asset_img_url: 'large' }}" class="bh-img__image" width="" height="192px" /> {% endcomment %}
+            {% comment %} <img src="{{ 'mono-amp-tesla_coil.png' | asset_img_url: 'large' }}" class="bh-img__image" width="" height="192px" /> {% endcomment %}
+          </div>
+        </div>
+        <div class="w-full">
+          <h4>
+            Pure Analog Excellence
+          </h4>
+          <p>
+            100% Analog Design for Authentic Audio Experience
+            {% comment %}
+              All analog design means 100% analog
+            {% endcomment %}
+          </p>
+        </div>
+        <span class="sr-only">Loading...</span>
+      </div>
 
-<aside class="">
-  <h3>Specifications</h3>
-  <div class="grid md:grid-cols-2">
-    <div class="">
-      <h4 class="">Audio Specification</h4>
-      <ul class="list-disc list-inside text-sm md:text-base">
-        <li>20W +120W @ 4, 6, or 8 ohms</li>
-        <li>THD+N - 0.0002% THD+N</li>
-        <li>SNR - 135dB at input sensitivity 5.2Vrms</li>
-        <li>SRN - 127dB at input sensitivity for 1.5Vrms</li>
-      </ul>
-      <h4 class="pt-2">Dimensions</h4>
-      <ul class="pb-2 list-disc list-inside text-sm md:text-base">
-        <li>17" x 6" x 14", 50 lbs</li>
-      </ul>
+      <div role="status" class="pb-5 space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+        <div class="bh-img">
+          <div class="bh-img__image-box">
+            <img src="{{ 'amp-signal-performance.png' | asset_img_url: 'large' }}" class="bh-img__image" width="" height="192px" />
+            {% comment %} <img src="{{ 'mono-amp_analog.png' | asset_img_url: 'large' }}" class="bh-img__image" width="" height="192px" /> {% endcomment %}
+            {% comment %} <img src="{{ 'mono-amp_signal.png' | asset_img_url: 'large' }}" class="bh-img__image" width="" height="192px" /> {% endcomment %}
+          </div>
+        </div>
+        <div class="w-full">
+          <h4>
+            Innovative Breakthrough
+          </h4>
+          <p>
+            Newly Patented Small Signal Architecture Redefining Performance
+            {% comment %}
+              Newly patented small signal architecture
+            {% endcomment %}
+          </p>
+        </div>
+        <span class="sr-only">Loading...</span>
+      </div>
+
+      <div role="status" class="pb-5 space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+        <div class="bh-img">
+          <div class="bh-img__image-box">
+            <img src="{{ 'mono-amp_zero-cross-talk.jpg' | asset_img_url: 'large' }}" class="bh-img__image" width="" height="192px" />
+          </div>
+        </div>
+        <div class="w-full">
+          <h4>
+            Unmatched Precision
+          </h4>
+          <p>
+            Dual Monoblock Design for Ultimate Channel Separation and Zero Crosstalk
+            {% comment %} 
+              Dual Mono block design- think this is the one we missed - infinite channel separate/crosstalk
+            {% endcomment %}
+          </p>
+        </div>
+        <span class="sr-only">Loading...</span>
+      </div>
+
+      <div role="status" class="pb-5 space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+        <div class="bh-img">
+          <div class="bh-img__image-box bg-gray-100">
+            <img src="{{ 'mono-amp_american-assembly.jpg' | asset_img_url: 'large' }}" class="bh-img__image" width="" height="192px" />
+          </div>
+        </div>
+        <div class="w-full">
+          <h4>
+            American Craftsmanship
+          </h4>
+          <p>
+            Premium Build Quality with 0.093 Thick PCB for Enhanced Thermal Performance
+            {% comment %}
+              Build quality - assembled in USA 0.093” thick PCB for better lower temperature
+            {% endcomment %}
+          </p>
+        </div>
+        <span class="sr-only">Loading...</span>
+      </div>
+
+      <div role="status" class="pb-5 space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+        <div class="bh-img">
+          <div class="bh-img__image-box">
+            <img src="{{ 'mono-amp_m87_power-supply.png' | asset_img_url: 'large' }}" class="bh-img__image" width="" height="100%" />
+            {% comment %} <img src="{{ 'mono-amp_power-supply.jpg' | asset_img_url: 'large' }}" class="bh-img__image" width="" height="192px" /> {% endcomment %}
+          </div>
+        </div>
+        <div class="w-full">
+          <h4>
+            Unparalleled Power
+          </h4>
+          <p>
+            Unregulated Brute Force Supply with Dual 33mF Filter Caps and 19 lb Transformer
+            {% comment %}
+              unregulated brute force power supply- Filter Caps 33mFx2 per channel for ultra low noise and power handling - including 19 lb transformer
+            {% endcomment %}
+          </p>
+        </div>
+        <span class="sr-only">Loading...</span>
+      </div>
+
+      <div role="status" class="pb-5 space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+        <div class="bh-img">
+          <div class="bh-img__image-box">
+            <img src="{{ 'mono-amp_m87_relays.png' | asset_img_url: 'large' }}" class="bh-img__image" width="" height="100%" />
+            {% comment %} <img src="{{ 'mono-amp_solid-state-relay.jpg' | asset_img_url: 'large' }}" class="bh-img__image" width="" height="192px" /> {% endcomment %}
+          </div>
+        </div>
+        <div class="w-full">
+          <h4>
+            Innovative Solid-State Relay Design
+          </h4>
+          <p>
+            Unmatched Reliability and Lifelong Performance
+            {% comment %}
+              First of its kind 100% solid state relay design for ultra reliability and steady performance for its lifetime
+            {% endcomment %}
+          </p>
+        </div>
+        <span class="sr-only">Loading...</span>
+      </div>
+
+      <div role="status" class="pb-5 space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+        <div class="bh-img">
+          <div class="bh-img__image-box">
+            <img src="{{ 'mono-amp_output-stage_analog.jpg' | asset_img_url: 'large' }}" class="bh-img__image" width="" height="192px" />
+          </div>
+        </div>
+        <div class="w-full">
+          <h4>
+            Premium Performance
+          </h4>
+          <p>
+            Japanese Silicon Class AB Output Stage with Dual 4 lb Heat Sinks for Enhanced Cooling and Durability
+            {% comment %}
+              Japanese silicon output class AB output stage including massive 4 lb heat sink per channel for lower temperature and longer life
+            {% endcomment %}
+          </p>
+        </div>
+        <span class="sr-only">Loading...</span>
+      </div>
+
     </div>
-    <div>
-      <h4 class="">Inputs/Outputs Connection</h4>
-      <ul class="list-disc list-inside text-sm md:text-base">
-        <li>110-120VAC</li>
-        <li>2 inputs - balanced <small>(XLR)</small></li>
-        <li>2 speaker banana plug outputs</li>
-        <li>3-way Power switch <small>(selectable ON-OFF-12V REMOTE)</small></li>
-        <li>Load configuration switch <small>(8-6-4) ohm</small></li>
-        <li>12V remote 3.5mm mono jack input and output</li>
-      </ul>
-    </div>
+
   </div>
 </aside>
 

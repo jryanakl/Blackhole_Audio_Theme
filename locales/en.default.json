@@ -39,6 +39,12 @@
     }
   },
   "sections": {
+    "header": {
+      "cart_count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      }
+    },
     "cart": {
       "headings": {
         "product": "Product",
@@ -47,6 +53,11 @@
         "quantity": "Quantity"
       },
       "title": "Your cart"
+    }
+  },
+  "templates": {
+    "cart": {
+      "cart": "Cart"
     }
   }
 }

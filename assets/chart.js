@@ -1,23 +1,123 @@
 // Flow
 const options = {
   // set the labels option to true to show the labels on the X and Y axis
+  series: [
+    {
+      name: "BHA M87",
+      data: [
+        { x: '0.1', y: 0.00794 },
+        { x: '1.0', y: 0.00354 },
+        { x: '10.0', y: 0.00199 },
+        { x: '100.0', y: 0.00019 }
+      ],
+      color: "#000",
+      line: {
+        // Customize the appearance of this series
+        width: 3, // Make the line thicker
+        dashArray: 5, // Make the line dashed
+        colors: ['#ff0000'] // Set a custom color for the line
+      },
+      zIndex: 13
+    },
+    {
+      name: "NAD C 298",
+      data: [
+        { x: '0.1', y: 0.0046 },
+        { x: '1.0', y: 0.0015 },
+        { x: '10.0', y: 0.0004 },
+        { x: '100.0', y: 0.0003 }
+      ],
+      color: "#ca8a04",
+    },
+    {
+      name: "Accustic Arts AMP V",
+      data: [
+        { x: '0.1', y: 0.0320 },
+        { x: '1.0', y: 0.0100 },
+        { x: '10.0', y: 0.0040 },
+        { x: '100.0', y: 0.0032 }
+      ],
+      color: "#78716c",
+    },
+    {
+      name: "Rotel Michi S5",
+      data: [
+        { x: '0.1', y: 0.0180 },
+        { x: '1.0', y: 0.0065 },
+        { x: '10.0', y: 0.0035 },
+        { x: '100.0', y: 0.0028 }
+      ],
+      color: "#f97316",
+    },
+    {
+      name: "Schiit Audio Tyr",
+      data: [
+        { x: '0.1', y: 0.0052 },
+        { x: '1.0', y: 0.0027 },
+        { x: '10.0', y: 0.0040 },
+        { x: '100.0', y: 0.0039 }
+      ],
+      color: "#93c5fd",
+    },
+    {
+      name: "Simaudio Moon 860A",
+      data: [
+        { x: '0.1', y: 0.0097 },
+        { x: '1.0', y: 0.0060 },
+        { x: '10.0', y: 0.0097 },
+        { x: '100.0', y: 0.0290 }
+      ],
+      color: "#84cc16",
+    },
+    {
+      name: "Mcintosh MAC7200",
+      data: [
+        { x: '0.1', y: 0.0700 },
+        { x: '1.0', y: 0.0240 },
+        { x: '10.0', y: 0.0075 },
+        { x: '100.0', y: 0.0025 }
+      ],
+      color: "#facc15",
+    },
+    {
+      name: "Mark Levinson #85",
+      data: [
+        { x: '0.1', y: 0.0400 },
+        { x: '1.0', y: 0.0120 },
+        { x: '10.0', y: 0.0047 },
+        { x: '100.0', y: 0.0050 }
+      ],
+      color: "#9ca3af",
+    },
+  ],
   xaxis: {
+    // categories: ['0.1', '1.0', '10.0', '50.0', '100.0'],
+    categories: ['0.1', '1.0', '10.0', '100.0'],
+   
     show: true,
-    categories: [
-      0.1,
-      1.0,
-      10.0,
-      100.0
-    ],
     labels: {
       show: true,
       style: {
-        fontFamily: "Oswald, sans-serif",
         cssClass: "text-xs font-normal fill-gray-500 dark:fill-gray-400",
-        formatter: function (value) {
-          return value;
+        fontFamily: "Oswald, sans-serif",
+        style: {
+          fontSize: '12px' // Adjust font size for y-axis labels
         },
       },
+      axisBorder: {
+        show: false
+      },
+      axisTicks: {
+        show: false
+      }
+    },
+    title: {
+      text: 'Power (W)',
+      style: {
+        fontSize: '14px',
+        color: '#6b7280'
+      },
+      offsetY: 5,
     },
     axisBorder: {
       show: false,
@@ -27,14 +127,14 @@ const options = {
     },
   },
   yaxis: {
+    // categories: ['0.000', '0.0001', '0.0010', '0.0100', '0.1000'],
+    // categories: [0.0000, 0.0001, 0.0010, 0.0100, 0.1000],
+    tickAmount: 2,
+    yaxis: {
+      min: 0.000, // Initial y-axis minimum
+      max: 0.1000 // Initial y-axis maximum
+    },
     show: true,
-    categories: [
-      0.0000,
-      0.0001,
-      0.0010,
-      0.0100,
-      0.1000
-    ],
     labels: {
       show: true,
       style: {
@@ -42,72 +142,25 @@ const options = {
         cssClass: "text-xs font-normal fill-gray-500 dark:fill-gray-400",
       },
       formatter: function (value) {
-        return value + `%`;
+        return value.toFixed(4) + `%`;
       },
+      decimalsInFloat: 4,
     },
+    title: {
+      text: 'THD+N',
+      style: {
+        fontSize: '14px',
+        color: '#6b7280'
+      },
+      offsetX: -5,
+    },
+    // tickPlacement: 'on'
   },
-  series: [
-    {
-      name: "BHA M87",
-      data: [
-        0.00079,
-        0.00035,
-        0.00019,
-        0.00018,
-        0.00019
-      ],
-      color: "#b91c1c",
-    },
-    {
-      name: "Schiit Audio Tyr",
-      data: [
-        0.0052,
-        0.0027,
-        0.004,
-        0.0035,
-        0.0039
-      ],
-      color: "#06b6d4",
-    },
-    {
-      name: "Rotel Michi S5",
-      data: [
-        0.018,
-        0.0065,
-        0.0035,
-        0.003,
-        0.0028,
-      ],
-      color: "#c2410c",
-    },
-    {
-      name: "Accustic Arts AMP V",
-      data: [
-        0.032,
-        0.01,
-        0.004,
-        0.003,
-        0.0032
-      ],
-      color: "#57534e",
-    },
-    {
-      name: "NAD C 298",
-      data: [
-        0.0046,
-        0.0015,
-        0.00048,
-        0.00045,
-        0.0003
-      ],
-      color: "#1d4ed8",
-    },
-  ],
   chart: {
     sparkline: {
       enabled: false,
     },
-    height: "700px",
+    height: "575px",
     width: "100%",
     type: "area",
     fontFamily: "Oswald, sans-serif",
@@ -137,75 +190,27 @@ const options = {
     enabled: false,
   },
   stroke: {
-    width: 2,
+    width: [6, 2, 2, 2, 2, 2, 2],
+    dashArray: [6, 0, 0, 0, 0, 0, 0]
   },
   legend: {
-    show: true,
+    position: "top",
+    horizontalAlign: "center",
+    offsetX: -10
   },
   grid: {
     show: true,
+    padding: {
+      top: 2,
+      right: 2,
+      bottom: 2,
+      left: 2,
+    }
   },
 };
 
-if (
-  document.getElementById("labels-chart") &&
-  typeof ApexCharts !== "undefined"
-) {
-  const chart = new ApexCharts(
-    document.getElementById("labels-chart"),
-    options
-  );
+if (document.getElementById("bh-thd-noise__area-chart") && typeof ApexCharts !== 'undefined') {
+  const chart = new ApexCharts(document.getElementById("bh-thd-noise__area-chart"), options);
+  //chart.zoomX('0.1', '100.0');
   chart.render();
 }
-
-// HighCharts
-// const charTextStyle = {
-//   color: "#4b5563",
-// };
-// const chartOptions = {
-//   chart: {
-//     type: "line",
-//     backgroundColor: "transparent",
-//   },
-//   title: {
-//     style: {
-//       ...charTextStyle,
-//     },
-//     text: ``,
-//   },
-//   xAxis: {
-//     categories: ["0.1", "1.0", "10.0", "100"],
-//     labels: {
-//       style: {
-//         ...charTextStyle,
-//       },
-//     },
-//   },
-//   yAxis: {
-//     title: {
-//       style: {
-//         ...charTextStyle,
-//       },
-//       text: "THD+N",
-//     },
-//     labels: {
-//       style: {
-//         ...charTextStyle,
-//       },
-//     },
-//     gridLineColor: "#4b5563",
-//   },
-//   legend: {
-//     itemStyle: {
-//       ...charTextStyle,
-//     },
-//   },
-//   series: [
-//     {
-//       color: "#dc2626",
-//       name: "Black Hole Audio - M87",
-//       data: [0.01, 0.003, 0.002],
-//     },
-//   ],
-// };
-// Highcharts.chart("chart-container", chartOptions);

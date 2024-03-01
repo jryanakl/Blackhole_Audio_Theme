@@ -1,31 +1,36 @@
-{% comment %}
-  Renders a header drawer menu for mobile and desktop.
-
-  Usage:
-  {% render 'header-drawer' %}
-{% endcomment %}
-
-
-<div id="mySidenav" class="sidenav pt-10">
-  <a href="javascript:void(0)" class="closebtn bh-icon fill-white" onclick="closeNav()">
-    {% render 'icon-close' %}
-  </a>
-  {% comment %} 
-  <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
-  {% endcomment %}
-  <ul clas="list text-base uppercase">
-    {% for link in linklists['main-menu'].links %}
-      <li class="text-white text-xs uppercase mb-4">
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      </li>
-    {% endfor %}
-    {% for link in linklists['header-right-menu'].links %}
-      <li class="text-white text-xs uppercase mb-4">
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
+<!-- drawer component -->
+<div
+  id="drawer-navigation"
+  class="fixed top-0 left-0 z-40 h-screen p-8 overflow-y-auto transition-transform -translate-x-full bg-black w-64 dark:bg-gray-800"
+  tabindex="-1"
+  aria-labelledby="drawer-navigation-label"
+>
+  <h5 id="drawer-navigation-label" class="sr-only text-base font-semibold text-white uppercase dark:text-gray-400">
+    Menu
+  </h5>
+  <button
+    type="button"
+    data-drawer-hide="drawer-navigation"
+    aria-controls="drawer-navigation"
+    class=""
+  >
+    <span class="fill-gray-100 hover:fill-red-600 bg-transparent rounded-lg absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+      {% render 'icon-close' %}
+    </span>
+    <span class="sr-only">Close menu</span>
+  </button>
+  <div class="py-4 overflow-y-auto">
+    <ul class="bh-header-drawer__links font-semibold">
+      {% for link in linklists['main-menu'].links %}
+        <li class="text-white text-lg uppercase mb-2">
+          <a class="text-white" href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+      {% for link in linklists['header-right-menu'].links %}
+        <li class="text-white text-lg uppercase mb-2">
+          <a class="text-white" href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>

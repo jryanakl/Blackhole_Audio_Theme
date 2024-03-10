@@ -1,7 +1,7 @@
 <aside class="">
-  <div class="">
-    <h2 class="">{{ section.settings.title }}</h2>
-  </div>
+  <h2 class="">
+    {{ section.settings.title }}
+  </h2>
   {% render 'dealers-usa' %}
 </aside>
 
@@ -16,6 +16,12 @@
       "id": "title",
       "default": "Dealers",
       "label": "Delears Heading Title"
+    },
+    {
+      "type": "text",
+      "id": "title_paragraph",
+      "default": "Based in the Dallas Fort Worth or Kansas City area? Let us coordinate an in-person demonstration of our amplifier for you.",
+      "label": "Delears Paragraph"
     }
   ]
 }

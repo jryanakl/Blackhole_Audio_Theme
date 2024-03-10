@@ -1,5 +1,7 @@
 <aside class="">
-  <h2>{{ section.settings.title }}</h2>
+  <h2>
+    {{ section.settings.title }}
+  </h2>
   {% render 'contact-address' %}
   {% render 'contact-email-phone' %}
 </aside>
@@ -15,6 +17,12 @@
       "id": "title",
       "default": "Contact",
       "label": "Contact Heading Title"
+    },
+    {
+      "type": "text",
+      "id": "title_paragraph",
+      "default": "For support, the best way to contact Black Hole Audio is via e-mail.",
+      "label": "Contact Paragraph"
     }
   ]
 }

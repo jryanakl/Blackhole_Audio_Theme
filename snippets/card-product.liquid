@@ -1,0 +1,68 @@
+{% comment %}
+* 
+* Accepts:
+* -card_product: product,
+* -show_rating: section.settings.show_rating,
+* -section_id: section.id
+*
+{% endcomment %}
+<div class="text-red-600 hidden">
+  {{ show_rating | json }}
+  {{ card_product.url | json }}
+  {{ card_product.featured_image | escape }}
+  {{ section_id | json }}
+</div>
+<div class="bh-card-product w-full py-10 px-4">
+  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow p-5 hover:border-2 hover:bg-gray-100">
+    <a href="{{ card_product.url }}">
+      {% if card_product.featured_image %}
+        <div class="">
+            <img
+              src="{{ card_product.featured_image | image_url: width: 750 }}"
+              class="object-cover w-full h-full"
+              sizes=""
+              alt="{{ card_product.featured_image.alt  | escape }}"
+              width="{{ card_product.featured_image.width }}"
+              height="{{ card_product.featured_image.height }}"
+            >
+        </div>
+
+      {% else %}
+        {{ 'product-5' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100' }}
+      {% endif %}
+  
+      <div class="p-5">
+        <h5 class="text-md font-bold tracking-tight text-gray-700 uppercase">
+          {{ 'company.name' | t }} {{ card_product.title }}
+        </h5>
+
+        {% if show_rating %}
+          <div class="bh-card-product__rating py-2">
+            <code class="uppercase">@todo: show rating</code>
+          </div>
+        {% endif %}
+
+        <ul class="list-inside list-disc">
+          <li class="">
+            120W+120W
+          </li>
+          <li class="">
+            2 Channels
+          </li>
+          <li class="">
+            0.0002% THD+N
+          </li>
+        </ul>
+      </div>
+
+      <p class="text-gray-700 font-semibold hidden">
+        {{ product_product.price | money }}
+      </p>
+
+      <button class="text-sm uppercase text-white bg-gray-700 hover:border-black hover:bg-black hover:text-white py-2 px-4">
+        {{ 'general.learn_more' | t }} &gt;&gt;
+      </button>
+    </a>
+
+  </div>
+</div>

@@ -1,0 +1,18 @@
+{% comment %}
+{% endcomment %}
+{% case media.media_type %}
+  {% when 'image' %}
+    <img id="bh-carousel-item-{{ media.position }}" width="100%" height="" 
+         src="{{ media | img_url: 'large' }}"
+         alt="{{ media.preview_image.alt }}"
+         class="bh-carousel-item h-auto object-contain">
+  {% comment %} {% when 'external_video' %}
+    {% comment %} <code>when 'external_video'</code><br /> {% endcomment %}
+    {{ media | external_video_tag: class: 'bh-carousel-item w-full h-80 object-cover', id: 'bh-carousel-item-' | append: forLoop.index }}
+  {% when 'video' %}
+    {{ media | video_tag: controls: true, class: 'bh-carousel-item w-full h-80 object-cover', id: 'bh-carousel-item-' | append: forLoop.index }}
+  {% when 'model' %}
+    {{ media | model_viewer_tag: class: 'bh-carousel-item w-full h-80 object-cover', id: 'bh-carousel-item-' | append: forLoop.index }} {% endcomment %}
+  {% comment %} {% else %}
+    {{ media | media_tag: class: 'bh-carousel-item w-full h-80 object-cover', id: 'bh-carousel-item-' | append: forLoop.index }} {% endcomment %}
+{% endcase %}

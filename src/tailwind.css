@@ -32,24 +32,46 @@
     @apply bg-neutral-800;
   }
 
-  .bh-main a {
-    @apply text-red-700 underline ;
-  }
-
   /** Shopify Overwrites **/
   /* overwrites 'contact form' section's captcha button */
   .button, .button-label, .shopify-challenge__button, .customer button {
     @apply mt-10 bg-black text-white text-sm md:text-base font-semibold uppercase py-2.5 px-8 cursor-pointer;
   }
-  
 
-  /** Links **/
-  .bh-main a:hover,
-  .bh-header a:hover {
-    @apply text-red-600 transition duration-100;
-    @apply fill-red-600 transition duration-100;
+  /* @todo */
+  /* Cart Items */
+  .cart-item__error {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 0.2rem;
+    width: min-content;
+    min-width: 100%;
+  }
+  
+  .cart-item__error-text {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    letter-spacing: 0.04rem;
+    order: 1;
+  }
+  
+  .cart-item__error-text + svg {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.7rem;
+    margin-top: 0.25rem;
+  }
+  
+  .cart-item__error-text:empty + svg {
+    display: none;
   }
 
+  .cart__items--disabled {
+    pointer-events: none;
+  }
+
+  /** Links **/
   .bh-footer .bh-menu__list__item a:hover {
     @apply text-white transition duration-100;
   }
@@ -72,11 +94,11 @@
   }
 
   button.bh-button--black {
-    @apply text-white hover:text-red-500 border border-black hover:border-red-500 bg-black hover:bg-gray-900 active:bg-gray-900;
+    @apply bg-gray-900 hover:bg-black active:bg-black text-white hover:text-white border border-black hover:border-white;
   }
 
   button.bh-button--gray {
-    @apply text-white border border-gray-500 hover:text-gray-500 bg-gray-500 hover:bg-gray-600 active:bg-gray-700;
+    @apply text-white border border-gray-500 hover:text-gray-500 bg-gray-600 hover:bg-gray-600 active:bg-gray-700;
   }
 
   button.bh-button--red {
@@ -93,8 +115,6 @@
 
   .bh-img {
     @apply flex items-center justify-center w-full h-48 rounded sm:w-96 bg-gray-200;
-
-    /* @apply flex items-center justify-center w-full h-48 bg-gray-950 rounded sm:w-96 dark:bg-gray-700; */
   }
 
   .bh-img__image-box {
@@ -116,6 +136,10 @@
   .bh-icon--gray {
     @apply fill-gray-600;
   }
+
+  .bh-icon--light-gray {
+    @apply fill-gray-400;
+  }
   
   .bh-icon--red,
   .bh-icon--danger {
@@ -133,7 +157,7 @@
 
   /** Form **/
   form.bh-form {
-    @apply space-y-8;
+    @apply space-y-3;
   }
 
   .bh-form__control {
@@ -163,15 +187,32 @@
 @layer components {
   /** Layout **/
   .bh-body {
-    @apply bg-gray-500;
+    @apply bg-gray-100;
   }
 
-  .bh-main .bh-main__page {
-    @apply p-5;
+  .bh-main {
+    /* @apply border-2 border-red-300; */
+    /* @apply p-5; */
+  }
+
+  .bh-main__page {
+    /* @apply border-2 border-gray-500 border-dashed; */
+    @apply text-sm md:text-base;
   }
 
   .bh-main__page__section {
-    @apply text-sm md:text-base mb-5 h-auto md:px-10 lg:px-20;
+    /* @apply border-2 border-green-500 border-solid; */
+    @apply h-auto px-10 lg:px-20;
+    @apply py-10;
+  }
+
+  .bh-box--non-full {
+    /* @apply border-2 border-orange-500 border-solid; */
+    @apply h-auto md:px-10 lg:px-20;
+  }
+
+  .bh-main__page__section--full {
+    /* @apply h-auto md:px-10 lg:px-20; */
   }
 
   .bh-main__page__section h2 {
@@ -182,17 +223,12 @@
     @apply mb-0;
   }
 
-
   .bh-main .bh-main-page--content {
-    @apply bg-white min-h-screen p-6 text-gray-800 text-base m-2 md:m-6
-  }
-  
-  .bh-main .bh-main-page--banner {
-
+    @apply bg-white text-gray-800 text-base min-h-screen p-6 m-2 md:m-6;
   }
 
   .bh-footer {
-    @apply pb-2 pt-2 border-gray-500;
+    @apply pb-2 border-gray-500;
   }
 
   /** Responsive **/
@@ -281,10 +317,18 @@
   }
 
   /** Snippets **/
-  .bh-banner {
-    background-image: url("black-hole-m87.png");
+  .bh-bg__heat-sink--mid {
     background-color: black;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("amp-m-heat-sink-bg.jpg");
+    background-size: cover;
   }
+
+  .bh-bg__heat-sink--dark {
+    background-color: black;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("amp-m-heat-sink-bg.jpg");
+    background-size: cover;
+  }
+
   .bh-banner__box {
     @apply text-center md:text-left;
   }
@@ -293,12 +337,17 @@
     @apply mt-3 md:mt-5 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto lg:mx-0;
   }
 
-  /** Other **/
-  .bh-hide {
-    @apply hidden;
+  .bh-image__black-and-white {
+    /* Apply grayscale filter */
+    filter: grayscale(100%);
+    /* Optionally add transition for a smooth effect */
+    transition: filter 0.3s ease;
   }
-
-  /** Banner **/
+  
+  /* Add hover effect to revert to color on hover */
+  .bh-image-hover__black-and-white:hover {
+    filter: grayscale(0%);
+  }
 }
 
 @layer utilities {
@@ -312,7 +361,6 @@
     position: relative;
     bottom: 0;
     width: 100%;
-    padding-top: 1.5rem;
     z-index: 999;
   }
 

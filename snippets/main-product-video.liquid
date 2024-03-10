@@ -1,0 +1,13 @@
+<div class="w-full flex justify-center align-middle bh-banner--dark">
+  <div style="width: 640px; height: 360px;">
+    {% for media in product.media %}
+      {% case media.media_type %}
+        {% when 'external_video' %}
+          {% comment %} <code>when 'external_video'</code><br /> {% endcomment %}
+          {{ media | external_video_tag: class: 'h-full w-full', id: 'bh-video-' | append: forLoop.index }}
+        {% comment %} {% when 'video' %}
+          {{ media | video_tag: controls: true, class: 'bh-carousel-item w-full h-80 object-cover', id: 'bh-carousel-item-' | append: forLoop.index }} {% endcomment %}
+      {% endcase %}
+    {% endfor %}
+  </div>
+</div>

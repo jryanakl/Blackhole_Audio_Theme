@@ -1,0 +1,49 @@
+<aside class="text-center">
+  <h2>{{ section.settings.title }}</h2>
+  <h4>{{ section.settings.sub_title }}</h4>
+  <div class="mt-5">
+    {% if section.settings.button_url == blank %}
+      {% assign shop_url = shop.secure_url %}
+    {% else %}
+      {% assign shop_url = section.settings.button_url %}
+    {% endif %}
+    <a href="{{ shop_url }}" class="px-4 inline py-2 text-base font-medium shadow bg-gray-800 hover:bg-black text-white">
+      {{ section.settings.button_label }}
+    </a>
+    <!-- @todo: include a link to your sitemap for search engine robots purposes -->
+    {% comment %} <a href="">sitemap</a> {% endcomment %}
+  </div>
+</aside>
+
+{% schema %}
+{
+  "name": "Main 404",
+  "tag": "section",
+  "class": "bh-main__page__section",
+  "settings": [
+    {
+      "default": "404",
+      "id": "title",
+      "label": "404 Heading Title",
+      "type": "text"
+    },
+    {
+      "default": "Sorry, the page you requested is not available",
+      "id": "sub_title",
+      "label": "404 Sub Title",
+      "type": "text"
+    },
+    {
+      "default": "Back to home page",
+      "id": "button_label",
+      "label": "Button Label",
+      "type": "text"
+    },
+    {
+      "id": "button_url",
+      "label": "Button URL",
+      "type": "url"
+    }
+  ]
+}
+{% endschema %}

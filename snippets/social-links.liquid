@@ -1,0 +1,12 @@
+
+
+{% if is_menu %}
+  <nav class="bh-menu bh-menu--footer-social">
+    {% render 'social-links-list', 
+         ul_class: 'bh-menu__list bh-menu__list--inline bh-icon--gray-md', 
+         li_class: 'bh-menu__list__item', 
+         icon_class: 'bh-icon--gray-md' %}
+  </nav>
+{% else %}
+  {% render 'social-links-list' %}
+{% endif %}

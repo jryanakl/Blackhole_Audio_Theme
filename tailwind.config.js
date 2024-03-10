@@ -9,12 +9,17 @@ module.exports = {
     './node_modules/flowbite/**/*.js'
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        '92': '22rem'
+      }
+    },
   },
 plugins: [
     require('flowbite/plugin')({
       charts: true,
     }),
+    // require('prettier-plugin-tailwindcss'),
   ],
 }
 

@@ -951,12 +951,6 @@ p, .bh-label, li:not(.bh-menu__list__item) {
   background-color: rgb(38 38 38 / var(--tw-bg-opacity));
 }
 
-.bh-main a {
-  --tw-text-opacity: 1;
-  color: rgb(200 30 30 / var(--tw-text-opacity));
-  text-decoration-line: underline;
-}
-
 /** Shopify Overwrites **/
 
 /* overwrites 'contact form' section's captcha button */
@@ -986,18 +980,6 @@ p, .bh-label, li:not(.bh-menu__list__item) {
 }
 
 /** Links **/
-
-.bh-main a:hover,
-  .bh-header a:hover {
-  --tw-text-opacity: 1;
-  color: rgb(224 36 36 / var(--tw-text-opacity));
-  fill: #E02424;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 100ms;
-}
 
 .bh-footer .bh-menu__list__item a:hover {
   --tw-text-opacity: 1;
@@ -1108,6 +1090,19 @@ button.bh-button--white:active {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
+
+.bh-image__black-and-white {
+  /* Apply grayscale filter */
+  filter: grayscale(100%);
+  /* Optionally add transition for a smooth effect */
+  transition: filter 0.3s ease;
+}
+
+/* Add hover effect to revert to color on hover */
+.bh-image-hover__black-and-white:hover {
+  filter: grayscale(0%);
+}
+
 @media (min-width: 640px) {
   .bh-img {
     width: 24rem;
@@ -1133,6 +1128,10 @@ button.bh-button--white:active {
 
 .bh-icon--gray {
   fill: #4B5563;
+}
+
+.bh-icon--light-gray {
+  fill: #a9aeb4;
 }
 
 .bh-icon--red,
@@ -1579,7 +1578,7 @@ input.bh-input--sm {
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
   padding-bottom: 0.5rem;
-  padding-top: 0.5rem;
+  /* padding-top: 0.5rem; */
 }
 
 /** Responsive **/
@@ -1677,7 +1676,18 @@ input.bh-input--sm {
 /** Snippets **/
 
 .bh-banner {
-  background-image: url("black-hole-m87.png");
+  /* background-image: url("black-hole-m87.png"); */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("amp-m-heat-sink-bg.jpg");
+  background-size: cover;
+  /* background-image: var(--tw-bg-opacity) var(--tw-backdrop-opacity); */
+  background-color: gray-500;
+}
+
+.bh-banner--dark {
+  /* background-image: url("black-hole-m87.png"); */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("amp-m-heat-sink-bg.jpg");
+  background-size: cover;
+  /* background-image: var(--tw-bg-opacity) var(--tw-backdrop-opacity); */
   background-color: black;
 }
 
@@ -2754,7 +2764,7 @@ input.bh-input--sm {
   position: relative;
   bottom: 0;
   width: 100%;
-  padding-top: 1.5rem;
+  /* padding-top: 1.5rem; */
   z-index: 999;
 }
 

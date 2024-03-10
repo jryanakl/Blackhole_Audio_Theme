@@ -1,191 +1,170 @@
-<div class="bh-main__page">
-  <section class="bh-main__page__section">
-    <cart-items class="gradient isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
+<script type="module" src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+<script type="module" src="{{ 'quantity.js' | asset_url }}" defer="defer"></script>
+<script type="module" src="{{ 'variant.js' | asset_url }}" defer="defer"></script>
+<script type="module">
+  import { utils, product } from '../assets/utils.js'
 
-      <div class="w-auto flex flex-row justify-between">
-        <div>
-          <h2 >{{ 'sections.cart.title' | t }}</h2>
-        </div>
-        <div>
-          <h3 class="hidden">
-            Cart Empty
-          </h3>
-          {% comment %} <a class="text-base text-uppercase" href="{{ routes.all_products_collection_url }}"> {% endcomment %}
-          <a href="/products/m87-amplifier">
+  utils.logLiquidPage('MainCartItems');
+
+  const routes = '{{ routes | escape }}';
+
+  console.log('routes', routes);
+
+  if (product && product.variants) {
+    const _product = {{ product | json }};
+    const _productVariants = {{ product.variants | json }};
+
+    product.setProduct(_product);
+    product.setVariants(_productVariants);
+  }
+</script>
+
+{% if cart.item_count > 0 %}
+  <div class="p-4">
+    <div class="max-w-6xl flex- flex-col my-10 mx-auto">
+      <div class="flex-1">
+        <div class="flex items-end justify-between my-5">
+          <h2>{{ 'sections.cart.title' | t }}</h2>
+          <a href="/products/m87-amplifier" class="text-red-600 hover:text-red-700 underline hover:no-underline font-semibold">
             {{ 'general.continue_shopping' | t }}
           </a>
         </div>
       </div>
-      
-      <form action="{{ routes.cart_url }}" class="cart__contents" method="post" id="cart">
-        <div class="cart__items" data-id="{{ section.id }}">
-          <div class="mt-10">
-            {% if cart != empty %}
+    </div>
 
-              <!-- New -->
-              <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                      <th>
-                        <!-- Image -->
-                      </th>
-                      <th scope="col" class="px-16 py-3">
-                        {{ 'sections.cart.headings.product' | t }}
-                      </th>
-                      <th scope="col" class="px-6 py-3">
-                        {{ 'sections.cart.headings.quantity' | t }}
-                      </th>
-                      <th scope="col" class="px-6 py-3">
-                        {{ 'sections.cart.headings.total' | t }}
-                      </th>
-                      <th scope="col" class="px-6 py-3">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
+    <div class="max-w-6xl flex flex-col my-10 mx-auto">
+      <form action="{{ routes.cart_url }}" method="POST" novalidate>
+        <table class="table-auto divide-y divide-gray-200 my-4 w-full">
+          <thead>
+            <th class="px-5 py-3 text-left text-sm font-medium text-gray-500">
+              {{ 'sections.cart.headings.product' | t }}
+            </th>
+            <th class="px-5 py-3 text-left text-sm font-medium text-gray-500">
+              {{ 'sections.cart.headings.quantity' | t }}
+            </th>
+            <th class="px-5 py-3 text-left text-sm font-medium text-gray-500">
+              {{ 'sections.cart.headings.total' | t }}
+            </th>
+          </thead>
+          <tbody>
+            {% for item in cart.items %}
+              <tr class="table-row">
+                <td class="py-4 px-2 flex flex-col justify-center">
+                  <a href="{{ item.url }}">
+                    {% if item.image %}
+                      <img
+                        src="{{ item.image | image_url: width: 300 }}"
+                        class="object-cover border"
+                        alt="{{ item.image.alt | escape }}"
+                        loading="lazy"
+                        width="150"
+                        height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}"
+                      >
+                    {% else %}
+                      {{ 'product-1' | placeholder_svg_tag: 'w-32 h-32 object-cover border' }}
+                    {% endif %}
+                  </a>
+                </td>
+                <td class="py-4 px-2 flex flex-col justify-center">
+                  <a href="{{ item.url }}" class="my-1">
+                    {{ item.product.title | truncatewords: 5 }}
+                  </a>
+                  <span class="text-sm text-gray-500 my-1">
+                    {{ item.variant.title }}
+                  </span>
 
-                  <tbody>
-                    {% for item in cart.items %}
-                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <!-- Image -->
-                        <td class="p-4">
-                          {% if item.image %}
-                            <img
-                              src="{{ item.image | image_url: width: 300 }}"
-                              class=""
-                              alt="{{ item.image.alt | escape }}"
-                              loading="lazy"
-                              width="150"
-                              height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}"
-                            >
-                          {% endif %}
-                        </td>
+                  <a class="text-white w-32 focus:outline-none font-medium text-sm px-5 py-2.5 text-center inline-flex items-center me-2 bg-black" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0">
+                    <span class="bh-icon bh-icon--white h-4 w-4">
+                      {% render 'icon-delete' %}
+                    </span>
+                    <span class="no-underline uppercase text-sm">
+                      {{ 'sections.cart.remove' | t }}
+                    </span>
+                  </a>
+                </td>
+                <td class="py-4 px-2">
+                  <input
+                    type="number"
+                    name="updates[]"
+                    id="updates_{{ forloop.index }}"
+                    value="{{ item.quantity }}"
+                    min="0"
+                    class="w-20 border p-2"
+                  >
+                </td>
+                <td class="py-4 px-2">
+                  {{ item.line_price | money }}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="flex flex-col md:flex-row items-center justify-between">
+          <div class="w-full my-4">
+            <div class="flex flex-col items-start">
+              <!--Add optional textarea? -->
+            </div>
+          </div>
 
-                          <!-- Title -->
-                        <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                          <a href="{{ item.url }}" class="">
-                            {{ item.product.title | escape }}
-                          </a>
-                        </td>
+          <div class="w-full my-4 md:w-72">
+            <h3>
+              {{ 'sections.cart.subtotal' | t }}: {{ cart.total_price | money }}
+            </h3>
 
-                        <!-- Quantity -->
-                        {% liquid
-                          assign has_qty_rules = false
-                          if item.variant.quantity_rule.increment > 1 or item.variant.quantity_rule.min > 1 or item.variant.quantity_rule.max != null
-                            assign has_qty_rules = true
-                          endif
-  
-                          assign has_vol_pricing = false
-                          if item.variant.quantity_price_breaks.size > 0
-                            assign has_vol_pricing = true
-                          endif
-                        %}
-                        <td class="px-6 py-4">
-                          <quantity-popover>
-                            <quantity-input class="quantity cart-quantity">
-                              <div id="bh-quantity-selector" class="flex items-center">
-                                <button class="bh-minus-button inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                                  type="button"
-                                  name="minus">
-                                  <span class="sr-only">
-                                    {{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}
-                                  </span>
-                                  <span class="bh-minus-button bh-icon fill-gray-400 hover:fill-gray-500">
-                                    {% render 'icon-minus' %}
-                                  </span>
-                                </button>
+            <small class="tax-note caption-large rte">
+              {% if cart.taxes_included and shop.shipping_policy.body != blank %}
+                {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+              {% elsif cart.taxes_included %}
+                {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
+              {% elsif shop.shipping_policy.body != blank %}
+                {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+              {% else %}
+                {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+              {% endif %}
+            </small>
+            
+            <div class="my-2">
+              <button type="submit" name="update" class="bh-button bh-button--md bh-button--white w-full">
+                {{ 'sections.cart.update' | t }}
+              </button>
+            </div>
 
-                                <div>
-                                  <input type="number"
-                                    class="bh-quantity-input bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    data-quantity-variant-id="{{ item.variant.id }}"
-                                    type="number"
-                                    name="updates[]"
-                                    value="{{ item.quantity }}"
-                                    {% # theme-check-disable %}
-                                    data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
-                                    min="{{ item.variant.quantity_rule.min }}"
-                                    {% if item.variant.quantity_rule.max != null %}
-                                      max="{{ item.variant.quantity_rule.max }}"
-                                    {% endif %}
-                                    step="{{ item.variant.quantity_rule.increment }}"
-                                    {% # theme-check-enable %}
-                                    aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
-                                    id="Quantity-{{ item.index | plus: 1 }}"
-                                    data-index="{{ item.index | plus: 1 }}"  />
-                                </div>
-
-                                <button class="bh-plus-button inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                                  <span class="sr-only">
-                                    {{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}
-                                  </span>
-                                  <span class="bh-plus-button bh-icon fill-gray-400 hover:fill-gray-500">
-                                    {% render 'icon-add' %}
-                                  </span>
-                                </button>
-                              </div>
-                            </quantity-input>           
-                          </quantity-popover>
-                        </td>
-
-                        <!-- Price -->
-                        <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                          {% if item.original_line_price != item.final_line_price %}
-                            <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
-                              <div class="flex flex-col pb-3">
-                                <dt class="hidden mb-1 text-gray-500 md:text-lg dark:text-gray-400">
-                                  {{ 'products.product.price.regular_price' | t }}
-                                </dt>
-                                <dd class="text-lg font-semibold">
-                                  <s class="text-lg font-semibold">
-                                    {{ item.original_line_price | money }}
-                                  </s>
-                                </dd>
-                                <dt class="hidden text-gray-500 md:text-lg dark:text-gray-400">
-                                  {{ 'products.product.price.sale_price' | t }}
-                                </dt>
-                                <dd class="text-lg font-semibold">
-                                  {{ item.final_line_price | money }}
-                                </dd>
-                              </div>
-                            </dl>
-                          {% else %}
-                            <span class="price price--end">
-                              {{ item.original_line_price | money }}
-                            </span>
-                          {% endif %}
-                        </td>
-
-                        <!-- Action -->
-                        <td class="px-6 py-4">
-                          <cart-remove-button id="remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
-                            <a href="{{ item.url_to_remove }}" class="" aria-label="{{ 'Remove' }}">
-                              <span class="bh-icon bh-icon--red md:hidden">
-                                {% render 'icon-delete' %}
-                              </span>
-                              <span class="hidden md:inline-block">Remove</span>
-                            </a>
-                          </cart-remove-button>
-                        </td>
-                      </tr>
-
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-            {% endif %}
+            <div class="my-2">
+              <button type="submit" name="checkout" class="bh-button bh-button--md bh-button--black w-full">
+                {{ 'sections.cart.checkout' | t }}
+              </button>
+            </div>
           </div>
         </div>
       </form>
-
-    </cart-items>
-  </section>
-</div>
+    </div>
+  </div>
+{% else %}
+  <div class="max-w-6xl h-60 my-4 mx-auto flex flex-col items-center justify-center">
+    <div class="text-center">
+      <h3 class="text-3xl my-4">
+        {{ 'sections.cart.title' | t }}
+      </h3>
+      <p>
+        {{ 'sections.cart.your_cart_is_empty' | t }}
+      </p>
+      <div class="my-4 py-4">
+        <a href="/products/m87-amplifier" class="flex text-sm text-white uppercase bg-gray-800 px-8 py-2 hover:text-gray-100 hover:bg-black cursor-pointer">
+          {{ 'general.continue_shopping' | t }}&nbsp;&nbsp;
+          <span class="bh-icon fill-white w-5 h-5">
+            {% render 'icon-arrow-forward' %}
+          </span>&nbsp;
+        </a>
+      </div>
+    </div>
+  </div>
+{% endif %}
 
 {% schema %}
 {
-  "name": "Page Main Cart Items",
+  "name": "Main Cart Items",
+  "tag": "section",
+  "class": "bh-main__page__section",
   "settings": []
 }
 {% endschema %}

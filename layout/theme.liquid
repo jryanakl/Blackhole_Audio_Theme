@@ -10,48 +10,81 @@
     <link rel="canonical" href="{{ canonical_url }}">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     {{ content_for_header }}
-    {{ 'application.css' | asset_url | stylesheet_tag }}
-    {{ 'colors.css' | asset_url | stylesheet_tag }}
-    {{ 'swiper.css' | asset_url | stylesheet_tag }}
+
+    <!-- *** CSS *** -->
+    <!-- Flowbite -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet">
     <!-- Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    
-    <!-- Link Swiper's CSS -->
+    <!-- Swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Black Hole Audio -->
+    {{ 'output.css' | asset_url | stylesheet_tag }}
+    {% comment %} {{ 'application.css' | asset_url | stylesheet_tag }} {% endcomment %}
+    {{ 'colors.css' | asset_url | stylesheet_tag }}
+    {{ 'swiper.css' | asset_url | stylesheet_tag }}
+
+
+    <!-- *** JS *** -->
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer="defer"></script>
-    <!-- Highcharts -->
-    {% comment %} <script src="https://code.highcharts.com/highcharts.js" defer="defer"></script> {% endcomment %}
-    
     <!-- Flowbite -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js" defer="defer"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts" defer="defer"></script>
-    {% comment %} <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet"> {% endcomment %}
-
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer="defer"></script>
-
     <!-- Black Hole -->
-    <script src="{{ 'application.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    
+    {% comment %} <script src="{{ 'application.js' | asset_url }}" defer="defer"></script> {% endcomment %}
     <script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
   </head>
 
   <body class="bh-body">
     <header class="bh-header">
-      <article class="bh-hide">
-        {% section 'test' %}
-      </article>
       {% section 'header' %}
     </header>
 
     <main class="bh-main bg-white" role="main">
-      {{ content_for_layout }}
+      <div class="bh-main__page">
+        {{ content_for_layout }}
+      </div>
     </main>
 
     <footer class="bh-footer bh-footer--sticky">
       {% section 'footer' %}
     </footer>
+
+    <script>
+      window.shopUrl = '{{ request.origin }}';
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+        cart_url: '{{ routes.cart_url }}',
+      };
+
+      window.cartStrings = {
+        error: `{{ 'sections.cart.cart_error' | t }}`,
+        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+      };
+
+      window.variantStrings = {
+        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+        unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
+      };
+
+      window.accessibilityStrings = {
+        imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
+        shareSuccess: `{{ 'general.share.success_message' | t }}`,
+      };
+    </script>
+
   </body>
 </html>

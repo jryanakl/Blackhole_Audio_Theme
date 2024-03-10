@@ -1,0 +1,64 @@
+{
+  "settings_schema": {
+    "logo": {
+      "name": "Logo",
+      "settings": {
+        "logo_image": {
+          "label": "Logo"
+        },
+        "logo_width": {
+          "label": "Desktop logo width",
+          "info": "Logo width is automatically optimized for mobile."
+        },
+        "favicon": {
+          "label": "Favicon image",
+          "info": "Will be scaled down to 32 x 32px"
+        }
+      }
+    },
+    "brand_information": {
+      "name": "Brand information",
+      "settings": {
+        "paragraph": {
+          "content": "Add a brand description to your store's footer."
+        },
+        "brand_headline": {
+          "label": "Headline"
+        },
+        "brand_description": {
+          "label": "Description"
+        },
+        "brand_image": {
+          "label": "Image"
+        },
+        "brand_image_width": {
+          "label": "Image width"
+        }
+      }
+    },
+    "social-media": {
+      "name": "Social media",
+      "settings": {
+        "header": {
+          "content": "Social accounts"
+        },
+        "social_twitter_link": {
+          "label": "Twitter",
+          "info": "https://twitter.com/shopify"
+        },
+        "social_facebook_link": {
+          "label": "Facebook",
+          "info": "https://facebook.com/shopify"
+        },
+        "social_instagram_link": {
+          "label": "Instagram",
+          "info": "http://instagram.com/shopify"
+        },
+        "social_youtube_link": {
+          "label": "YouTube",
+          "info": "https://www.youtube.com/shopify"
+        }
+      }
+    }
+  }
+}

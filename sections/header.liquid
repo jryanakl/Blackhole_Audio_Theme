@@ -42,7 +42,13 @@
       <a href="{{ routes.root_url }}">
         <span class="sr-only">{{ shop.name }}</span>
         <div class="w-auto flex align-middle justify-between">
-          <img src="{{ 'bh-logo-small.png' | asset_img_url: 'large' }}" style="max-width: none!important" width="auto" height="45px">
+          {% if section.settings.show_taller_logo %}
+            <div class="p-2">
+              {% render 'logo-bh-header' %}
+            </div>
+          {% else %}
+            <img src="{{ 'bha-logo_blackhole_text-white_sm.png' | asset_img_url: 'large' }}" style="max-width: none!important" width="auto" height="45px">
+          {% endif %}
         </div>
       </a>
     </div>
@@ -70,3 +76,17 @@
   </div>
 
 </div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_taller_logo",
+      "default": false,
+      "label": "Show taller logo with blackhole icon"
+    }
+  ]
+}
+{% endschema %}

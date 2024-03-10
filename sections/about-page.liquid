@@ -12,7 +12,7 @@
                 {% assign about_img = section.settings.about_image %}
                 <img
                   class="w-full h-80 md:h-96 object-cover object-center"
-                  src="{{section.settings.about_image | img_url: 'large'}}"
+                  src="{{section.settings.about_image | image_url: 'large'}}"
                   alt="{{ about_img.image.alt }}"
                   width=""
                   height=""
@@ -22,14 +22,9 @@
           {% when 'about_company' %}
             <div class="p-8">
               {% if section.settings.about_company == blank %}
-                <p>
-                Based in Dallas Texas, Black Hole Audio is a pioneering force in the home entertainment industry. Founded
-                in 2023 by Jeff Julich, a former hardware engineer at Texas Instruments, our company is dedicated to
-                crafting premium audio solutions for the modern home. Our flagship product, the M87 Amplifier, embodies
-                our commitment to innovation and quality, offering consumers a transformative audio experience for their
-                home theaters. With a focus on precision engineering and cutting-edge technology, Black Hole Audio is
-                poised to redefine the way people enjoy sound in their living spaces
-                </p>
+                <p class="pb-5">Established in 2023 by Jeff Julich, a former hardware engineer at Texas Instruments, Black Hole Audio is at the forefront of the home entertainment industry. Our mission is simple yet ambitious: to create exceptional power amplifiers that exceed the performance of upscale models in the market while being priced much lower.</p>
+                <p class="pb-5">Based in Dallas, Texas, we are driven by a passion for crafting audio solutions that transform the way people experience sound in their homes. Our flagship product, the <a class="text-red-600 underline hover:no-underline" href="#">M87 Power Amplifier</a>, embodies this commitment to excellence. It combines cutting-edge technology with precision engineering to offer music lovers and home theater enthusiasts an unparalleled audio experience.</p>
+                <p>At Black Hole Audio, we believe in pushing boundaries and redefining the standards of sound quality. Join us on our journey as we revolutionize the way you enjoy music and entertainment in your living spaces.</p>  
               {% else %}
                 <p>{{ section.settings.about_company }}</p>
               {% endif %}
@@ -41,27 +36,25 @@
 </aside>
 
 <aside class="mt-8">
+  <h3 class="pb-10 hidden">History</h3>
   <ol class="relative border-s border-gray-200 dark:border-gray-700">                  
   <li class="mb-10 ms-4">
       <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-      <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">February 2022</time>
+      <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">February 2023</time>
       <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Black Hole Audio is Founded</h3>
-      <p class="mb-4 font-normal text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id arcu suscipit, eleifend mi et, egestas est. Sed quis fermentum nibh. Sed odio dolor, euismod sed imperdiet auctor, lobortis in justo.</p>
-      <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700">Learn more <svg class="w-3 h-3 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-</svg></a>
   </li>
   <li class="mb-10 ms-4">
       <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
       <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">May 2024</time>
-      <h3 class="text-lg font-semibold text-gray-900 dark:text-white">M87 Amplifier gets built</h3>
-      <p class="font-normal text-gray-500 dark:text-gray-400">Ut porta magna id velit blandit imperdiet. Quisque dapibus, augue quis blandit pretium, erat arcu tincidunt dui, et consectetur nulla mi vitae lorem. Morbi enim ligula, tristique sit amet dolor vel, faucibus congue elit.</p>
-  </li>
-  <li class="ms-4">
-      <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-      <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Aug 2024</time>
-      <h3 class="text-lg font-semibold text-gray-900 dark:text-white">E-Commerce Storefront launches</h3>
-      <p class="font-normal text-gray-500 dark:text-gray-400">Fusce quis mi magna. Donec euismod felis felis, quis efficitur risus vehicula ullamcorper. Curabitur ornare ullamcorper varius. In rutrum nulla nibh, id rutrum mauris molestie ut. Nulla facilisi. Vestibulum cursus libero eget egestas vehicula.</p>
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Black Hole Audio Launches the M87 Power Amplifier</h3>
+      <p class="font-normal text-gray-500 dark:text-gray-400">A high-powered 2-channel power amplifier customizable for audio enthusiasts</p>
+      <a href="/blogs/news/black-hole-audio-launches-the-m87-a-2-channel-power-amplifier"
+         class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-red-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700">
+        Learn more 
+        <svg class="w-3 h-3 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+      </a>
   </li>
 </ol>
 </aside>
@@ -76,7 +69,7 @@
       "type": "text",
       "id": "title",
       "default": "About",
-      "label": "About Heading Title"
+      "label": "Heading"
     }
   ],
   "blocks": [

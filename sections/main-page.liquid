@@ -3,13 +3,57 @@
 
    renders main-page-banner & main-page-chart snippets, used in index.json
 {% endcomment %}
-<div id="bh-main__box" class="bh-main__box bh-main-page--banner">
-  {% render 'main-page-banner' %}
-</div>
-<div id="bh-main__box" class="bh-main__box bh-main-page--chart">
-  <section class="md:pt-5 px-5 h-full">
-    <h2 class="md:text-left">Unleash your Sound</h2>
-    <p class="text-sm md:text-left md:text-base pb-5">Experience unparalled performance. Hear what's on the Horizon</p>
+
+{% if section.settings.gsap_banner_enable %}
+  <div id="bh-main__box" class="bh-main__box bh-bg__heat-sink--mid">
+    {% render 'main-page-banner' %}
+  </div>
+{% endif %}
+
+<div id="bh-main__box" class="bh-main__box bh-main-page--chart p-1 md:p-10">
+  <section class="h-full bh-box--non-full p-4">
+    <h3 class="md:text-left">
+      {{ section.settings.bottom_fold_heading }}
+    </h3>
+    <p class="text-sm md:text-base md:text-left pb-5">
+      {{ section.settings.bottom_fold_sub_heading }}
+    </p>
+    {% if section.settings.thd_enable %}
+      <div class="p-1">
+        {% render 'main-page-chart' %}
+      </div>
+    {% endif %}
   </section>
-  {% render 'main-page-chart' %}
 </div>
+
+{% schema %}
+{
+  "name": "Main page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "gsap_banner_enable",
+      "default": true,
+      "label": "Show GSAP banner"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "bottom_fold_heading",
+      "default": "Unparalleled performance rivaling models priced higher",
+      "label": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "bottom_fold_sub_heading",
+      "default": "Don't compromise on quality for affordability, get the same level of audio excellence without the hefty price tag",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "thd_enable",
+      "default": true,
+      "label": "Show THD chart"
+    }
+  ]
+}
+{% endschema %}

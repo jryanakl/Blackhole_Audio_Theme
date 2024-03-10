@@ -1,6 +1,15 @@
 {
   "current": "Default",
   "presets": {
-    "Default": { }
+    "Default": {
+      "logo_width": 90,
+      "brand_headline": "Hear What's on the Horizon",
+      "brand_description": "<p>Black Hole Audio is at the forefront of the home entertainment industry. Our mission is to create exceptional power amplifiers.</p>",
+      "social_facebook_link": "https://facebook.com/BlackHoleAudio",
+      "social_instagram_link": "https://instagram.com/blackhole-audio",
+      "social_youtube_link": "https://www.youtube.com/@BlackHoleAudio",
+      "social_twitter_link": "https://twitter.com/Blackhole-Audio",
+      "sections": {}
+    }
   }
 }

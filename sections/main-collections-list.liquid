@@ -1,0 +1,56 @@
+<aside class="bh-collections-list">
+  <h2>
+    {{ section.settings.title }}
+  </h2>
+  <div class="flex flex-col items-center my-8">
+    <div class="my-3">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        {% for collection in collections %}
+          {% if collection.all_products_count > 0 %}
+            <div class="w-full py-5 px-2">
+              <div class="border bg-white overflow-hidden">
+                <a href="{{ collection.url }}">
+                  <div class="h-80 overflow-hidden">
+                    {% if collection.featured_image != blank %}
+                      {% assign collection_list_image = collection.featured_image %}
+                    {% else %}
+                      {% assign collection_list_image = collection.products.first.image %}
+                    {% endif %}
+
+                    <img
+                      alt="{{ collection.title | escape }}"
+                      class="object-cover w-full h-full transition duration-1000 ease-in-out transform hover:scale-105"
+                      height=""
+                      width=""
+                      src="{{ collection_list_image | img_url: 'medium' }}"
+                    >
+                  </div>
+                </a>
+
+                <div class="p-4 bg-gray-100">
+                  <h3>{{ collection.title }}</h3>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</aside>
+
+{% schema %}
+{
+  "name": "Main Collections List",
+  "tag": "section",
+  "class": "bh-main__page__section",
+  "settings": [
+    {
+      "default": "All Products",
+      "id": "title",
+      "label": "Title",
+      "type": "text"
+    }
+  ]
+}
+{% endschema %}

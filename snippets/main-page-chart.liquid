@@ -4,18 +4,16 @@
   Usage:
   {% render 'main-page-chart' %}
 {% endcomment %}
+
 <script src="{{ 'chart.js' | asset_url }}" defer="defer"></script>
-<section class="grid md:grid-cols-3 text-center md:text-left bg-gray-950 pt-1 pl-5 pb-1 pr-5 text-gray-50">
-  <div class="p-5">
-    <h2 class="text-2xl font-semibold">Outperforms Top Amps</h2>
-    <p class="mt-5 bh-text--gray">Consectetur adipiscing elit. Vestibulum imperdiet consectetur ligula, et blandit libero vehicula et. Cras imperdiet odio leo, eu consequat justo rhoncus vitae.</p> 
+<!-- Flowbite -->
+<div class="rounded-lg border-b border-b-gray-300 shadow dark:bg-gray-800 bg-gradient-to-r from-gray-100 to-gray-200">
+  <div class="p-2 border-b border-gray-200">
+    <h4 class="text-center">THD+N(20-20%kHz BW) 1kHz tone input 8 ohm load</h4>
+    <p class="text-center text-gray-500">
+      <small>The <span class="font-bold">BHA M87's</span> THD+N is &lt; 0.0002% (20-20%kHz BW, 1kHz, 8 ohms)</small>
+    </p>
   </div>
-  <div class="md:col-span-2 p-5">
-    <h3 class="text-md text-red-600 font-semibold">THD+N(20-20%kHz BW) 1kHz tone input 8 ohm load</h3>
-    <div id="chart" class="mt-5">
-      <div id="chart-container"></div>
-    </div>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-  </div>
-</section>
+  <div id="bh-thd-noise__area-chart" class="p-2"></div>
+</div>
+

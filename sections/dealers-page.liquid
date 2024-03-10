@@ -1,11 +1,22 @@
-<section class="grid md:grid-cols-3 bh-main__section">
-  <div class="p-5 md:col-span-3">
-    <h2>Dealers</h2>
+<aside class="">
+  <div class="">
+    <h2 class="">{{ section.settings.title }}</h2>
   </div>
-  <div class="p-5">
-    {% render 'dealers-usa' %}
-  </div>
-  <div class="md:col-span-2 p-5">
-    {% render 'dealers-form' %}
-  </div>
-</section>
+  {% render 'dealers-usa' %}
+</aside>
+
+{% schema %}
+{
+  "name": "Page Delears",
+  "tag": "section",
+  "class": "bh-main__page__section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Dealers",
+      "label": "Delears Heading Title"
+    }
+  ]
+}
+{% endschema %}

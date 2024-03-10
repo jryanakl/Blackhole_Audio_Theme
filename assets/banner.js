@@ -20,19 +20,19 @@ const fromRightFlyIn = {
   ease: 'power4.inOut',
 };
 
-gsap.from(naviationElements.headerBox, {
-  duration: 1,
-  opacity: 0,
-  y: -50,
-  ease: "power2.out"
-});
+// gsap.from(naviationElements.headerBox, {
+//   duration: 1,
+//   opacity: 0,
+//   y: -50,
+//   ease: "power2.out"
+// });
 
-gsap.fromTo(bannerElements.media, {
-  opacity: 0
-}, {
-  opacity: 1,
-  duration: 2
-});
+// gsap.fromTo(bannerElements.media, {
+//   opacity: 0
+// }, {
+//   opacity: 1,
+//   duration: 2
+// });
 
 gsap.from(bannerElements.content, {
   opacity: 0,

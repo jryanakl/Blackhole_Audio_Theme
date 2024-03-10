@@ -1,8 +1,12 @@
 {
+  "wrapper": "div.bh-main__page",
   "sections": {
     "main": {
       "type": "dealers-page"
+    },
+    "contact-form": {
+      "type": "contact-form"
     }
   },
-  "order": ["main"]
+  "order": ["main", "contact-form"]
 }

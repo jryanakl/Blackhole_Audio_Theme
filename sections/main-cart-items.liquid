@@ -1,0 +1,191 @@
+<div class="bh-main__page">
+  <section class="bh-main__page__section">
+    <cart-items class="gradient isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
+
+      <div class="w-auto flex flex-row justify-between">
+        <div>
+          <h2 >{{ 'sections.cart.title' | t }}</h2>
+        </div>
+        <div>
+          <h3 class="hidden">
+            Cart Empty
+          </h3>
+          {% comment %} <a class="text-base text-uppercase" href="{{ routes.all_products_collection_url }}"> {% endcomment %}
+          <a href="/products/m87-amplifier">
+            {{ 'general.continue_shopping' | t }}
+          </a>
+        </div>
+      </div>
+      
+      <form action="{{ routes.cart_url }}" class="cart__contents" method="post" id="cart">
+        <div class="cart__items" data-id="{{ section.id }}">
+          <div class="mt-10">
+            {% if cart != empty %}
+
+              <!-- New -->
+              <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      <th>
+                        <!-- Image -->
+                      </th>
+                      <th scope="col" class="px-16 py-3">
+                        {{ 'sections.cart.headings.product' | t }}
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                        {{ 'sections.cart.headings.quantity' | t }}
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                        {{ 'sections.cart.headings.total' | t }}
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {% for item in cart.items %}
+                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <!-- Image -->
+                        <td class="p-4">
+                          {% if item.image %}
+                            <img
+                              src="{{ item.image | image_url: width: 300 }}"
+                              class=""
+                              alt="{{ item.image.alt | escape }}"
+                              loading="lazy"
+                              width="150"
+                              height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}"
+                            >
+                          {% endif %}
+                        </td>
+
+                          <!-- Title -->
+                        <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                          <a href="{{ item.url }}" class="">
+                            {{ item.product.title | escape }}
+                          </a>
+                        </td>
+
+                        <!-- Quantity -->
+                        {% liquid
+                          assign has_qty_rules = false
+                          if item.variant.quantity_rule.increment > 1 or item.variant.quantity_rule.min > 1 or item.variant.quantity_rule.max != null
+                            assign has_qty_rules = true
+                          endif
+  
+                          assign has_vol_pricing = false
+                          if item.variant.quantity_price_breaks.size > 0
+                            assign has_vol_pricing = true
+                          endif
+                        %}
+                        <td class="px-6 py-4">
+                          <quantity-popover>
+                            <quantity-input class="quantity cart-quantity">
+                              <div id="bh-quantity-selector" class="flex items-center">
+                                <button class="bh-minus-button inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                                  type="button"
+                                  name="minus">
+                                  <span class="sr-only">
+                                    {{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}
+                                  </span>
+                                  <span class="bh-minus-button bh-icon fill-gray-400 hover:fill-gray-500">
+                                    {% render 'icon-minus' %}
+                                  </span>
+                                </button>
+
+                                <div>
+                                  <input type="number"
+                                    class="bh-quantity-input bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    data-quantity-variant-id="{{ item.variant.id }}"
+                                    type="number"
+                                    name="updates[]"
+                                    value="{{ item.quantity }}"
+                                    {% # theme-check-disable %}
+                                    data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
+                                    min="{{ item.variant.quantity_rule.min }}"
+                                    {% if item.variant.quantity_rule.max != null %}
+                                      max="{{ item.variant.quantity_rule.max }}"
+                                    {% endif %}
+                                    step="{{ item.variant.quantity_rule.increment }}"
+                                    {% # theme-check-enable %}
+                                    aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                                    id="Quantity-{{ item.index | plus: 1 }}"
+                                    data-index="{{ item.index | plus: 1 }}"  />
+                                </div>
+
+                                <button class="bh-plus-button inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+                                  <span class="sr-only">
+                                    {{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}
+                                  </span>
+                                  <span class="bh-plus-button bh-icon fill-gray-400 hover:fill-gray-500">
+                                    {% render 'icon-add' %}
+                                  </span>
+                                </button>
+                              </div>
+                            </quantity-input>           
+                          </quantity-popover>
+                        </td>
+
+                        <!-- Price -->
+                        <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                          {% if item.original_line_price != item.final_line_price %}
+                            <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+                              <div class="flex flex-col pb-3">
+                                <dt class="hidden mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                                  {{ 'products.product.price.regular_price' | t }}
+                                </dt>
+                                <dd class="text-lg font-semibold">
+                                  <s class="text-lg font-semibold">
+                                    {{ item.original_line_price | money }}
+                                  </s>
+                                </dd>
+                                <dt class="hidden text-gray-500 md:text-lg dark:text-gray-400">
+                                  {{ 'products.product.price.sale_price' | t }}
+                                </dt>
+                                <dd class="text-lg font-semibold">
+                                  {{ item.final_line_price | money }}
+                                </dd>
+                              </div>
+                            </dl>
+                          {% else %}
+                            <span class="price price--end">
+                              {{ item.original_line_price | money }}
+                            </span>
+                          {% endif %}
+                        </td>
+
+                        <!-- Action -->
+                        <td class="px-6 py-4">
+                          <cart-remove-button id="remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
+                            <a href="{{ item.url_to_remove }}" class="" aria-label="{{ 'Remove' }}">
+                              <span class="bh-icon bh-icon--red md:hidden">
+                                {% render 'icon-delete' %}
+                              </span>
+                              <span class="hidden md:inline-block">Remove</span>
+                            </a>
+                          </cart-remove-button>
+                        </td>
+                      </tr>
+
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </form>
+
+    </cart-items>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Page Main Cart Items",
+  "settings": []
+}
+{% endschema %}

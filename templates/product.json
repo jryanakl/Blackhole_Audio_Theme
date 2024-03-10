@@ -1,4 +1,5 @@
 {
+  "wrapper": "div.bh-main__page",
   "sections": {
     "main": {
       "type": "main-product"

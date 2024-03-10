@@ -1,48 +1,72 @@
-<div id="bh-header__box" class="bh-header__box">
+<script></script>
+<style></style>
+<div id="bh-header__box" class="flex justify-evenly items-center">
+  <!-- drawer init and show -->
+  <div class="md:hidden" >
+    <button class=""
+      type="button"
+      data-drawer-target="drawer-navigation"
+      data-drawer-show="drawer-navigation"
+      aria-controls="drawer-navigation">
+      <span class="bh-icon bh-icon--white hover:fill-red-600">{% render 'icon-menu' %}</span>
+    </button>
+    {% comment %} <div class="bh-icon bh-icon--white p-3 cursor-pointer"></div> {% endcomment %}
+    {% comment %} 
+    <a href="#" onclick="openNav()">
+      <div class="bh-icon bh-icon--white p-3 cursor-pointer">{% render 'icon-menu' %}</div>
+    </a>
+    {% endcomment %}
+  </div>
 
-  <!-- Menu -->
-  <nav class="bh-menu bh-menu--header flex-1">
-    <ul class="bh-menu__list">
-      {% for link in linklists.main-menu.links %}
-        <li class="bh-menu__list__item hidden md:inline-flex">
-          <a href="{{ link.url }}">{{ link.title }}</a>
-        </li>
-      {% endfor %}
-      <li class="bh-menu__list__item flex-none md:hidden">
-        <a href="#">
-          <span class="bh-icon bh-icon--white">
-            {% render 'icon-menu' %}
-          </span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <!-- drawer component -->
+  {% render 'header-drawer' %}
+
+  <!-- Menu Yo -->
+  <div>
+    <nav class="bh-menu bh-menu--header flex md:items-center md:justify-center w-full">
+      <ul class="bh-menu__list bh-menu__list--inline">
+        {% for link in linklists['main-menu'].links %}
+          <li class="bh-menu__list__item hidden md:flex">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+  
+
 
   <!-- Logo -->
-  <div class="bh-logo bh-logo--header flex-0">
-    <div class="bh-logo__box">
+  <div class="">
+    <div class="bh-logo bh-logo--header">
       <a href="{{ routes.root_url }}">
         <span class="sr-only">{{ shop.name }}</span>
-        {% render 'logo-bh-header' %}
+        <div class="w-auto flex align-middle justify-between">
+          <img src="{{ 'bh-logo-small.png' | asset_img_url: 'large' }}" style="max-width: none!important" width="auto" height="45px">
+        </div>
       </a>
     </div>
   </div>
 
   <!-- Menu, Cart -->
-  <nav class="bh-menu bh-menu--header flex-1">
-    <ul class="bh-menu__list">
-      {% for link in linklists.header-right-menu.links %}
-        <li class="bh-menu__list__item hidden md:inline-flex">
-          <a href="{{ link.url }}">{{ link.title }}</a>
+  <div>
+    <nav class="bh-menu bh-menu--header justify-end md:items-center md:justify-center w-full">
+      <ul class="bh-menu__list bh-menu__list--inline">
+        {% for link in linklists['header-right-menu'].links %}
+          <li class="bh-menu__list__item hidden md:flex">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+        <li class="bh-menu__list__item">
+          <a id="cart-icon-bubble" href="{{ routes.cart_url }}">
+            <span class="bh-icon bh-icon--white h-full hover:fill-red-600">
+              {% comment %} {% render 'icon-shopping-cart' %} {% endcomment %}
+              {% render 'cart-icon-bubble' %}
+            </span>
+          </a>
         </li>
-      {% endfor %}
-      <li class="bh-menu__list__item md:mt-auto md:inline-flex">
-        <a href="{{ routes.cart_url }}">
-          <span class="bh-icon bh-icon--white">
-            {% render 'icon-shopping-cart' %}
-          </span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+      </ul>
+    </nav>
+  </div>
+
 </div>

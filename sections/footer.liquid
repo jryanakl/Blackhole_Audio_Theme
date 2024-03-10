@@ -1,34 +1,87 @@
-<div id="bh-footer__box" class="bh-footer__box">
-  
-  <!-- Menu -->
-  <nav class="bh-menu bh-menu--footer">
-    <ul class="bh-menu__list">
-      {% for link in linklists.main-menu.links %}
-        <li class="bh-menu__list__item">
-          <a href="{{ link.url }}">{{ link.title }}</a>
-        </li>
-      {%  endfor %}
-    </ul>
-  </nav>
+<div id="bh-footer__box">
+  <div class="flex justify-between items-center">
+    <!-- Menu -->
+    <nav class="bh-menu bh-menu--footer w-full">
+      <ul class="bh-menu__list">
+        {% for link in linklists['main-menu'].links %}
+          <li class="bh-menu__list__item">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
 
-  <!-- Logo -->
-  <div class="bh-logo bh-logo--footer">
-    <div class="bh-logo__box">
-      <a href="{{ routes.root_url }}" >
+    <!-- Logo -->
+    <div class="bh-logo bh-logo--footer">
+      <a href="{{ routes.root_url }}">
         <span class="sr-only">{{ shop.name }}</span>
-        {% render 'logo-bh-footer' %}
+        <span class="">{% render 'logo-bh-footer' %}</span>
       </a>
     </div>
+
+    <!-- Menu -->
+    <nav class="bh-menu bh-menu--footer">
+      <ul class="bh-menu__list">
+        {% for link in linklists['header-right-menu'].links %}
+          <li class="bh-menu__list__item">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
   </div>
 
-  <!-- Menu -->
-  <nav class="bh-menu bh-menu--footer">
-    <ul class="bh-menu__list">
-      {% for link in linklists.header-right-menu.links %}
+  <div class="mt-2 text-center text-xs">
+    <h3 class="font-semibold text-gray-400">Hear What's on the Horizon</h3>
+    <nav class="bh-menu bh-menu--footer-social">
+      <ul class="bh-menu__list bh-menu__list--inline bh-icon--gray-md">
         <li class="bh-menu__list__item">
-          <a href="{{ link.url }}">{{ link.title }}</a>
+          <a class="underline" href="">
+            <span class="sr-only">Facebook</span>
+            <i class="bh-icon">
+              {% render 'icon-facebook' %}
+            </i>
+          </a>
         </li>
-      {% endfor %}
-    </ul>
-  </nav>
+        <li class="bh-menu__list__item">
+          <a class="underline" href="">
+            <span class="sr-only">Youtube</span>
+            <i class="bh-icon">
+              {% render 'icon-youtube' %}
+            </i>
+          </a>
+        </li>
+        <li class="bh-menu__list__item">
+          <a class="underline" href="">
+            <span class="sr-only">Instagram</span>
+            <i class="bh-icon">
+              {% render 'icon-instagram' %}
+            </i>
+          </a>
+        </li>
+        <li class="bh-menu__list__item">
+          <a class="underline" href="">
+            <span class="sr-only">Twitter</span>
+            <i class="bh-icon">
+              {% render 'icon-twitter' %}
+            </i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <nav class="bh-menu bh-menu--footer-legal">
+      <ul class="bh-menu__list bh-menu__list--inline">
+        <li class="bh-menu__list__item mx-1">
+          <a class="underline" href="">Terms & Conditions</a>
+        </li>
+        <li class="bh-menu__list__item mx-1">
+          <a class="underline" href="">Privacy Policy</a>
+        </li>
+        <li class="bh-menu__list__item mx-1">
+          <a class="underline" href="">Refund Policy</a>
+        </li>
+      </ul>
+    </nav>
+    <p class="text-gray-400 text-xs">© 2024, Black Hole Audio Company. All rights reserved.</p>
+  </div>
 </div>

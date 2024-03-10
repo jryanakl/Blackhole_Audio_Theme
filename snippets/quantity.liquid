@@ -1,0 +1,45 @@
+<label class="bh-label text-sm" for="quantity-{{ section.id }}">
+  {{ 'products.product.quantity.label' | t }}
+  <span class="no-js-hidden{% if cart_qty == 0 %} hidden{% endif %}">
+    <span class="hidden">{% render 'icon-loading-spinner' %}</span>
+    <span>
+        ( {{ 'products.product.quantity.in_cart_html' | t: quantity: cart_qty -}} )
+    </span>
+  </span>
+</label>
+<div class="">
+  <quantity-input class="border border-gray-100" data-url="{{ product.url }}" data-section="{{ section.id }}">
+    <div class="flex flex-row items-center justify-items-start">
+      <button class="b-button bh-button--sm bh-button--white no-js-hidden" name="minus" type="button">
+        <span class="hidden">
+          {{ 'products.product.quantity.decrease' | t: product: product.title | escape }}
+        </span>
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-minus' %}
+        </span>
+      </button>
+      <input
+        class="bh-input bh-input--sm"
+        data-cart-quantity="{{ cart_qty }}"
+        data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+        form="{{ product_form_id }}"
+        id="quantity-{{ section.id }}"
+        min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+        {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+          data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+          max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+        {% endif %}
+        name="quantity"
+        step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+        type="number"
+        value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+      >
+      <button class="bh-button bh-button--sm bh-button--white no-js-hidden" name="plus" type="button">
+        <span class="hidden">
+          {{ 'products.product.quantity.increase' | t: product: product.title | escape }}
+        </span>
+        {% render 'icon-add' %}
+      </button>
+    </div>
+  </quantity-input>
+</div>

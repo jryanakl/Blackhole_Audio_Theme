@@ -11,14 +11,28 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     {{ content_for_header }}
     {{ 'application.css' | asset_url | stylesheet_tag }}
+    {{ 'colors.css' | asset_url | stylesheet_tag }}
+    {{ 'swiper.css' | asset_url | stylesheet_tag }}
     <!-- Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer="defer"></script>
     <!-- Highcharts -->
-    <script src="https://code.highcharts.com/highcharts.js" defer="defer"></script>
+    {% comment %} <script src="https://code.highcharts.com/highcharts.js" defer="defer"></script> {% endcomment %}
+    
+    <!-- Flowbite -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js" defer="defer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts" defer="defer"></script>
+    {% comment %} <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet"> {% endcomment %}
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer="defer"></script>
+
     <!-- Black Hole -->
     <script src="{{ 'application.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
@@ -32,7 +46,7 @@
       {% section 'header' %}
     </header>
 
-    <main class="bh-main" role="main">
+    <main class="bh-main bg-white" role="main">
       {{ content_for_layout }}
     </main>
 

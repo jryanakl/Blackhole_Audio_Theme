@@ -1,0 +1,83 @@
+{% comment %}
+  Example from https://shopify.dev/docs/themes/product-merchandising/variants
+{% endcomment %}
+
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign current_variant_image = current_variant.image %}
+
+<div class="hidden">
+  <code>product:</code>
+  <pre class="bg-gray-500">{{ product | json }}</pre><br />
+</div>
+
+<div class="hidden">
+  <code>current_variant.featured_image.src:</code>
+  <pre class="bg-gray-500">{{ current_variant.featured_image.src }}</pre><br />
+</div>
+
+<aside>
+  <!-- Product -->
+  <div class="bh-product-image p-10">
+    <div id="bh-product-image__box" class="bh-product-image__box">
+      <img id="bh-product__img--{{ variant.featured_image.id }}"
+        class="bh-product__img"
+        src="{{ 'dual_monoblock_wooden_solid_state_amplifier.png' | asset_img_url: 'large' }}"
+        alt="{{ current_variant_image.src }}"
+        height=""
+        width="">
+      {% comment %}
+        {% for variant in product.variants %}
+        <span class="hidden">
+          <code>variant:</code>
+          <pre>{{ variant| json }}</pre>
+        </span>
+
+        <img id="bh-product__img--{{ variant.featured_image.id }}"
+             class="bh-product__img"
+             src="{{ featured_media.image | image_url: 'large' }}"
+             alt="{{ featured_media.src .alt }}"
+             height=""
+             width="">
+      {% endfor %}
+    {% endcomment %}
+    </div>
+  </div>
+
+  <!--Featured Media -->
+  <div class="p-10 hidden">
+    {% case featured_media.media_type %}
+      {% when 'image' %}
+        <div id="product-single__media" class="pt-1"
+          {% comment %} style="padding-top: {{ 1 | divided_by: featured_media.aspect_ratio | times: 100}}%;" {% endcomment %}
+          data-media-id="{{ featured_media.id }}"
+        >
+          {{ featured_media | image_url: width: 2048 | image_tag }}
+        </div>
+      {% when 'external_video' %}
+        <div id="product-single__media" class="pt-1"
+          {% comment %} style="padding-top: {{ 1 | divided_by: featured_media.aspect_ratio | times: 100}}%;" {% endcomment %}
+          data-media-id="{{ featured_media.id }}"
+        >
+          {{ featured_media | external_video_tag }}
+        </div>
+      {% when 'video' %}
+        <div id="product-single__media" class="pt-1" data-media-id="{{ featured_media.id }}">
+          {{ featured_media | video_tag: controls: true }}
+        </div>
+      {% when 'model' %}
+        <div id="product-single__media" class="pt-1"
+          {% comment %} style="padding-top: 100%" {% endcomment %}
+          data-media-id="{{ featured_media.id }}"
+        >
+          {{ featured_media | model_viewer_tag }}
+        </div>
+      {% else %}
+        <div id="product-single__media" class="pt-1"
+          {% comment %} style="padding-top: 100%;" {% endcomment %}
+          data-media-id="{{ featured_media.id }}"
+        >
+          {{ featured_media | media_tag }}
+        </div>
+    {% endcase %}
+  </div>
+</aside>

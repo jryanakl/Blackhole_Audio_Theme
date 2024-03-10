@@ -3,7 +3,13 @@
 
    renders main-page-banner & main-page-chart snippets, used in index.json
 {% endcomment %}
-<div id="bh-main__box" class="bh-main__box">
+<div id="bh-main__box" class="bh-main__box bh-main-page--banner">
   {% render 'main-page-banner' %}
+</div>
+<div id="bh-main__box" class="bh-main__box bh-main-page--chart">
+  <section class="md:pt-5 px-5 h-full">
+    <h2 class="md:text-left">Unleash your Sound</h2>
+    <p class="text-sm md:text-left md:text-base pb-5">Experience unparalled performance. Hear what's on the Horizon</p>
+  </section>
   {% render 'main-page-chart' %}
 </div>

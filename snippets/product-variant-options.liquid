@@ -1,0 +1,48 @@
+{% comment %}
+  Renders product variant options in form of select
+
+  Accepts:
+  - product: {Object} product object.
+  - option: {Object} current product_option object.
+  - block: {Object} block object.
+  - picker_type: {String} type of picker to dispay
+
+  Links:
+  - docs: https://shopify.dev/docs/api/liquid/objects/variant
+  - example: https://shopify.dev/docs/themes/product-merchandising/variants
+
+  Usage:
+    {% render 'product-variant-options',
+       product: product,
+       option: option,
+       block: block
+       picker_type: picker_type
+    %}
+{% endcomment %}
+
+{% unless product.has_only_default_variant %}
+  <div class="bh-product__variant mt-4">
+    <div data-url="{{ product.url }}" data-section="{{ section.id }}">
+      {% for option in product.options_with_values %}
+        <label for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+        <select
+          id="Option-{{ section.id }}-{{ forloop.index0 }}"
+          class="bh-product__variant__select w-full border py-3 px-3 cursor-pointer"
+        >
+          {% for variant in product.variants %}
+            <option
+              class="bh-product__variant__select-option"
+              value="{{ variant.id }}"
+              data-image="{{ variant.featured_image.src }}"
+              {% if option.selected_value == variant.title %}
+                selected="selected"
+              {% endif %}
+            >
+              {{ variant.title }}
+            </option>
+          {% endfor %}
+        </select>
+      {% endfor %}
+    </div>
+  </div>
+{% endunless %}

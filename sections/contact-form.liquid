@@ -1,115 +1,193 @@
-{% comment %} 
-* Tag: https://shopify.dev/docs/api/liquid/tags/form
-* Theme: https://shopify.dev/docs/themes/customer-engagement/add-contact-form
+{% comment %}
+  Contact Form for templates > page.contact.json
+
+   Usage:
+   "sections": {
+      "contact-form": {
+       "wrapper": "section",
+       "type": "contact-form"
+     }
+   }
+
+  Links:
+  - Liquid Form Tags: https://shopify.dev/docs/api/liquid/tags/form
+  - Themes Contact Form: https://shopify.dev/docs/themes/customer-engagement/add-contact-form
 {% endcomment %}
+<div class="py-2">
+  <h3 class="mb-4">{{ section.settings.title }}</h3>
 
-{% form 'contact', id: 'contact-form', class: bh-form %}
-  {% if form.errors %}
-    <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-      <span class="bh-icon bh-icon--danger">
-        {% render 'icon-error' %}
-      </span>&nbsp;
-      <span class="sr-only">Error Info</span>
-      <span class="font-semibold">Errors!</span> Your message was not sent
-      <div>
-        <span class="font-semibold">Ensure that these requirements are met:</span>
-        <ul class="mt-1.5 list-disc list-inside text-red-800">
-          {% for error in form.errors %}
-            <li class="">
-              <small>{{ form.errors.messages[error] }}</small>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-  {% elsif form.posted_successfully? %}
-    <div
-      class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
-      role="alert">
-      <span class="bh-icon bh-icon--success">
-        {% render 'icon-success' %}
-      </span>&nbsp;
-      <span class="sr-only">Success Info</span>
-      <div>
-        <span class="font-medium">Success!</span> Your message was sent!
-      </div>
-    </div>
-  {% endif %}
-
-  {% if section.settings.title != blank %}
-    <h3 class="">{{ section.settings.title }}</h3>
-  {% else %}
-    <h3 class="mb-42">Get in touch for amplifier inquiries</h3>
-  {% endif %}
-
-  <div class="grid md:grid-cols-2 md:gap-6">
-    <div class="relative z-0 w-full mb-5 group">
-      <input type="text" name="contact[first_name]" id="contact-first-name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" " required />
-      <label for="first-name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-gray-600 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First name</label>
-    </div>
-    <div class="relative z-0 w-full mb-5 group">
-      <input type="text" name="contact[last_name]" id="contact-last-name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" " required />
-      <label for="last-name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-gray-600 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last name</label>
-    </div>
-  </div>
-  <div class="relative z-0 w-full mb-5 group">
-    <input type="tel"
-      autocomplete="tel"
-      name="contact[phone]"
-      id="contact-phone"
-      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer"
-      placeholder=" "
-      value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-      required />
-    <label for="phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-gray-600 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone number (123-456-7890)</label>
-  </div>
-  <div class="relative z-0 w-full mb-5 group">
-    <input type="email"
-      name="contact[email]"
-      id="contact-email"
-      spellcheck="false"
-      autocapitalize="off"
-      value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-      {% if form.errors contains 'email' %}
-        aria-invalid="true"
-        aria-describedby="contact-form-email-error"
-      {% endif %}
-      aria-required="true"
-      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" " required />
-    <label for="email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-gray-600 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
-    {% if form.errors contains 'email' %}
-      <small class="text-error" id="contact-form-email-error">
-        <span class="form__message">
-          {% render 'icon-error' %}
-          {{ form.errors.translated_fields.email | capitalize }}
-          {{ form.errors.messages.email }}
+  {% form 'contact', id: 'bh-contact-form', class: 'bh-contact-form' %}
+    {% if form.posted_successfully? %}
+      <!-- Success Alert -->
+      <div
+        class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+        role="alert"
+      >
+        <span class="bh-icon bh-icon--success"> {% render 'icon-success' %} </span>&nbsp;
+        <span class="sr-only">
+          {{ 'templates.contact.form.success_info' | t }}
         </span>
-      </small>
+        <div>
+          <span class="font-medium">{{ 'templates.contact.form.success' | t }}</span>
+          {{ 'templates.contact.form.success_message_sent' | t }}
+        </div>
+      </div>
+      <style>
+        .bh-contact-form__form-fields {
+          display: none;
+        }
+      </style>
+    {% else %}
+      <!-- Error Alert -->
+      {% if form.errors %}
+        <div
+          class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+          role="alert"
+        >
+          <span class="bh-icon bh-icon--danger"> {% render 'icon-error' %} </span>&nbsp;
+          <span class="sr-only">{{ 'templates.contact.form.error_info' | t }}</span>
+          <span class="font-semibold">{{ 'templates.contact.form.errors' | t }}</span>
+          {{ 'templates.contact.form.errors_message_not_sent' | t }}
+          <div>
+            <span class="font-semibold">
+              {{ 'templates.contact.form.errors_heading_for_list' | t }}
+            </span>
+            <ul class="mt-1.5 list-disc list-inside text-red-800">
+              {% for error in form.errors %}
+                <li class="">
+                  <small>{{ form.errors.messages[error] }}</small>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+      <div class="bh-contact-form__form-fields">
+        <div class="grid md:grid-cols-2 md:gap-6">
+          <div class="relative z-0 w-full mb-5 group">
+            <input
+              type="text"
+              name="contact[first_name]"
+              id="contact-first-name"
+              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer"
+              placeholder=" "
+              required
+            >
+            <label
+              for="contact-first-name"
+              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-gray-600 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              {{ 'templates.contact.form.first_name' | t }}
+            </label>
+          </div>
+          <div class="relative z-0 w-full mb-5 group">
+            <input
+              type="text"
+              name="contact[last_name]"
+              id="contact-last-name"
+              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer"
+              placeholder=" "
+              required
+            >
+            <label
+              for="contact-last-name"
+              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-gray-600 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              {{ 'templates.contact.form.last_name' | t }}
+            </label>
+          </div>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+          <input
+            type="tel"
+            autocomplete="tel"
+            name="contact[phone]"
+            id="contact-phone"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer"
+            placeholder=" "
+            value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+            required
+          >
+          <label
+            for="contact-phone"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-gray-600 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >
+            {{ 'templates.contact.form.phone_number' | t }}
+          </label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+          <input
+            type="email"
+            name="contact[email]"
+            id="contact-email"
+            spellcheck="false"
+            autocapitalize="off"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            {% if form.errors contains 'email' %}
+              aria-invalid="true"
+              aria-describedby="contact-form-email-error"
+            {% endif %}
+            aria-required="true"
+            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer"
+            placeholder=" "
+            required
+          >
+          <label
+            for="contact-email"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-gray-600 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >
+            {{ 'templates.contact.form.email_address' | t }}
+          </label>
+          {% if form.errors contains 'email' %}
+            <small class="text-error" id="contact-form-email-error">
+              <span class="form__message">
+                {% render 'icon-error' %}
+                {{ form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email }}
+              </span>
+            </small>
+          {% endif %}
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+          <textarea
+            rows="8"
+            name="contact[body]"
+            id="contact-message"
+            class="text-sm text-gray-900 block py-2.5 px-0 w-full bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer"
+            placeholder=" "
+          ></textarea>
+          <label
+            for="contact-message"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-gray-600 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >
+            {{ 'templates.contact.form.let_us_help_comment' | t }}
+          </label>
+        </div>
+        <button
+          id="contact-submit"
+          class="text-white font-medium text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+          value="Submit message"
+          type="submit"
+        >
+          {{ 'templates.contact.form.submit' | t }}
+        </button>
+      </div>
     {% endif %}
-  </div>
-  <div class="relative z-0 w-full mb-5 group">
-    <textarea rows="8" name="contact[body]" id="contact-message" class="text-sm text-gray-900 block py-2.5 px-0 w-full bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" "></textarea>
-    <label for="message" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-gray-600 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Let us know how we can help</label>
-  </div>
-  <button id="contact-submit"
-    value="Submit message"
-    type="submit"
-    class="text-white font-medium text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Submit</button>
-{% endform %}
-
+  {% endform %}
+</div>
 
 {% schema %}
 {
-  "name": "Form Contact",
+  "name": "t:sections.contact-form.name",
   "tag": "section",
   "class": "bh-main__page__section",
   "settings": [
     {
       "type": "text",
       "id": "title",
-      "default": "Get in Touch for Amplifier Inquiries",
-      "label": "Contact Heading Title"
+      "label": "t:sections.contact-form.settings.title.label",
+      "default": "Get in Touch for Amplifier Inquiries"
     }
   ]
 }

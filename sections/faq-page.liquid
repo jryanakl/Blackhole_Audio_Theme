@@ -1,0 +1,23 @@
+<aside class="bh-page">
+  <h2 class="">
+    {{ section.settings.title }}
+  </h2>
+  FAQ
+</aside>
+
+{% schema %}
+{
+  "name": "t:sections.faq.name",
+  "tag": "section",
+  "class": "bh-main__page__section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "FAQ",
+      "label": "t:sections.faq.settings.text.label"
+    }
+  ],
+  "blocks": []
+}
+{% endschema %}

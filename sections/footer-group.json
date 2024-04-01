@@ -1,0 +1,19 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "brand_headline_enable": true,
+        "brand_headline": "Hear What's on the Horizon",
+        "color_scheme": "scheme-2",
+        "newsletter_enable": true,
+        "newsletter_heading": "Subscribe to our emails",
+        "show_social": true,
+        "show_policy": true
+      }
+    }
+  },
+  "order": ["footer"]
+}

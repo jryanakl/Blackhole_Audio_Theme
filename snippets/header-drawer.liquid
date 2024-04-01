@@ -1,7 +1,7 @@
 <!-- drawer component -->
 <div
   id="drawer-navigation"
-  class="fixed top-0 left-0 z-40 h-screen p-8 overflow-y-auto transition-transform -translate-x-full bg-black w-64 dark:bg-gray-800"
+  class="fixed top-0 left-0 z-50 h-screen p-8 overflow-y-auto transition-transform -translate-x-full bg-black w-64 dark:bg-gray-800"
   tabindex="-1"
   aria-labelledby="drawer-navigation-label"
 >
@@ -20,17 +20,11 @@
     <span class="sr-only">Close menu</span>
   </button>
   <div class="py-4 overflow-y-auto">
-    <ul class="bh-header-drawer__links font-semibold">
-      {% for link in linklists['main-menu'].links %}
-        <li class="text-white text-lg uppercase mb-2">
-          <a class="text-white" href="{{ link.url }}">{{ link.title }}</a>
-        </li>
-      {% endfor %}
-      {% for link in linklists['header-right-menu'].links %}
-        <li class="text-white text-lg uppercase mb-2">
-          <a class="text-white" href="{{ link.url }}">{{ link.title }}</a>
-        </li>
-      {% endfor %}
-    </ul>
+    <div class="mb-6">
+      {% render 'menu-nav-footer', menu_class: 'bh-menu--header-drawer', menu_handle: 'main-menu' %}
+    </div>
+    <div class="">
+    {% render 'menu-nav-footer', menu_class: 'bh-menu--header-drawer', menu_handle: 'menu-right' %}
+    </div>
   </div>
 </div>

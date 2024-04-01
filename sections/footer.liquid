@@ -1,87 +1,127 @@
-<div id="bh-footer__box">
-  <div class="flex justify-between items-center">
-    <!-- Menu -->
-    <nav class="bh-menu bh-menu--footer w-full">
-      <ul class="bh-menu__list">
-        {% for link in linklists['main-menu'].links %}
-          <li class="bh-menu__list__item">
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    </nav>
+<div id="bh-footer__box" class="bh-footer-color--{{ section.settings.color_scheme }}">
+  {% if section.settings.newsletter_enable %}
+    <div class="bh-footer__newsletter bg-gray-400 w-full p-8 text-center">
+      {% render 'form-newsletter' %}
+    </div>
+  {% endif %}
 
-    <!-- Logo -->
-    <div class="bh-logo bh-logo--footer">
-      <a href="{{ routes.root_url }}">
-        <span class="sr-only">{{ shop.name }}</span>
-        <span class="">{% render 'logo-bh-footer' %}</span>
-      </a>
+  <div class="flex justify-between pt-6">
+    <!-- Main Menu, Left -->
+    <div class="bh-footer__main-menu w-full">
+      {% render 'menu-nav-footer', menu_class: 'bh-menu--footer', menu_handle: 'main-menu' %}
     </div>
 
-    <!-- Menu -->
-    <nav class="bh-menu bh-menu--footer">
-      <ul class="bh-menu__list">
-        {% for link in linklists['header-right-menu'].links %}
-          <li class="bh-menu__list__item">
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    </nav>
+    <!-- Logo -->
+    <div class="bh-footer__logo flex items-center align-middle">
+      <div class="bh-logo bh-logo--footer">
+        <a href="{{ routes.root_url }}">
+          <span class="sr-only">{{ shop.name }}</span>
+          <span class="">
+            {% render 'logo-bh-no-color' %}
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Menu Right, Company -->
+    <div class="bh-footer__menu-right w-full">
+      {% render 'menu-nav-footer', menu_class: 'bh-menu--footer', menu_handle: 'menu-right' %}
+    </div>
   </div>
 
   <div class="mt-2 text-center text-xs">
-    <h3 class="font-semibold text-gray-400">Hear What's on the Horizon</h3>
-    <nav class="bh-menu bh-menu--footer-social">
-      <ul class="bh-menu__list bh-menu__list--inline bh-icon--gray-md">
-        <li class="bh-menu__list__item">
-          <a class="underline" href="">
-            <span class="sr-only">Facebook</span>
-            <i class="bh-icon">
-              {% render 'icon-facebook' %}
-            </i>
-          </a>
-        </li>
-        <li class="bh-menu__list__item">
-          <a class="underline" href="">
-            <span class="sr-only">Youtube</span>
-            <i class="bh-icon">
-              {% render 'icon-youtube' %}
-            </i>
-          </a>
-        </li>
-        <li class="bh-menu__list__item">
-          <a class="underline" href="">
-            <span class="sr-only">Instagram</span>
-            <i class="bh-icon">
-              {% render 'icon-instagram' %}
-            </i>
-          </a>
-        </li>
-        <li class="bh-menu__list__item">
-          <a class="underline" href="">
-            <span class="sr-only">Twitter</span>
-            <i class="bh-icon">
-              {% render 'icon-twitter' %}
-            </i>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <nav class="bh-menu bh-menu--footer-legal">
-      <ul class="bh-menu__list bh-menu__list--inline">
-        <li class="bh-menu__list__item mx-1">
-          <a class="underline" href="">Terms & Conditions</a>
-        </li>
-        <li class="bh-menu__list__item mx-1">
-          <a class="underline" href="">Privacy Policy</a>
-        </li>
-        <li class="bh-menu__list__item mx-1">
-          <a class="underline" href="">Refund Policy</a>
-        </li>
-      </ul>
-    </nav>
-    <p class="text-gray-400 text-xs">© 2024, Black Hole Audio Company. All rights reserved.</p>
+    {% if section.settings.brand_headline_enable %}
+      {% if section.settings.brand_headline != blank %}
+        <h3 class="font-semibold text-gray-400">
+          {{ section.settings.brand_headline }}
+        </h3>
+      {% endif %}
+    {% endif %}
+
+    {% comment %} {{ section.settings.show_social | json }} {% endcomment %}
+    {% if section.settings.show_social %}
+      {% render 'social-links', is_menu: true %}
+    {% endif %}
+
+    {% if section.settings.show_policy %}
+      <nav class="bh-menu bh-menu--footer-legal">
+        <ul class="bh-menu__list bh-menu__list--inline">
+          <li class="bh-menu__list__item mx-1">
+            <a class="underline" href="">
+              {{ 'sections.footer.policies.terms' | t }}
+            </a>
+          </li>
+          <li class="bh-menu__list__item mx-1">
+            <a class="underline" href="">
+              {{ 'sections.footer.policies.privacy' | t }}
+            </a>
+          </li>
+          <li class="bh-menu__list__item mx-1">
+            <a class="underline" href="">
+              {{ 'sections.footer.policies.refund' | t }}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    {% endif %}
+
+    <p class="text-gray-400 text-xs">
+      © {{ 'sections.footer.copyright' | t }}
+    </p>
   </div>
 </div>
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "checkbox",
+      "id": "brand_headline_enable",
+      "default": true,
+      "label": "Show brand headline"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "brand_headline",
+      "default": "Hear What's on the Horizon",
+      "label": "Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "default": true,
+      "label": "Show email signup"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "newsletter_heading",
+      "default": "Get the Latest News & Offers",
+      "label": "Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": true,
+      "label": "Show social media links"
+    },
+    {
+      "type": "checkbox",
+      "default": true,
+      "id": "show_policy",
+      "label": "Show policy links"
+    }
+  ]
+}
+{% endschema %}

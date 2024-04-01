@@ -1,0 +1,63 @@
+{%- comment -%}
+  Renders correct tag & styling for media type
+
+  Accepts:
+  - media: The media object to be displayed.
+  - media_id: item.id, e.g., item.id for variant_id--{{ item.id }}
+  - media_class_list: The CSS class list for styling the media element, e.g., 'w-full h-80 object-cover'
+  - media_type {String}
+  
+  Usage: 
+  {% render 'product-media', media: product.media, media_class_list 'w-full h-80 object-cover' %}
+{%- endcomment -%}
+
+<!--Test -->
+<code class="text-red-600 hidden">
+  <h4>MainProductMedia</h4>
+  <p>bindings?</p>
+  <pre>
+    'media': {{ media }}
+    'media_class_list': {{ media_class_list }}
+  </pre>
+  <p>case switch?</p>
+  <pre class="">
+    'media.media_type': {{ media.media_type }}
+  </pre>
+</code>
+
+
+{% if media_type %}
+  {% assign product_media_type = media_type %}
+{% elsif media.media_type %}
+  {% assign product_media_type = media.media_type %}
+{% else %}
+  <p class="text-red-600 hidden">No media_type available</p>
+  {% assign product_media_type = 'image' %}
+{% endif %}
+
+<!-- Media: Render MainProductMedia -->
+<span class="bh-main-product-media">
+  {% case product_media_type %}
+    {% when 'image' %}
+      <!-- media_type: image -->
+      <img
+        id="variant_id--{{ media_id }}"
+        width="100%"
+        height=""
+        src="{{ media | image_url }}"
+        class="{{ media_class_list }}">
+    {% when 'external_video' %}
+      <!-- media_type: external_video -->
+      {{ media | external_video_tag: class: media_class_list }}
+    {% when 'video' %}
+      <!-- media_type: video -->
+      {{ media | video_tag: controls: true, class: media_class_list }}
+    {% when 'model' %}
+       <!-- media_type: model -->
+      {{ media | model_viewer_tag: class: media_class_list }}
+    {% else %}
+      <!-- default condition of case media.media_type -->
+      <!-- media_type: null -->
+      {{ media | media_tag: class: media_class_list }}
+  {% endcase %}
+</span>

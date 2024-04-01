@@ -2,19 +2,7 @@
   "wrapper": "div.bh-main__page",
   "sections": {
     "main": {
-      "type": "about-page",
-      "blocks": {
-        "image": {
-          "type": "about_image"
-        },
-        "company": {
-          "type": "about_company"
-        }
-      },
-      "block_order": [
-        "image",
-        "company"
-      ]
+      "type": "about-page"
     }
   },
   "order": [

@@ -1,0 +1,57 @@
+<aside class="bh-collection">
+  <div class="bh-box--non-full">
+    <div class="hidden bh-collection__filters flex justify-between bg-white h-10">
+      <code>PRICE</code>
+      <code>SORTYBY</code>
+    </div>
+  
+    <div class="bh-collection__list flex">
+      {% paginate collection.products by section.settings.number_of_products_per_page %}
+        <div class="mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-3 py-4">
+            {% for product in collection.products %}
+              {% render 'card-product', 
+                card_product: product,
+                card_product_metafields: product.metafields.custom,
+                show_rating: section.settings.show_rating,
+                section_id: section.id
+              %}
+            {% else %}
+              <p>{{ 'collections.no_products' | t }}</p>
+            {% endfor %}
+          </div>
+        </div>
+  
+        {% render 'pagination', pagination: paginate %}
+      {% endpaginate %}
+    </div>
+  </div>
+</aside>
+
+<!-- New -->
+{% schema %}
+{
+  "name": "t:sections.main-collection.name",
+  "tag": "section",
+  "class": "bh-main__page__section--full",
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "number",
+      "id": "number_of_products_per_page",
+      "label": "t:sections.main-collection.settings.number_of_products_per_page.label",
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "t:sections.main-collection.settings.show_rating.label",
+      "info": "t:sections.main-collection.settings.show_rating.info"
+    }
+  ]
+}
+{% endschema %}

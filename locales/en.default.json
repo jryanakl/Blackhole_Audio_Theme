@@ -1,23 +1,134 @@
 {
+  "bha": {
+    "amplifier": "amplifier",
+    "amplifiers": "amplifiers",
+    "high_res": "Hi-Res"
+  },
+  "accessibility": {
+    "close": "Close",
+    "error": "Error",
+    "link_messages": {
+      "new_window": "Opens in a new window.",
+      "external": "Opens external website."
+    },
+    "loading": "Loading...",
+    "menu": "Menu",
+    "skip_to_content": "Skip to content"
+  },
+  "logo": {
+    "logo_image": {
+      "label": "Black Hole Audio"
+    }
+  },
+  "modal": {
+    "accessibility": {
+      "close_modal": "Close modal"
+    },
+    "buttons": {
+      "ok": "Ok",
+      "cancel": "Cancel",
+      "close": "Close"
+    }
+  },
+  "brand_information": {
+    "brand_headline": "Hear What's on the Horizon"
+  },
+  "collections": {
+    "all_products": "All Products",
+    "no_products": "There are no products inside of this collection"
+  },
+  "company": {
+    "name": "Black Hole Audio"
+  },
   "general": {
-    "about_page": {
-      "about_company": ""
+    "blogs": {
+      "article": {
+        "read_more": "Read more"
+      }
+    },
+    "carousel": {
+      "next": "Next",
+      "previous": "Previous"
     },
     "cart": {
       "view": "View cart ({{ count }})",
       "view_empty_cart": "View cart",
       "item_added": "Item added to your cart"
     },
-    "continue_shopping": "Continue shopping"
-  },
-  "accessibility": {
-    "loading": "Loading..."
+    "cst": "CST",
+    "continue_shopping": "Continue shopping",
+    "email": "Email",
+    "get_in_touch": "Get in Touch for Amplifier Inquiries",
+    "home": "Home",
+    "learn_more": "Learn More",
+    "password_page": {
+      "login_form_heading": "Enter store using password:",
+      "login_password_button": "Enter using password",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_error": "Wrong password!",
+      "login_form_submit": "Enter",
+      "admin_link_html": "Are you the store owner? <a href=\"/admin\" class=\"link underlined-link\">Log in here</a>",
+      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
+    },
+    "pagination": {
+      "label": "Pagination",
+      "page": "Page {{ number }}",
+      "next": "Next page",
+      "previous": "Previous page"
+    },
+    "search": "Search",
+    "share": {
+      "close": "Close share",
+      "copy_to_clipboard": "Copy link",
+      "share_url": "Link",
+      "success_message": "Link copied to clipboard"
+    },
+    "social": {
+      "alt_text": {
+        "share_on_facebook": "Share on Facebook",
+        "share_on_instagram": "Share on Instagram",
+        "share_on_twitter": "Tweet on Twitter",
+        "share_on_youtube": "Share on YouTube"
+      },
+      "links": {
+        "facebook": "Facebook",
+        "instagram": "Instagram",
+        "youtube": "YouTube",
+        "twitter": "Twitter"
+      }
+    }
   },
   "products": {
+    "facets": {
+      "product_count": {
+        "one": "{{ product_count }} of {{ count }} product",
+        "other": "{{ product_count }} of {{ count }} products"
+      },
+      "product_count_simple": {
+        "one": "{{ count }} product",
+        "other": "{{ count }} products"
+      },
+      "reset": "Reset",
+      "sort_button": "Sort",
+      "sort_by_label": "Sort by:",
+      "to": "To",
+      "clear_filter": "Remove filter"
+    },
     "product": {
+      "add_to_cart": "Add to cart",
+      "explore_product_features": "Explore our product features and find out how to get in touch with us for more information.",
+      "free_delivery": "Free Delivery",
+      "have_questions": "Have Questions?",
+      "media": {
+        "image_available": "Image {{ index }} is now available in gallery view"
+      },
+      "only_one_left": "Only {{ size }} item left in stock!",
       "price": {
+        "available": "Available",
         "from_price_html": "From {{ price }}",
         "regular_price": "Regular price",
+        "sale": "Sale",
         "sale_price": "Sale price",
         "unit_price": "Unit price"
       },
@@ -32,6 +143,17 @@
         "multiples_of": "Increments of {{ quantity }}",
         "note": "View quantity rules"
       },
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "tabs": {
+        "features": "Features",
+        "overview": "Overview",
+        "specifications": "Specifications",
+        "design": "Design",
+        "performance": "Performance"
+      },
+      "value_unavailable": "{{ option_value }} - Unavailable",
+      "variant_sold_out_or_unavailable": "Variant sold out or unavailable",
       "volume_pricing": {
         "note": "Volume pricing available",
         "title": "Volume Pricing"
@@ -39,25 +161,115 @@
     }
   },
   "sections": {
-    "header": {
-      "cart_count": {
-        "one": "{{ count }} item",
-        "other": "{{ count }} items"
-      }
-    },
     "cart": {
+      "name": "Cart",
+      "cart_empty": "Cart Empty",
+      "cart_error": "There was an error while updating your cart. Please try again.",
+      "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart.",
+      "checkout": "Checkout",
+      "estimated_total": "Estimated total",
       "headings": {
         "product": "Product",
         "price": "Price",
         "total": "Total",
         "quantity": "Quantity"
       },
-      "title": "Your cart"
+      "new_estimated_total": "New estimated total",
+      "note": "Order special instructions",
+      "remove": "remove",
+      "subtotal": "Subtotal",
+      "taxes_and_shipping_policy_at_checkout_html": "Taxes, Discounts and <a href=\"{{ link }}\">shipping</a> calculated at checkout",
+      "taxes_included_but_shipping_at_checkout": "Tax included and shipping and discounts calculated at checkout",
+      "taxes_included_and_shipping_policy_html": "Tax included. <a href=\"{{ link }}\">Shipping</a> and discounts calculated at checkout.",
+      "taxes_and_shipping_at_checkout": "Taxes, discounts and shipping calculated at checkout",
+      "title": "Your cart",
+      "update": "Update",
+      "your_cart_is_empty": "Your cart is currently empty"
+    },
+    "contact": {
+      "contact_us_during": "Contact us during normal business hours",
+      "email_support": "E-mail Support"
+    },
+    "footer": {
+      "name": "Footer",
+      "newsletter": {
+        "form": {
+          "enter_your_email": "Enter Your Email Address",
+          "thanks_for_signing_up": "Thanks for signing up!"
+        },
+        "get_the_latest_news_offers": "Get the Latest News & Offers",
+        "sign_up": "Sign Up"
+      },
+      "policies": {
+        "terms": "Terms & Conditions",
+        "privacy": "Privacy Policy",
+        "refund": ""
+      },
+      "settings": {
+        "brand_headline_enable": {
+          "label": "Show brand headline"
+        },
+        "brand_headline": {
+          "label": "Heading"
+        },
+        "newsletter_enable": {
+          "label": "Show email signup"
+        },
+        "newsletter_heading": {
+          "label": "Heading"
+        },
+        "show_policy": {
+          "label": "Show policy links"
+        },
+        "show_social": {
+          "label": "Show social media links"
+        }
+      },
+      "social": {
+        "facebook": "Facebook",
+        "youtube": "YouTube",
+        "instagram": "Instagram",
+        "twitter": "Twitter"
+      },
+      "copyright" : "2024, Black Hole Audio Company. All rights reserved."
+    },
+    "header": {
+      "name": "Header",
+      "cart_count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      }
     }
   },
   "templates": {
     "cart": {
       "cart": "Cart"
+    },
+    "contact": {
+      "form": {
+        "title": "Contact form",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "email_address": "Email",
+        "phone_number": "Phone number (123-456-7890)",
+        "let_us_help_comment": "Let us know how we can help",
+        "send": "Send",
+        "submit": "Submit",
+        "success": "Success!",
+        "success_info": "Success Info",
+        "success_message_sent": "Your message was sent!",
+        "errors": "Errors!",
+        "error_info": "Error Info",
+        "errors_message_not_sent": "Your message was not sent",
+        "errors_heading_for_list": "Ensure that these requirements are met:"
+      }
+    },
+    "search": {
+      "in_search_for": "in search for “{{ terms }}”",
+      "no_results_found_searching": "No results found searching for “{{ terms }}”. ",
+      "results_with_size": "{{ size }} results",
+      "search_results": "Search Results",
+      "try_using_different_word": "Try to use a different word or phrase."
     }
   }
 }

@@ -1,0 +1,120 @@
+{% comment %}
+  Renders product tab content for features
+
+  Accepts:
+  - metafields: product.custom.metafields
+{% endcomment %}
+
+<div class="bh-tab__content__features text-gray-500 dark:text-gray-400">
+  <div class="grid md:grid-cols-2 md:gap-8">
+    <ul class="list-none">
+      <li class="hidden flex items-top-center mb-2">
+        <i class="bh-icon bh-icon--gray">
+          {% render 'icon-audio-video-receiver' %}
+        </i>
+        <div class="ml-2">
+          <dt><h4>100% Analog</h4></dt>
+          <dd class="text-sm md:text-base">No digital switching or clocks in the box <small>(TM)</small></dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-dynamic-form' %}
+        </span>
+        <div class="ml-2">
+          <div class="text-green-500 hidden">{{ metafields | json }}</div>
+          {% if metafields.amp_power_output_channel %}
+            <dt>
+              <h4>{{ metafields.amp_power_output_channel }}</h4>
+            </dt>
+          {% else %}
+            <dt><h4>120W+120W</h4></dt>
+          {% endif %}
+          <dd class="text-sm md:text-base">At 4, 6, or 8 ohms</dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-high-res' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>Hi-Res amplifier</h4></dt>
+          {% if metafields.amp_power_thd_n %}
+            <dd class="text-sm md:text-base">
+              {{ metafields.amp_power_thd_n }}
+              <small>(-114dB)</small>
+            </dd>
+          {% else %}
+            <dd class="text-sm md:text-base">0.0002% THD+N <small>(-114dB)</small></dd>
+          {% endif %}
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-grid-view' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>Dual Mono Block Design</h4></dt>
+          <dd class="text-sm md:text-base">For non-measurable cross talk levels</dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-commit' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>No Mechanical Relays</h4></dt>
+          <dd class="text-sm md:text-base">100% solid state for uncompromised reliability and performance</dd>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="list-none">
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-volume-up' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>Class AB</h4></dt>
+          <dd class="text-sm md:text-base">Re-imagined from the bottom up</dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-blue-linear' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>Linear Regulated System</h4></dt>
+          <dd class="text-sm md:text-base">With 15uVrms noise 20-20kHz on low voltage rails</dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-filter-list' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>33mF filter caps</h4></dt>
+          <dd class="text-sm md:text-base">Each for high and low rail</dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-settings-input-component' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>Input/Output</h4></dt>
+          <dd class="text-sm md:text-base">12V- remote turn</dd>
+        </div>
+      </li>
+      <li class="flex items-top-center mb-2">
+        <span class="bh-icon bh-icon--gray">
+          {% render 'icon-output' %}
+        </span>
+        <div class="ml-2">
+          <dt><h4>Fast acting 100uS output</h4></dt>
+          <dd class="text-sm md:text-base">Short fault protection on hi and low side</dd>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

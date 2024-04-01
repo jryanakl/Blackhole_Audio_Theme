@@ -1,0 +1,149 @@
+<style>
+  .bh-article h2 {
+    margin-bottom: 0rem;
+  }
+
+  .bh-article h3,
+  .bh-article h4 {
+    margin-bottom: 0.75rem;
+  }
+
+  .bh-article p,
+  .bh-article ul {
+    margin-bottom: 1rem;
+  }
+
+  .bh-article ul {
+    list-style-position: inside;
+    list-style-type: disc;
+  }
+
+  .bh-article a {
+    color: #dc2626;
+    text-decoration: underline;
+  }
+
+  .bh-article a:hover {
+    color: #b91c1c;
+    text-decoration: none;
+  }
+</style>
+
+<article class="bh-article">
+  <nav class="flex pb-6" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+      <li>
+        <div class="flex items-center">
+          <a href="{{ blog.url }}" class="ms-1 text-sm font-medium text-gray-700">
+            {{ blog.title }}
+          </a>
+        </div>
+      </li>
+      <li aria-current="page">
+        <div class="flex items-center">
+          {% render 'icon-nav-arrow' %}
+          <span class="ms-1 text-sm font-medium text-gray-400">
+            {{ article.title | strip_html | truncatewords: 6 }}
+          </span>
+        </div>
+      </li>
+    </ol>
+  </nav>
+
+  {% for block in section.blocks %}
+    {% case block.type %}
+ 
+      {% when 'article_title' %}
+        <div class="flex">
+          <div class="max-w-7xl">
+            <h2>{{ article.title }}</h2>
+          </div>
+        </div>
+
+      {% when 'article_author' %}
+        <div class="flex">
+          <div class="max-w-7xl text-sm text-gray-500">
+            {% if section.settings.enable_author %}
+             by {{ article.author }}
+            {% endif %}
+          </div>
+        </div>
+ 
+      {% when 'article_published_date' %}
+        <div class="flex">
+          <div class="max-w-7xl text-sm text-gray-500">
+            {% if section.settings.enable_published_date %}
+              <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'on_date' }}</time>
+            {% endif %}
+          </div>
+        </div>
+
+      {% comment %} {% when 'featured_image' %}
+        <div class="max-w-5xl bg-gray-100 rounded-lg mx-2 md:mx-auto overflow-hidden my-4">
+          {% if article.image != blank %}
+            <img height="" width="" class="w-full h-60 md:h-60 object-cover object-center" src="{{ article.image | img_url: 'large'}}" alt="{{ article.image.alt }}">
+          {% else %}
+            {% assign placeholder_image = 'lifestyle-1' %}
+            {{ placeholder_image | placeholder_svg_tag: 'w-full h-80 md:h-80 object-cover object-center p-5' }}
+          {% endif %}
+        </div>
+      {% endcomment %}
+
+      {% when 'article_content' %}
+        <div class="pt-5">
+          <div class="">
+            {{ article.content }}
+          </div>
+        </div>
+    {% endcase %}
+  {% endfor %}
+</article>
+
+{% schema %}
+{
+    "name": "t:sections.main-article.name",
+    "tag": "section",
+    "class": "bh-main__page__section",
+    "settings": [
+        {
+          "default": true,  
+          "id": "enable_author",
+          "label": "Display Author Name",
+          "type": "checkbox"
+        },
+        {
+          "default": true,  
+          "id": "enable_published_date",
+          "label": "Display Published Date",
+          "type": "checkbox"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "article_title",
+            "limit": 1,
+            "name": "Title"
+        },
+        {
+            "type": "article_author",
+            "limit": 1,
+            "name": "Author"
+        },
+        {
+            "type": "article_published_date",
+            "limit": 1,
+            "name": "Published Date"
+        },
+        {
+            "type": "featured_image",
+            "limit": 1,
+            "name": "Thumbnail"
+        },
+        {
+            "type": "article_content",
+            "limit": 1,
+            "name": "Content"
+        }
+    ]
+}
+{% endschema %}

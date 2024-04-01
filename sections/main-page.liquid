@@ -1,15 +1,84 @@
 {% comment %}
-   main-page.liquid
-
-   renders main-page-banner & main-page-chart snippets, used in index.json
+  Renders banner & chart snippets, used in index.json
 {% endcomment %}
-<div id="bh-main__box" class="bh-main__box bh-main-page--banner">
-  {% render 'main-page-banner' %}
-</div>
-<div id="bh-main__box" class="bh-main__box bh-main-page--chart">
-  <section class="md:pt-5 px-5 h-full">
-    <h2 class="md:text-left">Unleash your Sound</h2>
-    <p class="text-sm md:text-left md:text-base pb-5">Experience unparalled performance. Hear what's on the Horizon</p>
+
+{% if section.settings.banner_animated_gsap_enable and section.settings.banner_heading != blank %}
+  <div class="bh-bg__heat-sink--mid">
+    {% render 'banner-animated-gsap',
+      heading: section.settings.banner_heading,
+      subheading: section.settings.banner_subheading,
+      button_label: section.settings.banner_button_label,
+      button_link: section.settings.banner_button_link 
+    %}
+  </div>
+{% endif %}
+
+<div class="p-1 md:p-10">
+  <section class="h-full bh-box--non-full p-4">
+    <h3 class="md:text-left">
+      {{ section.settings.heading }}
+    </h3>
+    <p class="text-sm md:text-base md:text-left pb-5">
+      {{ section.settings.subheading }}
+    </p>
+    {% if section.settings.chart_thd_enable %}
+      {% render 'chart-thd' %}
+    {% endif %}
   </section>
-  {% render 'main-page-chart' %}
 </div>
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "banner_animated_gsap_enable",
+      "default": true,
+      "label": "Show animated banner, i.e., 'Introducing M87...'"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "banner_heading",
+      "default": "Introducing the <span>M87</span> Power Amplifier",
+      "label": "Banner heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "banner_subheading",
+      "default": "A meticulously crafted high-powered two-channel amplifier featuring an exquisite wood-finished case, designed for exceptional sound performance",
+      "label": "Banner subheading"
+    },
+    {
+      "type": "text",
+      "id": "banner_button_label",
+      "default": "Learn More",
+      "label": "Banner button label"
+    },
+    {
+      "type": "url",
+      "id": "banner_button_link",
+      "label": "Banner button link",
+      "default": "/collections"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Unparalleled performance rivaling models priced higher",
+      "label": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "default": "Don't compromise on quality for affordability, get the same level of audio excellence without the hefty price tag",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "chart_thd_enable",
+      "default": true,
+      "label": "Show chart for THD+N"
+    }
+  ]
+}
+{% endschema %}

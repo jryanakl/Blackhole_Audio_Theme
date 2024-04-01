@@ -1,0 +1,104 @@
+{%- comment -%}
+  Renders 'Free Shipping' &  'Have Questions?' links for the product page
+
+  Usage:
+  {% render 'product-info-details' %}
+{%- endcomment -%}
+
+<script src="{{ 'ProductInfoDetails.js' | asset_url }}" defer="defer"></script>
+
+<!-- Links -->
+<div id="bh-product-info-details" class="bh-product-info-details">
+  <!-- Horizontal border -->
+  <div class="border border-gray-300"></div>
+
+  <div class="bh-product-stock-alerts">
+    {% if product.available %}
+      {% if product.variants.size == 1 and product.variants.first.inventory_quantity == 1 %}
+        <div class="flex flex-row align-middle justify-center w-full p-2">
+          <span class="w-5 h-5 fill-red-500">
+            {% render 'icon-notification-bell' %}
+          </span>
+          <p class="text-red-600 font-semibold text-sm text-center">
+            {{ 'products.product.only_one_left' | t: size: product.variants.size }}
+          </p>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="p-4">
+        <a class="text-red-600 underline hover:no-underline"
+           href="/pages/contact"
+           aria-label="Learn more about the product and how to contact us"
+           aria-describedby="product-description">
+            {{ 'general.get_in_touch' | t }}
+        </a>
+        <p id="product-description">
+          {{ 'products.product.explore_product_features' | t }}
+        </p>
+      </div>
+    {% endif %}
+  </div>
+  <div class="bh-product-delivery-questions__buttons">
+    <div class="flex flex-row text-sm pt-2">
+      <div class="w-full">
+        <div class="flex flex-row justify-center items-center">
+          <div class="w-8 h-8 me-1 bg-gray-500 rounded-full">
+            <span class="bh-icon bh-icon--white w-auto">
+              {% render'icon-package' %}
+            </span>
+          </div>
+          <span class="text-xs text-gray-500 font-semibold">
+            {{ 'products.product.free_delivery' | t }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Vertical border -->
+      {% comment %} <div class="border-r border-gray-300 h-8"></div> {% endcomment %}
+
+      <div class="w-full">
+        <div class="flex flex-row justify-center items-center">
+          <div class="w-8 h-8 me-1 bg-gray-500 rounded-full font-semibold">
+            <span class="bh-icon bh-icon--white w-auto">
+              {% render 'icon-support' %}
+            </span>
+          </div>
+          <a id="bh-info-details__link__have-questions" class="text-gray-500 text-xs hover:text-red-600 font-semibold underline cursor-pointer">
+            {{ 'products.product.have_questions' | t }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Cards -->
+  <div id="bh-info-details__card__have-questions" 
+    class="bh-info-details__card__have-questions pt-2 hidden">
+
+    <div class=" w-full p-2 text-center bg-gray-100 border border-gray-200 rounded-lg shadow sm:p-8">
+      {% comment %}
+      <div class="flex flex-row align-middle justify-center items-center">
+        <div class="w-8 h-8 me-1 bg-red-600 rounded-full">
+          <span class="bh-icon bh-icon--white me-1 w-auto h-10">
+            {% render 'icon-support' %}
+          </span>
+        </div>
+        <h4>{{ 'products.product.have_questions' | t }}</h4>
+      </div>
+      {% endcomment %}
+      <p class="mb-3 text-gray-500 text-xs">
+        {{ 'sections.contact.contact_us_during' | t }}<small>({{ 'general.cst' | t }})</small>
+      </p>
+      <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+        <span class="w-full sm:w-auto bg-white rounded-lg inline-flex items-center justify-center px-3 py-2.5">
+          {% render 'contact-phone-link', show_icon: true, link_class_list: 'text-gray-600 text-xs' %}
+        </span>
+        <span class="w-full sm:w-auto bg-white rounded-lg inline-flex items-center justify-center px-3 py-2.5">
+          {% render 'faq-link', show_icon: true, link_class_list: 'text-gray-600 text-xs' %}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+

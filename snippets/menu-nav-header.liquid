@@ -1,0 +1,64 @@
+{% comment %}
+  Renders dropdown by link_handle if link.links exits
+
+  Accepts:
+  - menu_class: 'bh-menu--header'
+  - menu_color_scheme: section.settings.menu_color_scheme
+  - menu_handle: 'main-menu'
+
+  Usage:
+  {% render 'menu-nav-header', menu_handle: 'menu-right' menu_class: 'bh-menu--header', menu_color_scheme: section.settings.menu_color_scheme %}
+{% endcomment %}
+
+<!--Test Product Meta -->
+<div class="text-white hidden">
+  menu_class: {{ menu_class | json }}
+  menu_color_scheme: {{ menu_color_scheme }}
+  menu_handle: {{ menu_handle }}
+</div>
+
+<nav class="bh-menu {{menu_class}} bh-menu-color--{{ menu_color_scheme }} hidden justify-end md:flex md:justify-center md:items-center">
+  {% if section.settings.menu.links == blank %}
+    {% capture actual_menu_handle %}{{ menu_handle }}{% endcapture %}
+    {% assign menu_linklist  = linklists[actual_menu_handle].links %}
+  {% else %}
+    {% assign menu_linklist = section.settings.menu.links %}
+  {% endif %}
+
+  {% for link in menu_linklist %}
+    {% if link.links != blank %}
+    {% assign link_handle = link.handle | replace: '-', '_' %}
+      <ul class="bh-menu__list">
+        <li class="bh-menu__list__item">
+          <a href="#"
+            id="dropdownDefaultButton"
+            data-dropdown-toggle="dropdown--{{ link_handle }}"
+            class="text-white bg-black inline-flex items-center">
+            {{ link.title }}&nbsp;
+            <span class="bh-icon bh-icon--white hover:fill-red-600">
+              {% render 'icon-chevron-down-expand' %}
+            </span>
+          </a>
+        </li>
+      </ul>
+      <!-- Dropdown menu -->
+      <div id="dropdown--{{ link_handle }}" class="bh-menu--dropdown z-10 hidden bg-gray-900 divide-y divide-gray-100 rounded-lg shadow w-48">
+        <ul class="bh-menu__list" aria-labelledby="dropdownDefaultButton">
+          {% for childlink in link.links %}
+            <li class="bh-menu__list__item hidden md:flex">
+              <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% else %}
+      <ul class="bh-menu__list">
+        <li class="bh-menu__list__item">
+          <a href="{{ link.url }}">
+            {{ link.title }}
+          </a>
+        </li>
+      </ul>
+    {% endif %}
+  {% endfor %}
+</nav>

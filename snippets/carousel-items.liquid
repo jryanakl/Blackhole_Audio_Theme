@@ -1,0 +1,44 @@
+{%- comment -%}
+
+  CarouselItem for use by Carousel
+  
+  Accepts: 
+  - carousel_items {Object} The items to be displayed in the carousel.
+  - carousel_item_element_id {String} The element ID associated with the item. Index from '| append: forloop.index' should be included in this.
+
+  Links:
+  - Flowbite Carousel: https://flowbite.com/docs/components/carousel/
+  - Shopify Objects Variant: https://shopify.dev/docs/api/liquid/objects#variant
+{%- endcomment -%}
+
+<!--Test Carousel Item -->
+<code class="text-red-600 hidden">
+  <h4>CarouselItem</h4>
+  <p>bindings?</p>
+  <pre>
+    featured_image: {{ featured_image | json }}
+    carousel_items: {{ carousel_items | json }}
+    carousel_item_id: {{ carousel_item_id }}
+  </pre>
+</code>
+
+{% if carousel_items %}
+  {% for item in carousel_items %}
+    {% assign carousel_item_element_id = carousel_item_id | append: forloop.index %}
+    <div id="{{carousel_item_element_id }}" class="{{ carousel_item_element_id }} hidden duration-700 ease-in-out">
+      {% if item %}
+          {% render 'product-media', 
+            media: item,
+            media_id: item.id,
+            media_class_list: 'absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2'
+          %}
+      {% else %}
+        <code id="{{carousel_item_element_id}}__item" class="{{carousel_item_element_id}} text-red-600">
+          if item failed! carousel_item: {{ carousel_item }}
+        </code>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endif %}
+
+

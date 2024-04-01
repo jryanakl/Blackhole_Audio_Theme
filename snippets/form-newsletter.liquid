@@ -1,0 +1,62 @@
+{% comment %} 
+  Form Newsletter
+
+  Links:
+  - Liquid Form Tags: https://shopify.dev/docs/api/liquid/tags/form
+  - Themes Customer Engagement: https://shopify.dev/docs/themes/customer-engagement/email-consent
+{% endcomment %}
+
+{% form 'customer', id: 'bh-newsletter-form', class: 'bh-newsletter-form flex flex-col align-middle justify-center' %}
+  {% if form.posted_successfully? %}
+    <!-- Success -->
+    <div class="bh-newsletter-form__alert flex flex-col align-middle justify-center">
+      <div class="bh-newsletter-form__alert--success flex items-center max-w-md mx-auto p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+        <span class="bh-icon bh-icon--success">
+          {% render 'icon-success' %}
+        </span>&nbsp;
+        <span>{{ 'sections.footer.newsletter.form.thanks_for_signing_up' | t }}</span>
+      </div>
+    </div>
+    <style>
+      .bh-newsletter-form__fields {
+        display: none;
+      }
+    </style>
+  {% else %}
+    <!-- Errors -->
+    {% if form.errors %}
+      <div class="bh-newsletter-form__alert flex flex-col align-middle justify-center">
+        <div class="bh-newsletter-form__alert--error flex items-center max-w-md mx-auto p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert" hidden>
+          <span class="bh-icon bh-icon--danger">
+            {% render 'icon-error' %}
+          </span>&nbsp;
+          <ul class="list-none">
+            {% for field_error in form.errors %}
+              <li>
+                <span class="text-red-800">{{ field_error | capitalize }}: {{ form.errors[field_error] }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+    <div class="bh-newsletter-form__fields">
+      <div class="flex flex-col align-middle justify-center">
+        <h3 class="text-sm md:text-md font-bold pb-5">
+          {{ 'sections.footer.newsletter.get_the_latest_news_offers' | t }}
+        </h3>
+        <div class="flex flex-row align-middle justify-center">
+          <div class="">
+            <label class="sr-only" for="email">
+              {{ 'general.email' | t }}
+            </label>
+            <input class="text-xs w-60" type="email" id="email" name="contact[email]" placeholder="{{ 'sections.footer.newsletter.form.enter_your_email' | t }}" />
+          </div>
+          <button type="submit" class="text-xs font-semibold text-white uppercase bg-red-600 cursor-pointer px-4 w-auto hover:bg-black">
+            {{ 'sections.footer.newsletter.sign_up' | t }}
+          </button>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endform %}

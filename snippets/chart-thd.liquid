@@ -1,0 +1,23 @@
+{% comment %}
+  Renders Area Chart showcasing THD+N comparisons
+
+  Usage:
+  {% render 'chart-thd' %}
+
+  Links:
+  - ApexCharts: https://apexcharts.com/docs/chart-types/area-chart/
+  - Flowbite: https://flowbite.com/docs/plugins/charts/
+{% endcomment %}
+
+{% comment %} <script src="{{ 'chart.js' | asset_url }}" defer="defer"></script> {% endcomment %}
+<script src="{{ 'Chart.js' | asset_url }}" defer="defer"></script> 
+
+<div class="rounded-lg border-b border-b-gray-300 shadow dark:bg-gray-800 bg-gradient-to-r from-gray-100 to-gray-200">
+  <div class="p-2 border-b border-gray-200">
+    <h4 class="text-center">THD+N(20-20%kHz BW) 1kHz tone input 8 ohm load</h4>
+    <p class="text-center text-gray-500">
+      <small><span class="font-bold">M87's</span> THD+N is &lt; 0.0002% (20-20%kHz BW, 1kHz, 8 ohms)</small>
+    </p>
+  </div>
+  <div id="bh-chart__thd__area-chart" class="p-2"></div>
+</div>

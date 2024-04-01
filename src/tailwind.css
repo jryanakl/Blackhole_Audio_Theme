@@ -32,27 +32,58 @@
     @apply bg-neutral-800;
   }
 
-  .bh-main a {
-    @apply text-red-700 underline ;
-  }
-
   /** Shopify Overwrites **/
   /* overwrites 'contact form' section's captcha button */
   .button, .button-label, .shopify-challenge__button, .customer button {
     @apply mt-10 bg-black text-white text-sm md:text-base font-semibold uppercase py-2.5 px-8 cursor-pointer;
   }
+
+  /* @todo */
+  /* Cart Items */
+  .cart-item__error {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 0.2rem;
+    width: min-content;
+    min-width: 100%;
+  }
   
-
-  /** Links **/
-  .bh-main a:hover,
-  .bh-header a:hover {
-    @apply text-red-600 transition duration-100;
-    @apply fill-red-600 transition duration-100;
+  .cart-item__error-text {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    letter-spacing: 0.04rem;
+    order: 1;
+  }
+  
+  .cart-item__error-text + svg {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.7rem;
+    margin-top: 0.25rem;
+  }
+  
+  .cart-item__error-text:empty + svg {
+    display: none;
   }
 
-  .bh-footer .bh-menu__list__item a:hover {
-    @apply text-white transition duration-100;
+  .cart__items--disabled {
+    pointer-events: none;
   }
+
+  /** Product Price **/
+  .bh-price__badge {
+    display: inline-flex;
+  }
+
+  .bh-price--on-sale .bh-price__badge--on-sale {
+    display: flex;
+  }
+
+  .bh-price--sold-out .bh-price__badge--sold-out {
+    display: flex;
+  }
+
 
   /** Buttons, Icons **/
   button.bh-button {
@@ -72,11 +103,11 @@
   }
 
   button.bh-button--black {
-    @apply text-white hover:text-red-500 border border-black hover:border-red-500 bg-black hover:bg-gray-900 active:bg-gray-900;
+    @apply bg-gray-900 hover:bg-black active:bg-black text-white hover:text-white border border-black hover:border-white;
   }
 
   button.bh-button--gray {
-    @apply text-white border border-gray-500 hover:text-gray-500 bg-gray-500 hover:bg-gray-600 active:bg-gray-700;
+    @apply text-white border border-gray-500 hover:text-gray-500 bg-gray-600 hover:bg-gray-600 active:bg-gray-700;
   }
 
   button.bh-button--red {
@@ -87,14 +118,8 @@
     @apply text-black border border-black hover:border-red-600 hover:border active:border-black bg-white hover:text-black hover:bg-white active:text-black active:bg-white;
   }
 
-  .bh-icon {
-    @apply fill-none;
-  }
-
   .bh-img {
     @apply flex items-center justify-center w-full h-48 rounded sm:w-96 bg-gray-200;
-
-    /* @apply flex items-center justify-center w-full h-48 bg-gray-950 rounded sm:w-96 dark:bg-gray-700; */
   }
 
   .bh-img__image-box {
@@ -104,7 +129,11 @@
   .bh-img__image {
     @apply w-full h-full object-cover;
   }
-  
+
+  .bh-icon svg {
+    @apply min-w-6 min-h-6;
+  }
+
   .bh-icon--img-mock {
     @apply flex items-center justify-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700;
   }
@@ -116,10 +145,14 @@
   .bh-icon--gray {
     @apply fill-gray-600;
   }
+
+  .bh-icon--light-gray {
+    @apply fill-gray-400;
+  }
   
   .bh-icon--red,
   .bh-icon--danger {
-    @apply fill-red-600;
+    @apply fill-red-700;
   }
 
   .bh-icon--white {
@@ -128,12 +161,12 @@
 
   .bh-icon-green,
   .bh-icon--success {
-    @apply fill-green-600;
+    @apply fill-green-700;
   }
 
   /** Form **/
   form.bh-form {
-    @apply space-y-8;
+    @apply space-y-3;
   }
 
   .bh-form__control {
@@ -163,36 +196,36 @@
 @layer components {
   /** Layout **/
   .bh-body {
-    @apply bg-gray-500;
+    /* @apply bg-gray-100; */
   }
 
-  .bh-main .bh-main__page {
-    @apply p-5;
+  .bh-main {
+    /* @apply border-2 border-red-300; */
+  }
+
+  .bh-main__page {
+    @apply text-sm md:text-base;
   }
 
   .bh-main__page__section {
-    @apply text-sm md:text-base mb-5 h-auto md:px-10 lg:px-20;
+    @apply h-auto px-10 md:px-20 lg:px-40 xl:px-60;
   }
 
   .bh-main__page__section h2 {
-    @apply mb-5;
+    @apply mt-5 mb-3;
   }
 
-  .bh-main__page__section h3 {
-    @apply mb-0;
+  .bh-box--non-full {
+    /* @apply border-2 border-orange-500 border-solid; */
+    @apply h-auto md:px-10 lg:px-20;
   }
-
 
   .bh-main .bh-main-page--content {
-    @apply bg-white min-h-screen p-6 text-gray-800 text-base m-2 md:m-6
-  }
-  
-  .bh-main .bh-main-page--banner {
-
+    @apply bg-white text-gray-800 text-base min-h-screen p-6 m-2 md:m-6;
   }
 
   .bh-footer {
-    @apply pb-2 pt-2 border-gray-500;
+    @apply pb-2 mt-5;
   }
 
   /** Responsive **/
@@ -208,50 +241,57 @@
     @apply md:hidden;  /* show for only medium screen sizes and below */
   }
 
-
   /** Menu, Nav **/
   .bh-menu {
-    @apply text-gray-50 text-center;
+    @apply text-gray-50;
   }
 
   .bh-menu--header {
-    @apply uppercase text-lg bg-black;
+    @apply uppercase text-lg;
   }
 
   .bh-menu--header .bh-menu__list__item  {
-    @apply p-5;
+    @apply flex items-center justify-center h-11 px-1;
+    /* @apply border border-green-600; */
+  }
+
+  .bh-menu--header .bh-menu__list__item button:hover,
+  .bh-menu--header .bh-menu__list__item a:hover {
+    @apply text-red-600 transition duration-100;
   }
 
   .bh-menu--footer {
-    @apply uppercase w-full;
+    /* @apply w-full; */ 
   }
 
   .bh-menu--footer .bh-menu__list__item  {
-    @apply font-semibold;
+    @apply font-semibold text-gray-400;
   }
 
-  .bh-menu--footer .bh-menu__list__item a {
-    @apply text-gray-300;
+  .bh-menu--header-drawer .bh-menu__list__item  {
+    @apply font-semibold text-gray-400 my-2;
   }
 
-  .bh-menu--footer .bh-menu__list__item a:hover {
+  .bh-menu--footer .bh-menu__list__item a,
+  .bh-menu--header-drawer .bh-menu__list__item a {
+    @apply text-gray-400;
+  }
+
+  .bh-menu--footer .bh-menu__list__item a:hover,
+  .bh-menu--header-drawer .bh-menu__list__item a:hover {
     @apply text-white transition duration-100;
-  }
-
-  .bh-menu--footer-legal {
-    @apply w-full;
   }
 
   .bh-menu--footer-social .bh-menu__list__item  {
     @apply py-4 px-2 text-gray-300;
   }
 
-  .bh-menu__list--inline {
-    @apply inline-flex flex-nowrap;
+  .bh-menu--footer-legal {
+    @apply w-full;
   }
 
-  .bh-menu__list__item button:hover {
-    @apply text-red-600 transition duration-100;
+  .bh-menu__list--inline {
+    @apply inline-flex flex-nowrap;
   }
   
   /** Border **/
@@ -281,10 +321,22 @@
   }
 
   /** Snippets **/
-  .bh-banner {
-    background-image: url("black-hole-m87.png");
+  .bh-bg__heat-sink--mid {
     background-color: black;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("amp-m-heat-sink-bg.jpg");
+    background-size: cover;
   }
+
+  .bh-bg__collection-image {
+    background-size: cover;
+  }
+
+  .bh-bg__heat-sink--dark {
+    background-color: black;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("amp-m-heat-sink-bg.jpg");
+    background-size: cover;
+  }
+
   .bh-banner__box {
     @apply text-center md:text-left;
   }
@@ -293,12 +345,26 @@
     @apply mt-3 md:mt-5 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto lg:mx-0;
   }
 
-  /** Other **/
-  .bh-hide {
-    @apply hidden;
+  h2.banner__content--header span {
+    @apply bg-gradient-to-r from-red-600 via-red-500 to-red-800 bg-clip-text text-transparent font-bold;
   }
 
-  /** Banner **/
+  .bh-image__black-and-white {
+    /* Apply grayscale filter */
+    filter: grayscale(100%);
+    /* Optionally add transition for a smooth effect */
+    transition: filter 0.3s ease;
+  }
+  
+  /* Add hover effect to revert to color on hover */
+  .bh-image-hover__black-and-white:hover {
+    filter: grayscale(0%);
+  }
+
+  /* Product */
+  .bh-product-form__error-message-wrapper:not([hidden]) {
+    @apply flex items-start text-base leading-5 tracking-tighter mb-6;
+  }
 }
 
 @layer utilities {
@@ -312,11 +378,10 @@
     position: relative;
     bottom: 0;
     width: 100%;
-    padding-top: 1.5rem;
     z-index: 999;
   }
 
-  .bh-menu--header, .bh-menu--footer, h2, h3, h4,
+  .bh-menu--header, h2, h3, h4,
   .bh-header-drawer__links a {
     font-family: "Oswald", sans-serif;
     font-optical-sizing: auto;

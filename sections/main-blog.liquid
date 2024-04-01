@@ -1,0 +1,43 @@
+<aside class="bh-blog">
+  <h2>{{ blog.title }}</h2>
+  <div class="mt-5">
+    {% paginate blog.articles by section.settings.number_of_blog_posts %}
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {% for article in blog.articles %}
+            {% render 'card-article', article: article %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="max-w-6xl mx-auto">
+        {% render 'pagination', pagination: paginate %}
+      </div>
+    {% endpaginate %}
+  </div>
+</aside>
+
+{% schema %}
+{
+  "name": "t:sections.main-blog.name",
+  "tag": "section",
+  "class": "bh-main__page__section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "blog_read_more",
+      "label": "t:sections.main-blog.settings.blog_read_more.label",
+      "default": "Read more"
+    },
+    {
+      "type": "range",
+      "id": "number_of_blog_posts",
+      "label": "t:sections.main-blog.settings.number_of_blog_posts.label",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,61 @@
+{% comment %} 
+  Renders social-links-list items for footer & password-footer templates
+
+  Accepts:
+  - ul_class: {String}, e.g., 'bh-menu__list bh-menu__list--inline bh-icon--gray-md'
+  - li_class: {String}, e.g., 'bh-menu__list__item'
+  - icon_class: {String}, e.g., 'bh-icon--gray-md'
+  
+  Usage:
+  {% render 'social-links-list' %}
+{% endcomment %}
+<ul class="{{ ul_class }} {{ icon_class }}">
+  {% if settings.social_facebook_link != blank %}
+  <li class="{{ li_class }}">
+    <a class="underline" href="{{ settings.social_facebook_link }}">
+      <span class="sr-only">
+        {{ 'sections.footer.social.facebook' | t }}
+      </span>
+      <i class="bh-icon {{ icon_class }}">
+        {% render 'icon-facebook' %}
+      </i>
+    </a>
+  </li>
+  {% endif %}
+  {% if settings.social_youtube_link != blank %}
+  <li class="{{ li_class }}">
+    <a class="underline" href="{{ settings.youtube_link }}">
+      <span class="sr-only">
+        {{ 'sections.footer.social.youtube' | t }}
+      </span>
+      <i class="bh-icon {{ icon_class }}">
+        {% render 'icon-youtube' %}
+      </i>
+    </a>
+  </li>
+  {% endif %}
+  {% if settings.social_instagram_link != blank %}
+  <li class="{{ li_class }}">
+    <a class="underline" href="{{ settings.social_instagram_link }}">
+      <span class="sr-only">
+        {{ 'sections.footer.social.instagram' | t }}
+      </span>
+      <i class="bh-icon {{ icon_class }}">
+        {% render 'icon-instagram' %}
+      </i>
+    </a>
+  </li>
+  {% endif %}
+  {% if settings.social_twitter_link != blank %}
+  <li class="{{ li_class }}">
+    <a class="underline" href="{{ settings.twitter_link }}">
+      <span class="sr-only">
+        {{ 'sections.footer.social.twitter' | t }}
+      </span>
+      <i class="bh-icon {{ icon_class }}">
+        {% render 'icon-twitter' %}
+      </i>
+    </a>
+  </li>
+  {% endif %}
+</ul>

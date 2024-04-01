@@ -1,0 +1,133 @@
+{%- comment -%}
+  Renders tabs for product and faq pages
+
+  Accepts:
+  - item: The item object to be displayed in the carousel.
+  - tabs_id: The ID of the tabs container.
+  - tabs_items: {{ tabs_items }}
+  - tabs_tab_id: The ID for each tab button, bh-tab-faq-orders
+  - tabs_content_id: The ID each content bh-content-faq-orders
+
+  Usage:
+  {% render 'tabs',
+    tabs_id: 'bh-product-tabs'
+    tabs_items: [
+      'features',
+      'overview'
+    ],
+    tabs_tab_id: 'bh-tab-product-'
+    tabs_content_id: 'bh-content-product-'
+  %}
+{%- endcomment -%}
+
+<code class="text-green-600 hidden">
+  <h4>Tabs</h4>
+  <p>bindings:</p>
+  <pre>
+    tabs_id: {{ tabs_id }}
+    tabs_items: {{ tabs_items }}
+    tabs_tab_id: {{ tabs_tab_id }}
+    tabs_content_id: {{ tabs_content_id }}
+  </pre>
+</code>
+
+<div id="bh-tabs {{ tabs_id}}" class="bh-tabs {{ tabs_id}} p-5 md:p-10 h-auto">
+  <div class="mb-4 border-b border-gray-200">
+    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" 
+        id="bh-product-tabs" 
+        role="tablist">
+      <li class="me-2" role="presentation">
+        <button
+          class="text-md md:text-lg font-semibold inline-block p-4 border-b-4 rounded-t-lg"
+          id="bh-tab-product-features"
+          type="button"
+          role="tab"
+          aria-controls="bh-content-product-features"
+          aria-selected="false">
+          {{ 'products.product.tabs.features' | t }}
+        </button>
+      </li>
+      <li class="me-2" role="presentation">
+        <button
+          class="text-md md:text-lg font-semibold inline-block p-4 border-b-4 rounded-t-lg"
+          id="bh-tab-product-overview"
+          type="button"
+          role="tab"
+          aria-controls="bh-content-product-overview"
+          aria-selected="false">
+          {{ 'products.product.tabs.overview' | t }}
+        </button>
+      </li>
+      <li class="me-2" role="presentation">
+        <button
+          class="text-md md:text-lg font-semibold inline-block p-4 border-b-4 rounded-t-lg"
+          id="bh-tab-product-specifications"
+          type="button"
+          role="tab"
+          aria-controls="bh-content-product-specifications"
+          aria-selected="false">
+          {{ 'products.product.tabs.specifications' | t }}
+        </button>
+      </li>
+      <li class="me-2" role="presentation">
+        <button
+          class="text-md md:text-lg font-semibold inline-block p-4 border-b-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+          id="bh-tab-product-design"
+          type="button"
+          role="tab"
+          aria-controls="bh-content-product-design"
+          aria-selected="false">
+          {{ 'products.product.tabs.design' | t }}
+        </button>
+      </li>
+      <li class="me-2" role="presentation">
+        <button
+          class="text-md md:text-lg font-semibold inline-block p-4 border-b-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+          id="bh-tab-product-performance"
+          type="button"
+          role="tab"
+          aria-controls="bh-content-product-performance"
+          aria-selected="false">
+          {{ 'products.product.tabs.performance' | t }}
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div id="productTabsContent">
+    <div
+      class="hidden p-4 rounded-lg bg-white"
+      id="bh-content-product-features"
+      role="tabpanel"
+      aria-labelledby="bh-tab-product-features">
+      {% render 'product-tab-features', metafields: product_metafields %}
+    </div>
+    <div
+      class="hidden p-4 rounded-lg bg-white"
+      id="bh-content-product-overview"
+      role="tabpanel"
+      aria-labelledby="bh-tab-product-overview">
+      {% render 'product-tab-overview' %}
+    </div>
+    <div
+      class="hidden p-4 rounded-lg bg-white"
+      id="bh-content-product-specifications"
+      role="tabpanel"
+      aria-labelledby="bh-tab-product-specifications">
+      {% render 'product-tab-specifications' %}
+    </div>
+    <div
+      class="hidden p-4 rounded-lg bg-white"
+      id="bh-content-product-design"
+      role="tabpanel"
+      aria-labelledby="bh-tab-product-design">
+      {% render 'product-tab-design' %}
+    </div>
+    <div
+      class="hidden p-4 rounded-lg bg-white"
+      id="bh-content-product-performance"
+      role="tabpanel"
+      aria-labelledby="bh-tab-product-performance">
+      {% render 'product-tab-performance' %}
+    </div>
+  </div>
+</div>

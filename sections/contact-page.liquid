@@ -1,20 +1,46 @@
-<aside class="">
-  <h2>{{ section.settings.title }}</h2>
-  {% render 'contact-address' %}
-  {% render 'contact-email-phone' %}
+<aside class="bh-page pb-4">
+  <h2>
+    {{ section.settings.title }}
+  </h2>
+  <div class="">
+    <h3>
+      {{ section.settings.subtitle }}
+    </h3>
+    <div class="text-sm md:text-base">
+      <p class="pt-1">
+        {{ section.settings.description }}
+      </p>
+      <div class="pt-1">
+        {% render 'contact-address' %}
+        {% render 'contact-email-phone' %}
+      </div>
+    </div>
+  </div>
 </aside>
 
 {% schema %}
 {
-  "name": "Page Contact",
+  "name": "t:sections.contact-page.name",
   "tag": "section",
   "class": "bh-main__page__section",
   "settings": [
     {
       "type": "text",
       "id": "title",
-      "default": "Contact",
-      "label": "Contact Heading Title"
+      "label": "t:sections.contact-page.settings.title.label",
+      "default": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:sections.contact-page.settings.subtitle.label",
+      "default": "Contact Info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "description",
+      "label": "t:sections.contact-page.settings.description.label",
+      "default": "For support, the best way to contact Black Hole Audio is via e-mail."
     }
   ]
 }

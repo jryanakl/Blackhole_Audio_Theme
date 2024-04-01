@@ -1,11 +1,13 @@
 <aside class="">
-  <p class="text-sm md:text-base">For support, the best way to contact Black Hole Audio is via e-mail.</p>
   <ul class="list-inside list-disc text-sm md:text-base">
     <li>
-      <a href="mailto:info@blackhole-audio.com">E-mail Support</a>
+      <a class="underline text-red-600 hover:no-underline" 
+         href="mailto:info@blackhole-audio.com">
+        {{ 'sections.contact.email_support' | t }}
+      </a>
     </li>
     <li>
-      <a href="tel:9723589739">972-358-9739</a>
+      {% render 'contact-phone-link', link_class_list: 'text-red-600' %}
     </li>
   </ul>
 </aside>

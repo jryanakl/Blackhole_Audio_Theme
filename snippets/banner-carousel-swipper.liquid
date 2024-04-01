@@ -1,0 +1,66 @@
+{%- comment -%}
+  Renders image carousel for banner-animated-gsap
+
+  Usage: 
+  {% render 'banner-carousel-swipper' %}
+
+  Links:
+  - SwipperJS: https://swiperjs.com/demos
+{%- endcomment -%}
+
+<!-- Alertnatively you can add style here -->
+{% comment %}
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+  <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+{% endcomment %}
+
+{% comment %}
+<style>
+  .swiper-button-prev,
+  .swiper-button-next { color: red; top: auto !important; height: 21px; }
+  .swiper-button-prev::after, .swiper-button-next::after { font-size: 21px; }
+  .swiper-pagination { color: red; bottom: 0 !important; }
+  .swiper-pagination-bullet-active { background:red !important; }
+</style>
+{% endcomment %}
+
+<!-- Swiper -->
+<script src="{{ 'Swiper.js' | asset_url }}" defer="defer"></script>
+
+ <!-- Swiper -->
+ <div class="swiper mySwiper p-3">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <img src="{{ 'dual_monoblock_wooden_solid_state_amplifier.png' | asset_img_url: 'large' }}" width="" height="" />
+    </div>
+    <div class="swiper-slide">
+      <img src="{{ 'monoblock_wooden_amp.png' | asset_img_url: 'large' }}" width="" height="" />
+    </div>
+    <div class="swiper-slide">
+      <img src="{{ 'amp-m87-front-rosewood.png' | asset_img_url: 'large' }}" width="" height="" />
+    </div>
+    <div class="swiper-slide">
+      <img src="{{ 'amp-m87-back-ebony.png' | asset_img_url: 'large' }}" width="" height="" />
+    </div>
+  </div>
+  <div class="swiper-pagination"></div>
+</div>
+
+<!-- Alternatively, you  can add script here -->
+{% comment %}
+<script>
+  const swiper = new Swiper('.swiper', {
+      direction: 'horizontal',
+
+      pagination: {
+          el: '.swiper-pagination'
+      },
+
+      navigation: {
+          prevEl: '.swiper-button-prev',
+          nextEl: '.swiper-button-next'
+      }
+  })
+</script>
+{% endcomment %}
+

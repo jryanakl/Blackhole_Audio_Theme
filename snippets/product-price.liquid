@@ -1,0 +1,117 @@
+{% comment %}
+  Displays the price of the product (e.g., sale, unit, regular)
+  Intended to be dynamically updated and accompanies various product forms
+
+  Accepts:
+    - product: {Object} Product Liquid object (optional)
+    - variant: {Object} Variant Liquid object (optional)
+
+  Usage:
+    {% render 'main-product-price', product: product, variant: product_variant_selected %}
+{% endcomment %}
+
+{% liquid
+  # Assign price for variants
+  if variant.title
+    assign compare_at_price = variant.compare_at_price
+    assign price = variant.price
+    assign available = variant.available
+  else
+    assign compare_at_price = 1999
+    assign price = 1998
+    assign available = true
+  endif
+
+  assign money_price = price | money
+%}
+
+<div class="text-green-600 hidden">
+  <pre>
+    compare_at_price: {{ compare_at_price }}
+    available : {{ available }}
+    money_price: {{ money_price }}
+  </pre>
+</div>
+
+{%- comment -%}
+  Guide to Price Elements:
+    - div.bh-price__regular: Shown when there are no variants that are on sale
+    - div.bh-price--sold-out: Shown when sold out
+    - div.bh-price--on-sale: Shown for variants on sale
+    - div.bh-price--unit: Shown when the first variant has a unit price
+    - div.bh-price--availability: Shown when the product is sold out
+{%- endcomment -%}
+
+<dl
+  id="bh-price"
+  data-price
+  class="
+    bh-price
+    {% if available == false %} bh-price--sold-out {% endif %}
+    {% if compare_at_price > price %} bh-price--on-sale {% endif %}
+    {% if variant.unit_price_measurement %} bh-price--unit-available {% endif %}
+  "
+>
+  <!-- Regular -->
+  {% if compare_at_price == null and available == true %}
+    <div class="bh-price__regular">
+      <dt class="text-xs hidden">
+        {{ 'products.product.price.regular_price' | t }}
+      </dt>
+      <dd class="bh-price__regular__price text-lg text-gray-900" data-price-regular>{{ money_price }}&nbsp;</dd>
+    </div>
+  {% endif %}
+
+  <!-- Sale -->
+  {% if price < compare_at_price %}
+    <div class="bh-price__sale flex">
+      <dt class="text-xs hidden">
+        {{ 'products.product.price.sale_price' | t }}
+      </dt>
+      <dd class="bh-price__sale__price text-base text-gray-500 inline-block" data-price-sale>
+        {{ money_price }}&nbsp;
+      </dd>
+      <div class="bh-price__compare flex">
+        <dt class="text-xs hidden">
+          {{ 'products.product.price.regular_price' | t }}
+        </dt>
+        <dd
+          class="bh-price__sale__price--compare-at text-base text-gray-600 line-through inline-block"
+          data-price-compare-at
+          data-price-regular
+        >
+          {{ compare_at_price | money }}&nbsp;
+        </dd>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- @todo: Unit -->
+  <div class="bh-price__unit hidden">
+    <dt class="text-xs hidden">
+      {{ 'products.product.price.unit_price' | t }}
+    </dt>
+    <dd class="bh-price__unit__price text-lg text-gray-900" data-price-unit>
+      {{ variant.unit_price | money }}
+    </dd>
+  </div>
+
+  <!-- @todo: Availabile Price -->
+  <div class="bh-price__availabile hidden">
+    <dt class="text-xs hidden">
+      {{ 'products.product.price.available' | t }}
+    </dt>
+    <dd class="bh-price__availabile__price text-lg text-gray-900" data-price-available>
+      {{ available }}
+    </dd>
+  </div>
+
+  <div class="bh-price__badge">
+    <span class="bh-price__badge bh-price__badge--on-sale hidden">
+      {% render 'badge-on-sale' %}
+    </span>
+    <span class="bh-price__badge bh-price__badge--sold-out hidden">
+      {% render 'badge-sold-out' %}
+    </span>
+  </div>
+</dl>

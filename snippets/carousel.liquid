@@ -1,0 +1,118 @@
+{%- comment -%}
+  Carousel to display on product page
+
+  Accepts: 
+  - product_variants {Array<Object>} product.variants
+  - product_images {Array<Object>} product.images
+  - product_media {Array<Object>} product.media
+  - carousel_id {String} The ID of the carousel container.
+  - carousel_item_id {String} The ID for each carousel item.
+  - carousel_indicator_id {String} The ID for the carousel indicators (if applicable).
+
+  Links:
+  - Flowbite Carousel: https://flowbite.com/docs/components/carousel/
+  - Shopify Objects Variant: https://shopify.dev/docs/api/liquid/objects#variant
+{%- endcomment -%}
+
+
+{% if product_variants.size > 0 %}
+  {% comment %} {% assign product_items = product_variants %} {% endcomment %}
+  {% assign product_items = product_media %}
+{% elsif product_media.size > 0 %}
+  {% assign product_items = product_media %}
+{% elsif product_images.size > 0 %}
+  {% assign product_items = product_images %}
+{% else %}
+  <p class="text-red-600 hidden">No images, media, or variants available</p>
+{% endif %}
+
+<!--Test Carousel -->
+<code class="text-green-600 hidden">
+  <h4>Carousel</h4>
+  <p>bindings:</p>
+  <pre>
+    product_variants: {{ product_variants }}
+    product_media: {{ product_media }}
+    product_images: {{ product_images }}
+    product_items: {{ product_items }}
+    carousel_id: {{ carousel_id }}
+    carousel_item_id: {{ carousel_item_id }}
+    carousel_indicator_id: {{ carousel_indicator_id }}
+  </pre>
+</code>
+
+<div id="{{ carousel_id }}" class="bh-carousel {{ carousel_id }} relative w-full">
+  <!-- Carousel wrapper -->
+  <div class="relative rounded-lg overflow-hidden h-56 sm:h-80 xl:h-92 2xl:h-96">
+    <!-- Carousel Items -->
+    <!-- @todo -->
+    {% if product_variants != blank %}
+      {% render 'carousel-items', 
+        carousel_items: product_variants,
+        carousel_item_id: carousel_item_id %}
+    {% else %}
+      {% render 'carousel-items',
+        featured_image: product_items.first.featured_image,
+        carousel_items: product_items,
+        carousel_item_id: carousel_item_id %}
+    {% endif %}
+  
+  </div>
+
+  <!-- Slider indicators -->
+  <div class="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse">    
+    
+    {% if product_variants %}
+      {% for item in product_variants %}
+        {% assign carousel_item_indicator_id = carousel_indicator_id | append: forloop.index %}
+        <button
+          id="{{ carousel_item_indicator_id }}"
+          type="button"
+          class="{{ carousel_item_indicator_id }} w-4 h-4 rounded-full"
+          style=""
+          aria-current="true"
+          aria-label="Slide {{ item.position }}"></button>
+      {% endfor %}
+
+    {% else %}
+      {% for item in product_items %}
+        {% assign carousel_item_indicator_id = carousel_indicator_id | append: forloop.index %}
+        <button
+          id="{{ carousel_item_indicator_id }}"
+          type="button"
+          class="{{ carousel_item_indicator_id }} w-4 h-4 rounded-full"
+          style=""
+          aria-current="true"
+          aria-label="Slide {{ item.position }}"></button>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <!-- Slider Controls -->
+  <button
+    id="data-carousel-prev"
+    type="button"
+    class="absolute bottom-0 start-0 z-30 flex items-center justify-center cursor-pointer group focus:outline-none">
+    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+      <span class="bh-icon fill-gray-800 w-10 h-10">
+        {% render 'icon-chevron-left' %}
+      </span>
+      <span class="sr-only">
+        {{ 'general.carousel.previous' | t }}
+      </span>
+    </span>
+  </button>
+  <button
+    id="data-carousel-next"
+    type="button"
+    class="absolute bottom-0 end-0 z-30 flex items-center justify-center cursor-pointer group focus:outline-none">
+    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+      <span class="bh-icon fill-gray-800 w-10 h-10">
+        {% render 'icon-chevron-right' %}
+      </span>
+      <span class="sr-only">
+        {{ 'general.carousel.next' | t }}
+      </span>
+    </span>
+  </button>
+</div>

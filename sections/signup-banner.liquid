@@ -1,0 +1,82 @@
+<aside class="bh-signup-banner">
+  <code class="text-green-600">
+    Singup Banner
+  </code>
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'heading' -%}
+        <h3>{{ block.settings.heading | escape }}</h3>
+      {%- when 'paragraph' -%}
+        <div class="mt-5">
+          {{ block.settings.text }}
+        </div>
+      {%- when 'signup_form' -%}
+        <div {{ block.shopify_attributes }}>
+         {% render 'form-newsletter' %}
+        </div>
+    {%- endcase -%}
+  {%- endfor -%}
+</aside>
+
+{% schema %}
+{
+  "name": "t:sections.signup-banner.name",
+  "tag": "section",
+  "class": "bh-main__page__section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Paragraph content"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Opening soon",
+          "label": "Heading"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Be the first to know when we launch.</p>",
+          "label": "Description"
+        }
+      ]
+    },
+    {
+      "type": "signup_form",
+      "name": "Signup form",
+      "limit": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "Signup banner",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "paragraph"
+        },
+        {
+          "type": "signup_form"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

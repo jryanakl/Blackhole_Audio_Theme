@@ -1,0 +1,59 @@
+{% comment %}
+* Renders header with link.links as list
+*
+* Accepts:
+* -menu_class: 'bh-menu--footer',
+* -menu_handle: 'main-menu',
+{% endcomment %}
+
+<!--Test Product Meta -->
+<div class="text-white hidden">
+  menu_class: {{ menu_class | json }}
+</div>
+<div class="bh-menu-nav-footer">
+  {% if section.settings.menu.links == blank %}
+    {% capture actual_menu_handle %}{{ menu_handle }}{% endcapture %}
+    {% assign menu_linklist  = linklists[actual_menu_handle].links %}
+  {% else %}
+    {% assign menu_linklist = section.settings.menu.links %}
+  {% endif %}
+
+  {% for link in menu_linklist %}
+    {% if link.links != blank %}
+      {% assign link_handle = link.handle | replace: '-', '_' %}
+      <div class="flex flex-col items-center">
+        <h4 class="mb-2 uppercase text-gray-100"
+          data-menu-handle="{{ actual_menu_handle }}">
+          {{ link.title }}
+        </h4>
+        <nav class="bh-menu {{menu_class}}" data-menu-handle="{{ actual_menu_handle }}">
+          <ul class="bh-menu__list">
+            {% for childlink in link.links %}
+              <li class="bh-menu__list__item text-center">
+                <a href="{{ childlink.url }}">
+                  {{ childlink.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </div>
+    {% else %}
+      <div class="flex flex-col items-center">
+        <span class="mb-2 text-gray-100 uppercase {% if actual_menu_handle != 'main-menu' %}hidden{% endif  %}"
+          data-menu-handle="{{ link_handle }}">
+          Shop
+        </span>
+        <nav class="bh-menu {{menu_class}}" data-menu-handle="{{ actual_menu_handle }}">
+          <ul class="bh-menu__list">
+            <li class="bh-menu__list__item">
+              <a class="" href="{{ link.url }}">
+                {{ link.title }}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>

@@ -1,67 +1,31 @@
-<script></script>
-<style></style>
-<div id="bh-header__box" class="flex justify-evenly items-center">
-  <!-- drawer init and show -->
-  <div class="md:hidden" >
-    <button class=""
-      type="button"
-      data-drawer-target="drawer-navigation"
-      data-drawer-show="drawer-navigation"
-      aria-controls="drawer-navigation">
-      <span class="bh-icon bh-icon--white hover:fill-red-600">{% render 'icon-menu' %}</span>
-    </button>
-    {% comment %} <div class="bh-icon bh-icon--white p-3 cursor-pointer"></div> {% endcomment %}
-    {% comment %} 
-    <a href="#" onclick="openNav()">
-      <div class="bh-icon bh-icon--white p-3 cursor-pointer">{% render 'icon-menu' %}</div>
-    </a>
-    {% endcomment %}
-  </div>
+<script type="module" src="{{ 'AnnouncementModal.js' | asset_url }}" defer="defer"></script>
 
-  <!-- drawer component -->
-  {% render 'header-drawer' %}
+<div class="text-white bg-black hidden">
+  'color_scheme': {{ section.settings.color_scheme }} 'menu_color_scheme': {{ section.settings.menu_color_scheme }}
+</div>
 
-  <!-- Menu Yo -->
-  <div>
-    <nav class="bh-menu bh-menu--header flex md:items-center md:justify-center w-full">
+<div
+  id="bh-header"
+  class="bh-box--non-full bh-header bh-header-color--{{ section.settings.color_scheme }} flex justify-evenly items-center"
+>
+  <!-- Container for mobile menu drawer -->
+  <div class="flex justify-end items-center w-16 h-16">
+    <nav class="bh-menu bh-menu--header md:hidden">
       <ul class="bh-menu__list bh-menu__list--inline">
-        {% for link in linklists['main-menu'].links %}
-          <li class="bh-menu__list__item hidden md:flex">
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    </nav>
-  </div>
-  
-
-
-  <!-- Logo -->
-  <div class="">
-    <div class="bh-logo bh-logo--header">
-      <a href="{{ routes.root_url }}">
-        <span class="sr-only">{{ shop.name }}</span>
-        <div class="w-auto flex align-middle justify-between">
-          <img src="{{ 'bh-logo-small.png' | asset_img_url: 'large' }}" style="max-width: none!important" width="auto" height="45px">
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <!-- Menu, Cart -->
-  <div>
-    <nav class="bh-menu bh-menu--header justify-end md:items-center md:justify-center w-full">
-      <ul class="bh-menu__list bh-menu__list--inline">
-        {% for link in linklists['header-right-menu'].links %}
-          <li class="bh-menu__list__item hidden md:flex">
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          </li>
-        {% endfor %}
+        <!-- Drawer -->
         <li class="bh-menu__list__item">
-          <a id="cart-icon-bubble" href="{{ routes.cart_url }}">
-            <span class="bh-icon bh-icon--white h-full hover:fill-red-600">
-              {% comment %} {% render 'icon-shopping-cart' %} {% endcomment %}
-              {% render 'cart-icon-bubble' %}
+          <a
+            href="#"
+            class=""
+            data-drawer-target="drawer-navigation"
+            data-drawer-show="drawer-navigation"
+            aria-controls="drawer-navigation"
+          >
+            <div class="bh-icon bh-icon--white hover:fill-red-600">
+              {% render 'icon-menu' %}
+            </div>
+            <span class="sr-only">
+              {{ 'accessibility.menu' | t }}
             </span>
           </a>
         </li>
@@ -69,4 +33,123 @@
     </nav>
   </div>
 
+  <!-- Container for medium & above menu items, and logo -->
+  <div class="flex justify-evenly items-center w-full">
+    {% render 'header-drawer' %}
+
+    <!-- MainMenu: Left -->
+    {% render 'menu-nav-header',
+      menu_handle: 'main-menu',
+      menu_class: 'bh-menu--header',
+      menu_color_scheme: section.settings.menu_color_scheme
+    %}
+
+    <!-- Logo -->
+    <div class="bh-header__logo w-48 p-1 text-white flex justify-center items-center">
+      <a href="{{ routes.root_url }}">
+        <span class="sr-only">
+          {{ shop.name }}
+        </span>
+        {% if section.settings.show_taller_logo %}
+          {% render 'logo-bh-color-tall' %}
+        {% else %}
+          {% render 'logo-bh-color-short' %}
+        {% endif %}
+      </a>
+    </div>
+
+    <!-- MenuRight: Company -->
+    {% render 'menu-nav-header',
+      menu_handle: 'menu-right',
+      menu_class: 'bh-menu--header',
+      menu_color_scheme: section.settings.menu_color_scheme
+    %}
+  </div>
+
+  <!-- Container for cart -->
+  <div class="flex justify-start items-center w-16 h-16">
+    <!-- Cart, Search -->
+    <nav class="bh-menu bh-menu--header">
+      <ul class="bh-menu__list bh-menu__list--inline">
+        <!-- Search -->
+        {% if section.settings.show_search %}
+          <li class="bh-menu__list__item">
+            <a href="{{ routes.search_url }}">
+              <span class="bh-icon bh-icon--white hover:fill-red-600">
+                {% render 'icon-search' %}
+              </span>
+              <span class="text-white sr-only">
+                {{ 'general.search' | t }}
+              </span>
+            </a>
+          </li>
+        {% endif %}
+        <!-- Cart -->
+        <li class="bh-menu__list__item">
+          <a id="cart-icon-bubble" href="{{ routes.cart_url }}">
+            <div class="bh-icon bh-icon--white hover:fill-red-600">
+              {% render 'cart-icon-bubble' %}
+            </div>
+            <span class="text-white sr-only">
+              {{ 'sections.cart.name' | t }}
+            </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </div>
+
+<!-- Announcement Modal Dialog -->
+<div class="bh-header__announcement__modal-dialog">
+  <bh-announcement-modal>
+    {% render 'modal',
+      modal_instance_id: 'bh-modal__announcement',
+      modal_heading: 'Announcement',
+      modal_description: 'Announcement Description'
+    %}
+  </bh-announcement-modal>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "menu_color_scheme",
+      "label": "Menu color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_taller_logo",
+      "default": false,
+      "label": "Show taller logo with blackhole icon"
+    },
+    {
+      "type": "checkbox",
+      "default": false,
+      "id": "show_search",
+      "label": "Show search icon"
+    },
+    {
+      "type": "link_list",
+      "id": "menu-left",
+      "default": "main-menu",
+      "label": "Heading Navigation Menu Left"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,11 @@
+{
+  "wrapper": "div.bh-main__page",
+  "sections": {
+    "main": {
+      "type": "faq-page"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

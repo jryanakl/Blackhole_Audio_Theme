@@ -1,0 +1,16 @@
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "menu_color_scheme": "scheme-2",
+        "show_search": false,
+        "show_taller_logo": false
+      }
+    }
+  },
+  "order": ["header"]
+}

@@ -1,0 +1,19 @@
+{% comment %}
+  *
+  * Accepts:
+  * -metafields: card_product_metafields or product.custom.metafields,
+  *
+{% endcomment %}
+<ul class="text-sm list-inside list-disc">
+  {% if metafields.amp_power_output_channel %}
+    <li class="">
+      {{ metafields.amp_power_output_channel }}
+    </li>
+  {% endif %}
+  {% if metafields.amp_channels %}
+    <li class="">{{ metafields.amp_channels }} Channels</li>
+  {% endif %}
+  {% if metafields.amp_power_thd_n %}
+    <li class="">{{ metafields.amp_power_thd_n }} THD+N</li>
+  {% endif %}
+</ul>

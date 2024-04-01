@@ -1,0 +1,76 @@
+<aside class="bh-search mx-auto">
+  <h2>
+    {{ 'general.search' | t }}
+  </h2>
+
+  {% paginate search.results by 10 %}
+    <div class="px-5 py-10 bg-gray-100">
+      <div class="bh-box--non-full flex flex-col justify-center items-center">
+        <h4 class="text-center">{{ 'templates.search.search_results' | t }}</h4>
+        <form class="flex w-full pt-5" action="{{ routes.search_url }}" method="get">
+          <input class="bg-white w-full"
+                type="search"
+                name="q"
+                placeholder="{{ 'general.search' | t }}"
+                value="{{ search.terms | escape }}">
+
+          <button type="submit" 
+                  class="text-sm uppercase bg-black hover:bg-gray-700 text-white border px-5">
+            {{ 'general.search' | t }}
+          </button>
+        </form>
+        <div class="pt-5">
+          <p class="text-gray-500 text-center">
+            {{ 'templates.search.results_with_size' | t: size: search.results.size }}
+            {{ 'templates.search.in_search_for' | t: terms: search.terms | escape }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bh-search__list bg-white pt-5">
+      {% if search.performed %}
+        {% if search.results.size > 0 %}
+          <div class="max-w-6xl mx-auto bg-white">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+              {% for item in search.results %}
+                {% case item.object_type %}
+                  {% when 'product' %}
+                    {% render 'card-product', card_product: item %}
+                  {% when 'article' %}
+                    {% render 'card-article', article: item %}
+                {% endcase %}
+              {% endfor %}
+            </div>
+          </div>
+
+        {% else %}
+          <div class="text-left my-4">
+            <p>
+              {{ 'templates.search.no_results_found_searching' | t: terms: search.terms | escape }}
+              {{ 'templates.search.try_using_different_word' | t }}
+            </p>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+
+    {% render 'pagination', pagination: paginate %}
+  {% endpaginate %}
+</aside>
+
+{% schema %}
+{
+  "name": "t:sections.main-search.name",
+  "tag": "section",
+  "class": "bh-main__page__section",
+  "settings": [
+    {
+      "default": "All Products",
+      "id": "title",
+      "label": "Title",
+      "type": "text"
+    }
+  ]
+}
+{% endschema %}

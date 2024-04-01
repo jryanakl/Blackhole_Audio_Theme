@@ -1,9 +1,8 @@
-// Flow
-const options = {
+const apexChartOptions = {
   // set the labels option to true to show the labels on the X and Y axis
   series: [
     {
-      name: "BHA M87",
+      name: "Black Hole Audio M87",
       data: [
         { x: '0.1', y: 0.00794 },
         { x: '1.0', y: 0.00354 },
@@ -17,7 +16,8 @@ const options = {
         dashArray: 5, // Make the line dashed
         colors: ['#ff0000'] // Set a custom color for the line
       },
-      zIndex: 13
+      zIndex: 13,
+      active: true
     },
     {
       name: "NAD C 298",
@@ -28,6 +28,7 @@ const options = {
         { x: '100.0', y: 0.0003 }
       ],
       color: "#ca8a04",
+      active: false
     },
     {
       name: "Accustic Arts AMP V",
@@ -160,7 +161,7 @@ const options = {
     sparkline: {
       enabled: false,
     },
-    height: "575px",
+    height: "475px",
     width: "100%",
     type: "area",
     fontFamily: "Oswald, sans-serif",
@@ -209,8 +210,12 @@ const options = {
   },
 };
 
-if (document.getElementById("bh-thd-noise__area-chart") && typeof ApexCharts !== 'undefined') {
-  const chart = new ApexCharts(document.getElementById("bh-thd-noise__area-chart"), options);
-  //chart.zoomX('0.1', '100.0');
-  chart.render();
-}
+document.addEventListener('DOMContentLoaded', function () {
+  const thdAreaChartElement = document.getElementById('bh-chart__thd__area-chart');
+
+  if (thdAreaChartElement && typeof ApexCharts !== 'undefined') {
+    const chart = new ApexCharts(thdAreaChartElement, apexChartOptions);
+    //chart.zoomX('0.1', '100.0');
+    chart.render();
+  }
+});

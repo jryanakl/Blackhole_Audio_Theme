@@ -1,0 +1,148 @@
+
+{% comment %}
+MainCollectionBanner
+
+-Radio https://shopify.dev/docs/themes/architecture/settings/input-settings#radio 
+{% endcomment %}
+
+<!-- Show All Products Link -->
+{% if section.settings.show_all_products_link %}
+  <div class="bh-collections__all-products py-2 bg-gray-950 border-t-2 border-b-2 border-gray-800">
+    <div class="bh-box--non-full">
+      <a class="flex " href="{{ routes.collections_url }}">
+        <span class="bh-icon fill-red-500">
+          {% render 'icon-arrow-back' %}
+        </span>&nbsp;
+        <span class="text-red-500 underline cursor-pointer hover:text-red-400">
+          {{ 'collections.all_products' | t }}
+        </span>
+      </a>
+    </div>
+  </div>
+{% endif %}
+
+<!-- MainCollectionBanner -->
+<aside class="bh-main-collection-banner">
+  <!-- Collection Title, Description -->
+  {% if section.settings.select_collection_description_type == 'collection' or section.settings.select_collection_description_type == 'settings' %}
+    {%- assign description_type = section.settings.select_collection_description_type -%}
+
+    <div class="bh-box--non-full flex flex-col {% if section.settings.show_collection_image and collection.image %}bh-bg__collection-image{% endif %} {% if description_type == 'settings' %}bh-bg__heat-sink--dark{% else %}bg-gray-200{% endif %}">
+      <div class="p-4 md:p-5">
+        {%- if description_type == 'collection' -%}
+          {% if section.settings.show_collection_image and collection.image %}
+            <!-- Collection Image -->
+            <div class="flex flex-row">
+              <div class="">
+                <h2>{{ collection.title | escape }}</h2>
+                <p>{{ collection.description }}</p>
+              </div>
+              <div class="media gradient">
+                <img
+                  alt="{{ collection.image.alt | escape }}"
+                  srcset="
+                    {%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
+                    {%- if collection.image.width >= 360 -%}{{ collection.image | image_url: width: 360 }} 360w,{%- endif -%}
+                    {%- if collection.image.width >= 535 -%}{{ collection.image | image_url: width: 535 }} 535w,{%- endif -%}
+                    {%- if collection.image.width >= 750 -%}{{ collection.image | image_url: width: 750 }} 750w,{%- endif -%}
+                    {%- if collection.image.width >= 1070 -%}{{ collection.image | image_url: width: 1070 }} 1070w,{%- endif -%}
+                    {%- if collection.image.width >= 1500 -%}{{ collection.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                    {{ collection.image | image_url }} {{ collection.image.width }}w
+                  "
+                  src="{{ collection.image | image_url: width: 750 }}"
+                  sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
+                  width="{{ collection.image.width }}"
+                  height="{{ collection.image.height }}">
+              </div>
+            </div>
+          {% else %}
+            <h2>{{ collection.title | escape }}</h2>
+            <p>{{ collection.description }}</p>
+          {% endif %}
+        {%- elsif description_type == 'settings' -%}
+          <h2 class="text-white" style="margin-bottom: 0px; margin-top: 0px;">
+            {{ collection.title | escape }}
+          </h2>
+          <p class="text-white md:text-xl font-thin">
+            {{ section.settings.powered_amplifiers_description }}
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if section.settings.show_settings_overview %}
+    <div class="bg-gray-100 border-2">
+      {% if collection.handle == 'amplifier-collection' %}
+        {% render 'amplifiers-overview' %}
+        <!-- Your code for handling the 'amplifier-collection' -->
+      {% else %}
+        <!-- Your code for handling other collections -->
+        <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+          <span class="bh-icon bh-icon--danger">
+            {% render 'icon-error' %}
+          </span>&nbsp;
+          <span>
+            Template settings issue! This 'show_settings_overview' setting is a amp-specific collection feature; only supports the collection with the following handle: 'amplifier-collection'
+          </span>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+</aside>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-banner.name",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_all_products_link",
+      "label": "t:sections.main-collection-banner.settings.show_all_products_link.label",
+      "info": "t:sections.main-collection-banner.settings.show_all_products_link.info"
+    },
+    {
+      "type": "radio",
+      "id": "select_collection_description_type",
+      "label": "t:sections.main-collection-banner.settings.select_collection_description_type",
+      "options": [
+        {
+          "value": "collection",
+          "label": "t:sections.main-collection-banner.settings.select_collection_description_type.options__1"
+        },
+        {
+          "value": "settings",
+          "label": "t:sections.main-collection-banner.settings.select_collection_description_type.options__2"
+        },
+        {
+          "value": "none",
+          "label": "t:sections.main-collection-banner.settings.select_collection_description_type.options__3"
+        }
+      ],
+      "default": "settings"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "powered_amplifiers_description",
+      "default": "Experience Exceptional & Affordable Power Amplifiers – Invest in Quality and Preserve Your Integrity",
+      "label": "t:sections.main-collection-banner.settings.powered_amplifiers_description.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "default": false,
+      "label": "t:sections.main-collection-banner.settings.show_collection_image.label",
+      "info": "t:sections.main-collection-banner.settings.show_collection_image.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_settings_overview",
+      "default": true,
+      "label": "t:sections.main-collection-banner.settings.show_settings_overview.label",
+      "info": "t:sections.main-collection-banner.settings.show_settings_info.info"
+    }
+  ]
+}
+{% endschema %}

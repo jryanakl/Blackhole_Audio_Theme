@@ -1,0 +1,279 @@
+{
+  "settings_schema": {
+    "colors": {
+      "name": "Colors",
+      "settings": {
+        "background": {
+          "label": "Background"
+        },
+        "background_gradient": {
+          "label": "Background gradient",
+          "info": "Background gradient replaces background where possible."
+        },
+        "text": {
+          "label": "Text"
+        },
+        "button_background": {
+          "label": "Solid button background"
+        },
+        "button_label": {
+          "label": "Solid button label"
+        },
+        "secondary_button_label": {
+          "label": "Outline button"
+        },
+        "shadow": {
+          "label": "Shadow"
+        }
+      }
+    },
+    "logo": {
+      "name": "Logo",
+      "settings": {
+        "logo_image": {
+          "label": "Logo"
+        },
+        "logo_width": {
+          "label": "Desktop logo width",
+          "info": "Logo width is automatically optimized for mobile."
+        },
+        "favicon": {
+          "label": "Favicon image",
+          "info": "Will be scaled down to 32 x 32px"
+        }
+      }
+    },
+    "brand_information": {
+      "name": "Brand information",
+      "settings": {
+        "paragraph": {
+          "content": "Add a brand description to your store's footer."
+        },
+        "brand_headline": {
+          "label": "Headline"
+        },
+        "brand_description": {
+          "label": "Description"
+        },
+        "brand_image": {
+          "label": "Image"
+        },
+        "brand_image_width": {
+          "label": "Image width"
+        }
+      }
+    },
+    "social-media": {
+      "name": "Social media",
+      "settings": {
+        "header": {
+          "content": "Social accounts"
+        },
+        "social_twitter_link": {
+          "label": "Twitter",
+          "info": "https://twitter.com/shopify"
+        },
+        "social_facebook_link": {
+          "label": "Facebook",
+          "info": "https://facebook.com/shopify"
+        },
+        "social_instagram_link": {
+          "label": "Instagram",
+          "info": "http://instagram.com/shopify"
+        },
+        "social_youtube_link": {
+          "label": "YouTube",
+          "info": "https://www.youtube.com/shopify"
+        }
+      }
+    }
+  },
+  "sections": {
+    "all": {
+      "colors": {
+        "label": "Color scheme"
+      }
+    },
+    "apps": {
+      "name": "Apps",
+      "settings": {
+        "include_fixed_width": {
+          "label": "Make section a fixed max-width with margin"
+        }
+      },
+      "presets": {
+        "name": "Apps"
+      }
+    },
+    "about": {
+      "name": "About",
+      "settings": {
+        "title": {
+          "label": "Heading"
+        },
+        "image_with_text_image": {
+          "label": "Select image"
+        },
+        "description": {
+          "label": "Enter desription"
+        }
+      }
+    },
+    "contact-page": {
+      "name": "Contact",
+      "settings": {
+        "title": {
+          "label": "Title"
+        },
+        "subtitle": {
+          "label": "Subtitle"
+        },
+        "description": {
+          "label": "Description"
+        }
+      }
+    },
+    "contact-form": {
+      "name": "Contact Form",
+      "settings": {
+        "title": {
+          "label": "Title"
+        }
+      }
+    },
+    "dealers": {
+      "name": "Dealers",
+      "settings": {
+        "title": {
+          "label": "Title"
+        },
+        "subtitle": {
+          "label": "Subtitle"
+        },
+        "description": {
+          "label": "Description"
+        }
+      }
+    },
+    "faq": {
+      "name": "FAQ",
+      "settings": {
+        "text": {
+          "label": "Text"
+        }
+      }
+    },
+    "footer": {
+      "name": "Footer"
+    },
+    "header": {
+      "name": "Header",
+      "settings": {
+        "menu_color_scheme": {
+          "label": "Menu color scheme"
+        }
+      }
+    },
+    "main-article": {
+      "name": "Blog post"
+    },
+    "main-blog": {
+      "name": "Blog posts",
+      "settings": {
+        "blog_read_more": {
+          "label": "Read more button label"
+        },
+        "number_of_blog_posts": {
+          "label": "Blog posts per page"
+        }
+      }
+    },
+    "main-cart-items": {
+      "name": "Items"
+    },
+    "main-collection-banner": {
+      "name": "Collection banner",
+      "settings": {
+        "paragraph": {
+          "content": "Add a description or image by editing your collection. [Learn more](https://help.shopify.com/manual/products/collections/collection-layout)"
+        },
+        "show_all_products_link": {
+          "label": "Show all products breadcrumb link",
+          "info": "This takes you back to main collection page. Useful if we sell collections that are not power amplifiers, e.g., tube amps"
+        },
+        "select_collection_description_type": {
+          "label": "Select collection description type",
+          "options__1": "Use collection description",
+          "options__2": "Use section settings description (Amp USP)",
+          "options__3": "None"
+        },
+        "powered_amplifiers_description": {
+          "label": "Powered Amplifiers description"
+        },
+        "show_collection_image": {
+          "label": "Show collection image",
+          "info": "For best results, use an image with a 16:9 aspect ratio. [Learn more](https://help.shopify.com/manual/shopify-admin/productivity-tools/image-editor#understanding-image-aspect-ratio)"
+        },
+        "show_settings_overview": {
+          "label": "Show section-settings overiew banner (Power Amplifiers USPs)",
+          "info": "This shows the Powered Amplifier Collections' USP (Unique Selling Points), i.e., 1) Exceptional Performance, 2)Affordable Luxury, and 3)Stunning Wood Finish."
+        }
+      }
+    },
+    "main-collection": {
+      "name": "Collection page",
+      "settings": {
+        "number_of_products_per_page": {
+          "label": "Number of products per page"
+        },
+        "show_rating": {
+          "label": "Show product rating",
+          "info": "To rating for a collection, add a product rating app. [Learn more](https://help.shopify.com/manual/online-store/themes/theme-structure/theme-features#featured-collection-show-product-rating)"
+        }
+      }
+    },
+    "main-collections-list": {
+      "name": "Collections list page",
+      "settings": {
+        "title": {
+          "label": "Heading"
+        }
+      }
+    },
+    "main-login": {
+      "name": "Login"
+    },
+    "main-order": {
+      "name": "Order"
+    },
+    "main-page": {
+      "name": "Page"
+    },
+    "main-password-footer": {
+      "name": "Password footer"
+    },
+    "main-password-header": {
+      "name": "Password header",
+      "settings": {
+        "logo_header": {
+          "content": "Logo"
+        },
+        "logo_help": {
+          "content": "Edit your logo in theme settings."
+        }
+      }
+    },
+    "main-product": {
+      "name": "Product information"
+    },
+    "main-reset-password": {
+      "name": "Password reset"
+    },
+    "main-search": {
+      "name": "Search results"
+    },
+    "signup-banner": {
+      "name": "Signup banner"
+    }
+  }
+}

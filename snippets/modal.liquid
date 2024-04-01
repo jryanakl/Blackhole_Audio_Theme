@@ -1,0 +1,52 @@
+
+{% comment %}
+  Modal for Product, Password, Announcement, etc.
+
+  Accepts:
+  - modal_heading {String}
+  - modal_description {String}
+  - modal_instance_id {String}, e.g.,  'bh-modal__announcement', 'bh-modal__product', 'bh-modal__password'
+
+  Usage:
+  {% render 'modal', modal_heading: 'Announcement', modal_description: 'Announcement Description' %}
+{% endcomment %}
+<div id="{{ modal_instance_id }}" tabindex="-1" aria-hidden="true" class="{{ modal_instance_id }} fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0">
+  <div class="relative max-h-full w-full max-w-2xl">
+    <!-- Modal content -->
+    <div class="relative rounded-lg bg-white shadow dark:bg-gray-700">
+      <!-- Modal header -->
+      <div class="flex items-start justify-between rounded-t border-b p-5 dark:border-gray-600">
+        <h3 class="">
+          {{ modal_heading }}
+        </h3>
+        <button type="button"
+                class="ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900">
+          <span class="bh-icon bh-icon--white">
+            {% render 'icon-close' %}
+          </span>
+          <span class="sr-only">
+            {{ 'modal.accessibility.close_modal' | t }}
+          </span>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="space-y-6 p-6">
+        <!-- inline_richtext -->
+        <p>{{ modal_description }}</p>
+      </div>
+      <!-- Modal footer -->
+      <div class="flex items-center space-x-2 rtl:space-x-reverse rounded-b border-t border-gray-200 p-6 dark:border-gray-600">
+        <button
+          type="button"
+          class="rounded-lg bg-red-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-blue-300">
+          {{ 'modal.buttons.ok' | t }}
+        </button>
+        <button
+          type="button"
+          class="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 focus:ring-blue-300">
+          {{ 'modal.buttons.cancel' | t }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

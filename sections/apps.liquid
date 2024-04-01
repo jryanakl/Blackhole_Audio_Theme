@@ -1,0 +1,36 @@
+{% comment %}
+App Block Wrapper
+- https://shopify.dev/docs/themes/architecture/blocks/app-blocks#app-blocks-and-section-settings
+
+{% endcomment %}
+<div class="bh-app__block-wrapper {% if section.settings.include_fixed_width %}bh-box--non-full{% endif %}">
+  {% for block in section.blocks %}
+    {% render block %}
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.apps.name",
+  "tag": "section",
+  "class": "bh-main__page__section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "include_fixed_width",
+      "default": true,
+      "label": "t:sections.apps.settings.include_fixed_width.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.apps.presets.name"
+    }
+  ]
+}
+{% endschema %}
